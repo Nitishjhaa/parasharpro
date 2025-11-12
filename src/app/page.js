@@ -1,172 +1,72 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-export default function Home() {
-  const [cities, setCities] = useState([]);
-  const [groupedCities, setGroupedCities] = useState({});
-
-  const [form, setForm] = useState({
-    name: "",
-    gender: "",
-    birthDate: "",
-    birthTime: "",
-    country: "India",
-    city: "",
-  });
-
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  // Load indian cities JSON
-  useEffect(() => {
-    fetch("/data/cities.json")
-      .then((r) => r.json())
-      .then((data) => {
-        setCities(data);
-
-        // GROUP by state (admin_name)
-        const grouped = {};
-        data.forEach((item) => {
-          const state = item.admin_name || "Other";
-          if (!grouped[state]) grouped[state] = [];
-          grouped[state].push(item);
-        });
-
-        setGroupedCities(grouped);
-      })
-      .catch((e) => console.error("Error loading cities.json", e));
-  }, []);
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const submit = async () => {
-    const selectedCity = cities.find((c) => c.city === form.city);
-
-    if (!selectedCity) {
-      alert("City not found in cities.json");
-      return;
-    }
-
-    const payload = {
-      birthDate: form.birthDate,
-      birthTime: form.birthTime,
-      timeZone: "Asia/Kolkata",
-      lat: Number(selectedCity.lat),
-      lon: Number(selectedCity.lng),
-      gender: form.gender,
-      country: form.country,
-      city: selectedCity.city,
-      name: form.name,
-    };
-
-    setLoading(true);
-    setResult(null);
-
-    try {
-      const res = await fetch("http://localhost:8080/kundali", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-      setResult(data);
-    } catch (err) {
-      alert("Failed to fetch kundali data");
-      console.error(err);
-    }
-
-    setLoading(false);
-  };
+export default function Page() {
+  const cards = [
+    { href: "/child", icon: "/images/footprint.svg", title: "Child Kundali", desc: "Understand your child’s cosmic blueprint and future path." },
+    { href: "/kundali", icon: "/images/star.svg", title: "Kundali", desc: "Generate detailed birth charts with advanced interpretations." },
+    { href: "/matchmatching", icon: "/images/ring.svg", title: "Match-Matching", desc: "Check compatibility and discover perfect astrological matches." },
+    { href: "/panchang", icon: "/images/shape.svg", title: "Panchang", desc: "View daily tithis, nakshatras, and auspicious timings." },
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 flex justify-center">
-      <div className="w-full max-w-xl">
+    <div className="relative flex items-center justify-center min-h-screen overflow-hidden bg-linear-to-br from-[#fffaf2] to-[#fdf5e8] dark:from-[#121212] dark:to-[#1a1a1a]">
+      {/* Background Aura */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#FDC565]/30 blur-[180px] rounded-full"></div>
+        <div className="absolute bottom-0 right-1/2 translate-x-1/2 w-[400px] h-[400px] bg-[#FFAE42]/20 blur-[160px] rounded-full"></div>
+      </div>
 
-        <h1 className="text-3xl font-bold mb-6">Parashar-Pro</h1>
-        <p className="text-gray-400 mb-8">Generate your detailed Kundali instantly.</p>
+      {/* Main Content */}
+      <div className="relative z-10 w-[92%] md:w-[85%] max-w-7xl text-center">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4">
+            Discover Your Cosmic Path
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Navigate your journey through precise astrology tools designed for
+            insight, clarity, and balance.
+          </p>
+        </motion.div>
 
-        <div className="bg-gray-900 p-6 rounded-xl border border-gray-800 space-y-4">
-
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Full Name"
-            className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-          />
-
-          <select
-            name="gender"
-            value={form.gender}
-            onChange={handleChange}
-            className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-          >
-            <option value="">Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-
-          <div className="grid grid-cols-2 gap-4">
-            <input
-              type="date"
-              name="birthDate"
-              value={form.birthDate}
-              onChange={handleChange}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-            />
-            <input
-              type="time"
-              name="birthTime"
-              value={form.birthTime}
-              onChange={handleChange}
-              className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-            />
-          </div>
-
-          {/* CITY SELECT WITH GROUPING */}
-          <select
-            name="city"
-            value={form.city}
-            onChange={handleChange}
-            className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-          >
-            <option value="">Select Birth City</option>
-
-            {Object.keys(groupedCities).map((state) => (
-              <optgroup key={state} label={state}>
-                {groupedCities[state].map((cityObj) => (
-                  <option key={cityObj.id} value={cityObj.city}>
-                    {cityObj.city}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-
-          <button
-            onClick={submit}
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg transition disabled:bg-blue-900"
-          >
-            {loading ? "Calculating..." : "Generate Kundali"}
-          </button>
+        {/* Cards */}
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-8">
+          {cards.map((card, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2, duration: 0.8 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative cursor-pointer rounded-3xl border border-[#e4e4e4] dark:border-[#333] bg-white/70 dark:bg-[#222]/70 backdrop-blur-lg shadow-[0_10px_40px_rgba(0,0,0,0.07)] hover:shadow-[0_15px_50px_rgba(253,197,101,0.3)] transition-all duration-500 overflow-hidden"
+            >
+              <Link href={card.href}>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-b from-[#FDC565]/20 to-transparent"></div>
+                <div className="relative z-10 flex flex-col items-center justify-center h-80 p-6">
+                  <div className="w-24 h-24 rounded-full flex items-center justify-center bg-[#FDC565] shadow-[0_0_25px_rgba(253,197,101,0.5)] mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <img src={card.icon} alt="" className="w-12 h-12" />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 px-3">
+                    {card.desc}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
-
-        {result && (
-          <div className="mt-6 bg-gray-900 p-6 rounded-xl border border-gray-800">
-            <h2 className="text-xl font-bold">Kundali Result</h2>
-            <details className="bg-gray-800 mt-4 p-4 rounded-lg">
-              <summary>View JSON</summary>
-              <pre className="whitespace-pre-wrap text-sm mt-2">
-                {JSON.stringify(result, null, 2)}
-              </pre>
-            </details>
-          </div>
-        )}
       </div>
     </div>
   );

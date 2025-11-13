@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.card-bg {
+  @apply bg-[#FDC565]/50 hover:bg-[#FDC565]/80 transition-all duration-300 rounded-3xl shadow-sm hover:shadow-md cursor-pointer;
+}

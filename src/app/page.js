@@ -125,22 +125,28 @@ export default function Page() {
 
                     {/* Right Column */}
                     <div className="flex-1 flex flex-col gap-3 ">
-                      <Link href="/matchmatching" className="flex-1 rounded-3xl card-bg p-5 pl-3 relative">
+                      <Link href="/panchang" className="flex-1 rounded-3xl card-bg p-5 relative">
                         <div className="text-lg">
-                          Matchmatching
+                          Panchang
                         </div>
                         <img src="/images/homeChild.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                       </Link>
-                      <Link href="/child" className="flex-1 rounded-3xl card-bg p-5">
-                      
+                      <Link href="/child" className="flex-1 rounded-3xl card-bg p-5 relative">
+                        <div className="text-lg">
+                          Child
+                        </div>
+                        <img src="/images/matchKundali.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                       </Link>
                     </div>
                   </div>
 
                   {/* Middle Full Box */}
-                  <div className="flex-1 rounded-3xl card-bg">
-                    
-                  </div>
+                  <Link href="/matchmatching" className="flex-1 rounded-3xl card-bg p-5 relative">
+                    <div className="text-lg">
+                      Match Matching
+                    </div>
+                    <img src="/images/homePanchange.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
+                  </Link>
                 </div>
 
                 {/* Bottom Box */}

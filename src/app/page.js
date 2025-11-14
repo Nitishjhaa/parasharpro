@@ -80,8 +80,11 @@ export default function Page() {
           <div className="flex flex-col gap-3 h-screen">
             <div className="flex-[0.5] rounded-3xl overflow-hidden">
               <div className="dark:bg-[#232323] bg-[#c9c9c9] w-full h-full flex justify-between items-center">
-                <div className="ml-5 text-4xl flex gap-5 items-center">
-                  <img src='images/kundali.png' className="w-15" /> Horescope
+                <div className="ml-3 text-4xl flex gap-5 items-center w-full mr-3 rounded-3xl">
+                  <img src='images/kundaliHead.png' className="w-15" />
+                  <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent">
+                    Horescope
+                  </span>
                 </div>
               </div>
             </div>
@@ -131,10 +134,14 @@ export default function Page() {
                 </div>
 
                 {/* Bottom Box */}
-                <div className="flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700">
+                <div className="flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700 card-bg p-5">
+                  <div className="mb-1">
+                    Recent Kundali.
+                  </div>
+                  <div className="border">
 
+                  </div>
                 </div>
-
               </div>
             </div>
 

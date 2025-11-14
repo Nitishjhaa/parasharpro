@@ -181,10 +181,10 @@ export default function KundaliPage() {
       return;
     }
 
-if (!form.gender) {
-  toast.error("Gender needed to progress further");
-  return;
-}
+    if (!form.gender) {
+      toast.error("Gender needed to progress further");
+      return;
+    }
 
     const payload = {
       name: form.name,
@@ -235,7 +235,7 @@ if (!form.gender) {
 
           {/* MOBILE FORM */}
           <div className="card-bg rounded-3xl p-5 h-[80vh]">
-            <div className="grid grid-cols-[1fr_60px] gap-3">
+            <div className="grid grid-cols-[1fr] gap-3">
 
               {/* LEFT SIDE */}
               <div className="space-y-6">
@@ -444,7 +444,7 @@ if (!form.gender) {
               </div>
 
               {/* RIGHT SIDE BUTTON BAR */}
-              <div className="flex flex-col items-center gap-6 pt-4">
+              <div className="flex justify-left items-center gap-6 pt-5">
                 <button className="w-12 h-12 bg-[#061224] rounded-lg flex items-center justify-center">
                   <span className="text-white text-xl font-bold "><HiLanguage /></span>
                 </button>

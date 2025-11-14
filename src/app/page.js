@@ -16,8 +16,7 @@ export default function Page() {
 
   return (
     <>
-
-
+      {/* =======for desktop======= */}
       <div className="max-md:hidden relative flex items-center justify-center min-h-screen overflow-hidden bg-linear-to-br from-[#fffaf2] to-[#fdf5e8] dark:from-[#121212] dark:to-[#1a1a1a] max-md:py-20">
         {/* Background Aura */}
         <div className="absolute inset-0 overflow-hidden">
@@ -75,6 +74,8 @@ export default function Page() {
           </div>
         </div>
       </div>
+      {/* =======for mobile======= */}
+
       <div className="max-md:block hidden pb-10 pt-2">
         <div className="mx-auto w-[98%] min-h-screen">
           <div className="flex flex-col gap-3 h-screen">

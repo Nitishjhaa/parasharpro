@@ -7,7 +7,6 @@ import KundaliStructure from '@/components/KundaliStructure';
 import PlanetTable from "@/components/PlanetTable";
 import PlanetAspectTable from "@/components/PlanetAspectTable";
 import Link from "next/link";
-import { computeD9Chart } from "@/lib/computeD9";
 
 export default function KundaliInfoInner() {
   const [kundali, setKundali] = useState(null);
@@ -19,22 +18,13 @@ export default function KundaliInfoInner() {
 
   useEffect(() => {
     async function load() {
-      if (indexParam === null) {
-        router.push("/");
-        return;
-      }
+      if (!indexParam) return;
 
       const idx = Number(indexParam);
-      if (isNaN(idx) || idx < 0) {
-        router.push("/");
-        return;
-      }
+      if (isNaN(idx) || idx < 0) return;
 
       const record = await loadKundaliByIndex(idx);
-      if (!record) {
-        router.push("/");
-        return;
-      }
+      if (!record) return;
 
       setKundali(record);
     }
@@ -42,9 +32,6 @@ export default function KundaliInfoInner() {
   }, [indexParam, router]);
 
   // console.log((kundali?.raw?.planets?.Sun?.house))
-
-  // d9 chart
-  const d9 = computeD9Chart(kundali);
 
   if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 
@@ -61,7 +48,7 @@ export default function KundaliInfoInner() {
               onClick={() => setIsSideOpen(!isSideOpen)}
             />
             <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent text-xl">
-              {kundali.meta?.name}'s Kundali
+               लग्न कुंडली
             </span>
           </div>
         </div>
@@ -78,12 +65,14 @@ export default function KundaliInfoInner() {
           />
           <div className="w-full text-white mt-5 text-lg" onClick={() => setIsSideOpen(!isSideOpen)}>
             <div className="border-b-2 pb-2">
-              <Link href="/panchang" >
+              <Link href={`/kundaliInfo`} >
                 लग्न कुंडली
               </Link>
             </div>
             <div className="border-b-2 py-2">
-              नवमांश कुंडली
+              <Link href={`/kundaliInfo/navmansha?index=${indexParam}`}>
+                नवमांश कुंडली
+              </Link>
             </div>
             <div className="border-b-2 py-2">
               सामान्य परिचय
@@ -120,7 +109,6 @@ export default function KundaliInfoInner() {
           <KundaliStructure kundali={kundali} title="लग्न कुंडली" />
           <PlanetTable kundali={kundali} />
           <PlanetAspectTable kundali={kundali} />
-           <KundaliStructure kundali={d9} title="D9 - Navamsa Chart" />
 
         </div>
 

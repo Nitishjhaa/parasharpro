@@ -23,7 +23,7 @@ export default function PlanetAspectTable({ kundali }) {
     return (
         <div className="flex flex-col items-center w-full p-1.5">
             <h2 className="text-2xl mb-3">
-                ग्रहों की दृष्टि
+                ग्रह दृष्टि
             </h2>
 
             <table className="w-full border-2 border-black text-sm">

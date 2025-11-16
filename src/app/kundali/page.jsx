@@ -221,7 +221,7 @@ export default function KundaliPage() {
     setResult(null);
 
     try {
-      const res = await fetch("http://localhost:8080/kundali" || "http://192.168.0.111:8080", {
+      const res = await fetch("https://kundalipwa.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

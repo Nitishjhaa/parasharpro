@@ -1,0 +1,18 @@
+export const rashiHindiMap = {
+    "Aries": "मेष",
+    "Taurus": "वृषभ",
+    "Gemini": "मिथुन",
+    "Cancer": "कर्क",
+    "Leo": "सिंह",
+    "Virgo": "कन्या",
+    "Libra": "तुला",
+    "Scorpio": "वृश्चिक",
+    "Sagittarius": "धनु",
+    "Capricorn": "मकर",
+    "Aquarius": "कुंभ",
+    "Pisces": "मीन"
+};
+
+export function getHindiRashi(englishName) {
+    return rashiHindiMap[englishName] || englishName || "";
+}

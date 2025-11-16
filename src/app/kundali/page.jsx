@@ -591,7 +591,7 @@ export default function KundaliPage() {
             <div className="space-y-1">
               <label className="text-[#e29d00] font-semibold">Name</label>
               <input
-                className="w-full bg-white rounded-xl p-4 shadow outline-none"
+                className="w-full bg-white rounded-xl p-4 shadow outline-none text-black"
                 name="name"
                 placeholder="Full Name"
                 value={form.name}
@@ -605,7 +605,7 @@ export default function KundaliPage() {
               <div className="space-y-1">
                 <label className="text-[#e29d00] font-semibold">Date Of Birth</label>
                 <input
-                  className="w-full bg-white rounded-xl p-4 shadow outline-none"
+                  className="w-full bg-white rounded-xl p-4 shadow outline-none text-black"
                   name="birthDate"
                   value={form.birthDate}
                   onChange={handleChange}
@@ -616,7 +616,7 @@ export default function KundaliPage() {
               <div className="space-y-1">
                 <label className="text-[#e29d00] font-semibold">Birth Time</label>
                 <input
-                  className="w-full bg-white rounded-xl p-4 shadow outline-none"
+                  className="w-full bg-white rounded-xl p-4 shadow outline-none text-black"
                   name="birthTime"
                   value={form.birthTime}
                   onChange={handleChange}
@@ -630,7 +630,7 @@ export default function KundaliPage() {
                   name="gender"
                   value={form.gender}
                   onChange={handleChange}
-                  className="w-full bg-white rounded-xl p-4 shadow outline-none"
+                  className="w-full bg-white rounded-xl p-4 shadow outline-none text-black"
                 >
                   <option value="">Select Gender</option>
                   <option>Male</option>
@@ -651,7 +651,7 @@ export default function KundaliPage() {
                 onKeyDown={handleCityKeyDown}
                 autoComplete="off"
                 placeholder="Delhi"
-                className="w-full bg-white rounded-xl p-4 shadow outline-none"
+                className="w-full bg-white rounded-xl p-4 shadow outline-none text-black"
               />
 
               {showSuggestions && filtered.length > 0 && (
@@ -663,7 +663,7 @@ export default function KundaliPage() {
                       className={`p-3 cursor-pointer ${i === highlight ? "bg-yellow-100" : ""
                         }`}
                     >
-                      <div className="font-semibold">{c.city}</div>
+                      <div className="font-semibold text-black">{c.city}</div>
                       <div className="text-xs text-gray-600">{c.admin_name}</div>
                     </div>
 

@@ -32,7 +32,7 @@ export default function KundaliInfoInner() {
   }, [indexParam, router]);
 
   // console.log((kundali?.raw?.planets?.Sun?.house))
-  console.log((kundali))
+  // console.log((kundali))
 
   if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 

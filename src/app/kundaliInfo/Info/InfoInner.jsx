@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import { rashi, nakshatra } from "../AstrologicalData";
+import { rashi, nakshatra, getGhaatChakraByRashi } from "../AstrologicalData";
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -13,6 +13,7 @@ export default function KundaliInfoInner() {
     const router = useRouter();
 
     const indexParam = params.get("index");
+
 
     const data = [
         {
@@ -26,6 +27,10 @@ export default function KundaliInfoInner() {
             "चरण": kundali?.raw?.planets?.Moon?.pada,
         }
     ];
+
+    const ghaat = getGhaatChakraByRashi(kundali?.raw?.planets?.Moon?.rashiIndex, kundali?.meta?.gender);
+
+    console.log(ghaat)
 
     useEffect(() => {
         async function load() {
@@ -43,32 +48,7 @@ export default function KundaliInfoInner() {
     }, [indexParam, router]);
 
 
-console.log(kundali?.raw)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log(kundali?.raw)
 
 
     // const rashiIndex = kundali?.raw?.planets?.Moon?.rashiIndex
@@ -88,7 +68,20 @@ console.log(kundali?.raw)
                 />
                 <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
                     <ul className="w-full mt-5 p-5">
+                        <h3 className="text-2xl ml-5 my-5 font-bold underline underline-offset-8">सामान्य परिचय</h3>
                         {Object.entries(data[0]).map(([key, value]) => (
+                            <li
+                                key={key}
+                                className="flex justify-between gap-8 px-6 py-3 border-b border-black/20 text-lg font-medium"
+                            >
+                                <span>{key} : </span>
+                                <span>{value || "-"}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <ul className="w-full p-5">
+                        <h3 className="text-2xl ml-5 my-5 font-bold underline underline-offset-8">घात चक्र</h3>
+                        {Object.entries(ghaat[0]).map(([key, value]) => (
                             <li
                                 key={key}
                                 className="flex justify-between gap-8 px-6 py-3 border-b border-black/20 text-lg font-medium"

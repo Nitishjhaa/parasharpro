@@ -26,7 +26,8 @@ export default function KundaliHeader({
 
       {/* ---------- SIDE MENU (Mobile) ---------- */}
       <div
-        className={`max-md:block hidden h-screen w-70 bg-black absolute z-20 rounded-3xl p-3 transition-all duration-300 delay-150 top-2 ${isSideOpen ? "left-2" : "-left-80"
+      // max-md:block hidden
+        className={` h-screen w-70 bg-black absolute z-20 rounded-3xl p-3 transition-all duration-300 delay-150 top-2 ${isSideOpen ? "left-2" : "-left-80"
           }`}
       >
         <img

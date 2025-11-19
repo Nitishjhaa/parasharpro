@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
+import { rashi, nakshatra } from "../AstrologicalData";
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -19,6 +20,10 @@ export default function KundaliInfoInner() {
             "जन्म तिथि": kundali?.meta?.birthDate,
             "जन्म समय": kundali?.meta?.birthTime,
             "जन्म स्थान": kundali?.meta?.city,
+            "राशि": rashi(kundali?.raw?.planets?.Moon?.rashiIndex),
+            "लग्न": rashi(kundali?.raw?.ascendant?.rashiIndex),
+            "नक्षत्र": nakshatra(kundali?.raw?.planets?.Moon?.nakshatraIndex),
+            "चरण": kundali?.raw?.planets?.Moon?.pada,
         }
     ];
 
@@ -36,6 +41,38 @@ export default function KundaliInfoInner() {
         }
         load();
     }, [indexParam, router]);
+
+
+console.log(kundali?.raw)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const rashiIndex = kundali?.raw?.planets?.Moon?.rashiIndex
+    // const rashiHiName = rashi(rashiIndex);
 
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 
@@ -63,7 +100,6 @@ export default function KundaliInfoInner() {
                     </ul>
 
                 </div>
-
             </div>
 
         </div>

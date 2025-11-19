@@ -220,7 +220,7 @@ export default function KundaliPage() {
     setLoading(true);
     setResult(null);
 
-    // http://localhost:8080/kundali
+    // http://localhost:8080/kundali 
 
     try {
       const res = await fetch("https://kundalipwa.onrender.com/kundali", {

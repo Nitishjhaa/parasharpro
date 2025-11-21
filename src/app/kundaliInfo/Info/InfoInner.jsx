@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import { rashi, nakshatra, getGhaatChakraByRashi } from "../AstrologicalData";
+import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords } from "../AstrologicalData";
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -22,15 +22,22 @@ export default function KundaliInfoInner() {
             "जन्म समय": kundali?.meta?.birthTime,
             "जन्म स्थान": kundali?.meta?.city,
             "राशि": rashi(kundali?.raw?.planets?.Moon?.rashiIndex),
+            "राशिपति": getLords("rashi",kundali?.raw?.planets?.Moon?.rashi),
             "लग्न": rashi(kundali?.raw?.ascendant?.rashiIndex),
+            "लग्नाधिपति": getLords("lagna", kundali?.raw?.ascendant?.rashi),
             "नक्षत्र": nakshatra(kundali?.raw?.planets?.Moon?.nakshatraIndex),
             "चरण": kundali?.raw?.planets?.Moon?.pada,
+            "नक्षत्रपति": getLords("nakshatra", kundali?.raw?.planets?.Moon?.nakshatra),
+            "पाये (राशि से)": getMoonPaaye(kundali?.raw?.planets?.Moon?.house),
+            "पाये (नक्षत्र से)": getNakPaaye(kundali?.raw?.planets?.Moon?.nakshatra)
         }
     ];
 
+    console.log(kundali?.raw?.planets?.Moon?.nakshatra)
+    console.log( kundali?.raw?.ascendant?.rashi)
+
     const ghaat = getGhaatChakraByRashi(kundali?.raw?.planets?.Moon?.rashiIndex, kundali?.meta?.gender);
 
-    console.log(ghaat)
 
     useEffect(() => {
         async function load() {
@@ -50,9 +57,6 @@ export default function KundaliInfoInner() {
 
     console.log(kundali?.raw)
 
-
-    // const rashiIndex = kundali?.raw?.planets?.Moon?.rashiIndex
-    // const rashiHiName = rashi(rashiIndex);
 
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 

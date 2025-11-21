@@ -1,3 +1,6 @@
+import { getHindiGrah } from '@/lib/grah'
+
+
 // ---- RASHI FUNCTION ----
 export const rashi = (rashiIndex) => {
     if (rashiIndex === undefined || rashiIndex === null) {
@@ -177,3 +180,89 @@ export const getGhaatChakraByRashi = (rashiNumber, gender) => {
         return ghaatChakar;
     }
 }
+
+export const getMoonPaaye = (h) => {
+
+    // Paaye by Moon house
+    if (h === 1 || h === 6 || h === 11) return "सोना";
+    if (h === 2 || h === 5 || h === 9) return "चाँदी";
+    if (h === 3 || h === 7 || h === 10) return "ताँबा";
+    if (h === 4 || h === 8 || h === 12) return "लोहा";
+
+};
+
+export const getNakPaaye = (nak) => {
+
+    const goldPaaye = ['Revati', 'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira'];
+    const silverPaaye = ['Ardra', 'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'Purva_Phalguni', 'Uttara_Phalguni', 'Hasta', 'Chitra', 'Swati'];
+    const copperPaaye = ['Vishakha', 'Anuradha', 'Jyeshtha', 'Mula', 'Purva_Ashadha', 'Uttara_Ashadha', 'Shravana', 'Dhanishta', 'Shatabhisha'];
+    const IronPaaye = ['Purva_Bhadrapada', 'Uttara_Bhadrapada'];
+
+    // Paaye by Nakshatra
+    if (goldPaaye.includes(nak)) return "सोना";
+    if (silverPaaye.includes(nak)) return "चाँदी";
+    if (copperPaaye.includes(nak)) return "ताँबा";
+    if (IronPaaye.includes(nak)) return "लोहा";
+
+
+};
+
+
+export const getLords = (type, value) => {
+
+    const rashiLords = {
+        Aries: "Mars",
+        Taurus: "Venus",
+        Gemini: "Mercury",
+        Cancer: "Moon",
+        Leo: "Sun",
+        Virgo: "Mercury",
+        Libra: "Venus",
+        Scorpio: "Mars",
+        Sagittarius: "Jupiter",
+        Capricorn: "Saturn",
+        Aquarius: "Saturn",
+        Pisces: "Jupiter"
+    };
+
+    const nakshatraLords = {
+        Ashwini: "Ketu",
+        Bharani: "Venus",
+        Krittika: "Sun",
+        Rohini: "Moon",
+        Mrigashira: "Mars",
+        Ardra: "Rahu",
+        Punarvasu: "Jupiter",
+        Pushya: "Saturn",
+        Ashlesha: "Mercury",
+        Magha: "Ketu",
+        Purva_Phalguni: "Venus",
+        Uttara_Phalguni: "Sun",
+        Hasta: "Moon",
+        Chitra: "Mars",
+        Swati: "Rahu",
+        Vishakha: "Jupiter",
+        Anuradha: "Saturn",
+        Jyeshtha: "Mercury",
+        Mula: "Ketu",
+        Purva_Ashadha: "Venus",
+        Uttara_Ashadha: "Sun",
+        Shravana: "Moon",
+        Dhanishta: "Mars",
+        Shatabhisha: "Rahu",
+        Purva_Bhadrapada: "Jupiter",
+        Uttara_Bhadrapada: "Saturn",
+        Revati: "Mercury"
+    };
+
+    if (type === "lagna" || type === "rashi") {
+        return getHindiGrah(rashiLords[value]) || "Unknown";
+    }
+
+    if (type === "nakshatra") {
+        return getHindiGrah(nakshatraLords[value]) || "Unknown";
+    }
+
+    return "Invalid type";
+}
+

@@ -26,8 +26,8 @@ export default function KundaliHeader({
 
       {/* ---------- SIDE MENU (Mobile) ---------- */}
       <div
-      // max-md:block hidden
-        className={` h-screen w-70 bg-black absolute z-20 rounded-3xl p-3 transition-all duration-300 delay-150 top-2 ${isSideOpen ? "left-2" : "-left-80"
+        // max-md:block hidden
+        className={`h-screen w-70 bg-black absolute z-20 rounded-3xl p-3 transition-all duration-300 delay-150 top-2 ${isSideOpen ? "left-2" : "-left-80"
           }`}
       >
         <img
@@ -63,14 +63,18 @@ export default function KundaliHeader({
           </div>
 
           <div className="border-b-2 py-2">
-             <Link href={`/kundaliInfo/faladesh?index=${indexParam}`}>
-            फलादेश
+            <Link href={`/kundaliInfo/faladesh?index=${indexParam}`}>
+              फलादेश
             </Link>
           </div>
 
           <div className="border-b-2 py-2">दोष</div>
 
-          <div className="border-b-2 py-2">रत्न</div>
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/ratna?index=${indexParam}`}>
+              रत्न
+            </Link>
+          </div>
 
           <div className="border-b-2 py-2">उपाय</div>
         </div>

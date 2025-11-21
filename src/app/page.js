@@ -96,7 +96,7 @@ export default function Page() {
               {recent.length === 0 && (
                 <div className="text-gray-600 col-span-full">No recent kundalis</div>
               )}
-              {recent.map((r, idx) => (
+              {recent.slice(0,5).map((r, idx) => (
                 <div
                   key={r.id}
                   onClick={() => router.push(`/kundaliInfo?index=${idx}`)}
@@ -178,7 +178,7 @@ export default function Page() {
                     {recent.length === 0 && (
                       <div className="text-gray-500">No recent kundalis</div>
                     )}
-                    {recent.map((r, idx) => (
+                    {recent.slice(0,5).map((r, idx) => (
                       <div
                         key={r.id}
                         className="p-3 rounded-md bg-white/80 dark:bg-[#1f1f1f] cursor-pointer"

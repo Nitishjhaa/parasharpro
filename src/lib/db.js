@@ -20,7 +20,7 @@ export const saveKundali = async (entry) => {
   list.unshift(record);
 
   // Keep only last 5
-  list = list.slice(0, 5);
+  list = list.slice(0, 100);
 
   await set(KEY, list);
 

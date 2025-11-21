@@ -140,7 +140,6 @@ export default function KundaliInfoInner() {
 
                 </div>
                 <div className="flex flex-col justify-start bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl p-2 mt-5 lg:p-10">
-                    <h3 className="text-2xl font-semibold px-6 underline underline-offset-8 pb-4">नक्षत्र फल:</h3>                    
                     <p className="text-black px-6 py-3">
                         <span className="font-bold">सूर्य:{nakAndPaad("Sun")} :</span><br />
                         {sunMeaning}
@@ -185,8 +184,6 @@ export default function KundaliInfoInner() {
                         <span className="font-bold">केतु: {nakAndPaad("Ketu")} :</span><br />
                         {ketuMeaning}
                     </p>
-                    <hr />
-
                 </div>
             </div>
         </div>

@@ -14,7 +14,6 @@ export default function KundaliInfoInner() {
 
     const indexParam = params.get("index");
 
-
     const data = [
         {
             "नाम": kundali?.meta?.name,
@@ -22,7 +21,7 @@ export default function KundaliInfoInner() {
             "जन्म समय": kundali?.meta?.birthTime,
             "जन्म स्थान": kundali?.meta?.city,
             "राशि": rashi(kundali?.raw?.planets?.Moon?.rashiIndex),
-            "राशिपति": getLords("rashi",kundali?.raw?.planets?.Moon?.rashi),
+            "राशिपति": getLords("rashi", kundali?.raw?.planets?.Moon?.rashi),
             "लग्न": rashi(kundali?.raw?.ascendant?.rashiIndex),
             "लग्नाधिपति": getLords("lagna", kundali?.raw?.ascendant?.rashi),
             "नक्षत्र": nakshatra(kundali?.raw?.planets?.Moon?.nakshatraIndex),
@@ -33,11 +32,9 @@ export default function KundaliInfoInner() {
         }
     ];
 
-    console.log(kundali?.raw?.planets?.Moon?.nakshatra)
-    console.log( kundali?.raw?.ascendant?.rashi)
-
     const ghaat = getGhaatChakraByRashi(kundali?.raw?.planets?.Moon?.rashiIndex, kundali?.meta?.gender);
 
+    console.log(kundali)
 
     useEffect(() => {
         async function load() {
@@ -53,9 +50,6 @@ export default function KundaliInfoInner() {
         }
         load();
     }, [indexParam, router]);
-
-
-    console.log(kundali?.raw)
 
 
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;

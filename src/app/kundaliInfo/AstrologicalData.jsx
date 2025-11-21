@@ -138,7 +138,6 @@ export const getGhaatChakraByRashi = (rashiNumber, gender) => {
         }
     };
 
-    console.log(rashiNumber)
     const index = rashiNumber;
 
     const rashiName = rashiList[index];

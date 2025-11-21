@@ -6,7 +6,8 @@ import { HiLanguage } from "react-icons/hi2";
 import { FaDatabase } from "react-icons/fa";
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
-import { saveKundali } from "@/lib/db";
+import { saveKundali, loadKundalis } from "@/lib/db";
+import { RiCloseLargeFill } from "react-icons/ri";
 
 
 export default function KundaliPage() {
@@ -14,6 +15,21 @@ export default function KundaliPage() {
   const [filtered, setFiltered] = useState([]);
   const [highlight, setHighlight] = useState(-1);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [recent, setRecent] = useState([]);
+  const [isDbClicked, setIsDbClicked] = useState(false)
+
+  useEffect(() => {
+    async function load() {
+      const list = await loadKundalis();
+      setRecent(list);
+    }
+    load();
+  }, []);
+
+  const formatMetaDate = (meta) => {
+    if (!meta) return "";
+    return `${meta.birthDate || ""} ${meta.birthTime ? "• " + meta.birthTime : ""}`;
+  };
 
   const ddRef = useRef(null);
   const mmRef = useRef(null);
@@ -220,7 +236,7 @@ export default function KundaliPage() {
     setLoading(true);
     setResult(null);
 
-    //http://localhost:8080/kundali
+    // http://localhost:8080/kundali
 
     try {
       const res = await fetch("https://kundalipwa.onrender.com/kundali", {
@@ -523,7 +539,7 @@ export default function KundaliPage() {
                   <span className="text-black text-xl font-bold "><HiLanguage /></span>
                 </button>
 
-                <button className="w-12 h-12 bg-[#ccc] rounded-lg flex items-center justify-center">
+                <button onClick={(e) => setIsDbClicked(!isDbClicked)} className="w-12 h-12 bg-[#ccc] rounded-lg flex items-center justify-center">
                   <FaDatabase color="black" />
                 </button>
 
@@ -562,16 +578,33 @@ export default function KundaliPage() {
             </button>
           </div>
 
-          {/* {result && (
-            <div className="mt-4 card-bg rounded-3xl p-4">
-              <details>
-                <summary>View JSON</summary>
-                <pre className=" text-sm mt-2 whitespace-pre-wrap">
-                  {JSON.stringify(result, null, 2)}
-                </pre>
-              </details>
+          <div className={`card-bg absolute top-2 justify-center items-center scale-0 transition-all duration-300 ease-in ${isDbClicked ? 'scale-100 flex' : 'scale-0 hidden'} `}>
+            <div className=" flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700 card-bg overflow-y-auto w-[90vw] p-3">
+              <div className="flex justify-between items-center">
+                <div className="mb-1">
+                  Last 100 Kundalis.
+                </div>
+                <button onClick={(e) => setIsDbClicked(!isDbClicked)} className="bg-black w-10 h-10 flex justify-center items-center rounded-full">
+                  <RiCloseLargeFill />
+                </button>
+              </div>
+              <div className="mt-3 space-y-3 p-2 rounded overflow-y-auto">
+                {recent.length === 0 && (
+                  <div className="text-gray-500">No recent kundalis</div>
+                )}
+                {recent.map((r, idx) => (
+                  <div
+                    key={r.id}
+                    className="p-3 rounded-md bg-white/80 dark:bg-[#1f1f1f] cursor-pointer"
+                    onClick={() => router.push(`/kundaliInfo?index=${idx}`)}
+                  >
+                    <div className="font-semibold">{r.meta?.name || "Unknown"}</div>
+                    <div className="text-sm text-gray-300">{formatMetaDate(r.meta)} {" "} | {r.meta?.city || ""} </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          )} */}
+          </div>
         </div>
       </div>
 
@@ -682,19 +715,6 @@ export default function KundaliPage() {
               {loading ? "Calculating..." : "Generate Kundali"}
             </button>
           </div>
-
-          {/* {result && (
-            <div className="mt-8 bg-white p-6 rounded-xl shadow">
-              <details>
-                <summary className=" cursor-pointer font-semibold text-black">
-                  View JSON
-                </summary>
-                <pre className="mt-2 whitespace-pre-wrap text-sm text-black">
-                  {JSON.stringify(result, null, 2)}
-                </pre>
-              </details>
-            </div>
-          )} */}
         </div>
       </div>
     </div>

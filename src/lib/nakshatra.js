@@ -9,8 +9,8 @@ export const nakshatraHindiMap = {
     "Pushya": "पुष्य",
     "Ashlesha": "आश्लेषा",
     "Magha": "मघा",
-    "Purva_Phalguni": "पूर्व फाल्गुनी",
-    "Uttara_Phalguni": "उत्तर फाल्गुनी",
+    "PurvaPhalguni": "पूर्वाफाल्गुनी",
+    "UttaraPhalguni": "उत्तराफाल्गुनी",
     "Hasta": "हस्त",
     "Chitra": "चित्रा",
     "Swati": "स्वाती",
@@ -18,13 +18,13 @@ export const nakshatraHindiMap = {
     "Anuradha": "अनुराधा",
     "Jyeshtha": "ज्येष्ठा",
     "Mula": "मूल",
-    "Purva_Ashadha": "पूर्वाषाढ़ा",
-    "Uttara_Ashadha": "उत्तराषाढ़ा",
+    "PurvaAshadha": "पूर्वाषाढ़ा",
+    "UttaraAshadha": "उत्तराषाढ़ा",
     "Shravana": "श्रवण",
     "Dhanishta": "धनिष्ठा",
     "Shatabhisha": "शतभिषा",
-    "Purva_Bhadrapada": "पूर्व भाद्रपद",
-    "Uttara_Bhadrapada": "उत्तर भाद्रपद",
+    "PurvaBhadrapada": "पूर्वाभाद्रपद",
+    "UttaraBhadrapada": "उत्तराभाद्रपद",
     "Revati": "रेवती"
 };
 

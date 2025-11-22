@@ -42,6 +42,7 @@ export default function KundaliInfoInner() {
             .then((data) => setPlanetsInNakshatras(data)); // data is ARRAY
     }, []);
 
+    console.log(kundali)
 
     // Helper to get data for any planet
     function getPlanetNakshatraMeaning(planet) {
@@ -49,8 +50,12 @@ export default function KundaliInfoInner() {
 
         const root = planetsInNakshatras[0];  // FIXED ROOT
 
+        console.log(root)
+
         const nakRaw = kundali?.raw?.planets?.[planet]?.nakshatra;
+        console.log(nakRaw)
         const pada = kundali?.raw?.planets?.[planet]?.pada;
+        console.log(pada)
 
         if (!nakRaw || !pada) return null;
 

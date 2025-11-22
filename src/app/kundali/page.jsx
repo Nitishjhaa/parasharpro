@@ -236,10 +236,10 @@ export default function KundaliPage() {
     setLoading(true);
     setResult(null);
 
-    // https://kundalipwa.onrender.com/kundali 
+    //  http://localhost:8080/kundali
 
     try {
-      const res = await fetch("http://localhost:8080/kundali", {
+      const res = await fetch("https://kundalipwa.onrender.com/kundali", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

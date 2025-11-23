@@ -5,6 +5,7 @@ import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
 import { getHindiNakshatra } from "@/lib/nakshatra";
+import { preditionOnDate } from '../AstrologicalData'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -42,20 +43,14 @@ export default function KundaliInfoInner() {
             .then((data) => setPlanetsInNakshatras(data)); // data is ARRAY
     }, []);
 
-    console.log(kundali)
-
     // Helper to get data for any planet
     function getPlanetNakshatraMeaning(planet) {
         if (!planetsInNakshatras || planetsInNakshatras.length === 0) return null;
 
         const root = planetsInNakshatras[0];  // FIXED ROOT
 
-        console.log(root)
-
         const nakRaw = kundali?.raw?.planets?.[planet]?.nakshatra;
-        console.log(nakRaw)
         const pada = kundali?.raw?.planets?.[planet]?.pada;
-        console.log(pada)
 
         if (!nakRaw || !pada) return null;
 
@@ -79,8 +74,6 @@ export default function KundaliInfoInner() {
         return `${nakRawName} : ${pada} `
     }
 
-    if (!kundali) return <div className="p-4 text-white">Loading...</div>;
-
     const nakshataraIndex = kundali?.raw?.planets?.Moon?.nakshatraIndex;
     const gender = kundali?.meta?.gender.toLowerCase();
     const n = nakshatara[nakshataraIndex];
@@ -94,6 +87,17 @@ export default function KundaliInfoInner() {
     const rahuMeaning = getPlanetNakshatraMeaning("Rahu");
     const ketuMeaning = getPlanetNakshatraMeaning("Ketu");
 
+    const birthDate = kundali?.raw?.meta?.datetimeUTC;
+
+    const datePrediction = preditionOnDate({ birthDate });
+
+    console.log(datePrediction)
+
+    // console.log()
+
+    if (!kundali) return <div className="p-4 text-white">Loading...</div>;
+
+
     return (
         <div className="p-2 overflow-hidden text-black">
             <div className="w-[98%] mx-auto">
@@ -106,6 +110,17 @@ export default function KundaliInfoInner() {
                 />
 
                 <div className="flex flex-col justify-start bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl p-2 lg:p-10">
+                    <div className="px-6 py-3 flex flex-col gap-5">
+                        {datePrediction.map((p, index) => (
+                            <div key={index} >
+                                <div>
+                                    {p.msg}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="flex flex-col justify-start bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl p-2 lg:p-10 mt-5">
                     <p className="text-black px-6 py-3">
                         <span className="font-bold">शारीरिक संरचना:</span><br />
                         {n?.saririkSanrahna?.[gender]}

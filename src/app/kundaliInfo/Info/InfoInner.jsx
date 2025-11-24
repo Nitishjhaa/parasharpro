@@ -5,7 +5,7 @@ import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
 import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords } from "../AstrologicalData";
-import { getPanchangDetails } from '@/lib/panchang'
+import getPanchangDetails from '@/lib/panchang'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -32,25 +32,94 @@ export default function KundaliInfoInner() {
 
     const indexParam = params.get("index");
 
+    const cityName = kundali?.raw?.city;
+
+    let lat = null;
+    let lon = null;
+
+    if (cityName) {
+        const latAndLon = getLatLon(cityName);
+        lat = latAndLon?.lat ?? null;
+        lon = latAndLon?.lon ?? null;
+    }
+
+    const birthString = kundali?.raw?.meta?.datetimeUTC ?? null;
+
+    let birthDate = null;
+    let birthTime = null;
+
+    if (birthString) {
+        const [date, time] = birthString.split('T');
+        birthDate = date;
+        birthTime = time?.split('.')[0]; // remove milliseconds
+    }
+
+    const panchang = getPanchangDetails(birthDate, birthTime, lat, lon)
+
+    function getHindiWeekday(dob) {
+
+        if (!dob) {
+            return 'dob is not found'
+        }
+
+        const hindiDays = [
+            "रविवार",  // Sunday
+            "सोमवार",  // Monday
+            "मंगलवार", // Tuesday
+            "बुधवार",  // Wednesday
+            "गुरुवार", // Thursday
+            "शुक्रवार", // Friday
+            "शनिवार"   // Saturday
+        ];
+
+        let date;
+        date = new Date(dob);
+
+        if (isNaN(date.getTime())) {
+            throw new Error("Invalid Date Format");
+        }
+
+        return hindiDays[date.getDay()];
+    }
+
+    getHindiWeekday()
+
+    let tithi = null;
+
+    if (panchang?.tithi?.name) {
+        tithi = panchang.tithi.name;
+    }
+
+    const chandraRelated = kundali?.raw?.planets?.Moon;
+    const kundaliMeta = kundali?.meta;
+
     const data = [
         {
-            "नाम": kundali?.meta?.name,
-            "जन्म तिथि": kundali?.meta?.birthDate,
-            "जन्म समय": kundali?.meta?.birthTime,
-            "जन्म स्थान": kundali?.meta?.city,
-            "राशि": rashi(kundali?.raw?.planets?.Moon?.rashiIndex),
-            "राशिपति": getLords("rashi", kundali?.raw?.planets?.Moon?.rashi),
+            "नाम": kundaliMeta?.name,
+            "जन्म तिथि": kundaliMeta?.birthDate,
+            "जन्म समय": kundaliMeta?.birthTime,
+            "जन्म स्थान": kundaliMeta?.city,
+            "अक्षांश": lat,
+            "देशांतर": lon,
+            "राशि": rashi(chandraRelated?.rashiIndex),
+            "राशिपति": getLords("rashi", chandraRelated?.rashi),
             "लग्न": rashi(kundali?.raw?.ascendant?.rashiIndex),
             "लग्नाधिपति": getLords("lagna", kundali?.raw?.ascendant?.rashi),
-            "नक्षत्र": nakshatra(kundali?.raw?.planets?.Moon?.nakshatraIndex),
-            "चरण": kundali?.raw?.planets?.Moon?.pada,
-            "नक्षत्रपति": getLords("nakshatra", kundali?.raw?.planets?.Moon?.nakshatra),
-            "पाये (राशि से)": getMoonPaaye(kundali?.raw?.planets?.Moon?.house),
-            "पाये (नक्षत्र से)": getNakPaaye(kundali?.raw?.planets?.Moon?.nakshatra)
+            "नक्षत्र": nakshatra(chandraRelated?.nakshatraIndex),
+            "चरण": chandraRelated?.pada,
+            "नक्षत्रपति": getLords("nakshatra", chandraRelated?.nakshatra),
+            "पाये (राशि से)": getMoonPaaye(chandraRelated?.house),
+            "पाये (नक्षत्र से)": getNakPaaye(chandraRelated?.nakshatra),
+            "गण": panchang.gana,
+            "मास": panchang.purnimantaMonth,
+            "पक्ष": panchang.paksha,
+            "तिथि": tithi,
+            "वार": getHindiWeekday(birthDate),
+            "ऋतु": panchang.ritu,
         }
     ];
 
-    const ghaat = getGhaatChakraByRashi(kundali?.raw?.planets?.Moon?.rashiIndex, kundali?.meta?.gender);
+    const ghaat = getGhaatChakraByRashi(chandraRelated?.rashiIndex, kundaliMeta?.gender);
 
     useEffect(() => {
         async function load() {
@@ -66,22 +135,6 @@ export default function KundaliInfoInner() {
         }
         load();
     }, [indexParam, router]);
-
-    const cityName = kundali?.raw?.city;
-
-    let lat = null;
-    let lon = null;
-
-    if (cityName) {
-        const latAndLon = getLatLon(cityName);
-        lat = latAndLon?.lat ?? null;
-        lon = latAndLon?.lon ?? null;
-    }
-
-
-    const birthString = kundali?.raw?.meta?.datetimeUTC
-    const panchang = getPanchangDetails(birthString, lat, lon )
-
 
 
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;

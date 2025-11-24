@@ -1,8 +1,13 @@
 import { MhahPanchang } from 'mhah-panchang'
 
-export default function getPanchangDetails(birthString, lat, lon) {
+export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
+
+     if (!birthDate || !birthTime) {
+        return { error: "Invalid date or time" };
+    }
+
     const panchang = new MhahPanchang();
-    const date = new Date(birthString);
+    const date = new Date(`${birthDate}T${birthTime}`);
     const panchangDetails = panchang.calendar(date, lat, lon);
 
     // Extract Amanta month

@@ -91,10 +91,6 @@ export default function KundaliInfoInner() {
 
     const datePrediction = preditionOnDate({ birthDate });
 
-    console.log(datePrediction)
-
-    // console.log()
-
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 
 

@@ -5,12 +5,30 @@ import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
 import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords } from "../AstrologicalData";
+import { getPanchangDetails } from '@/lib/panchang'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
     const [isSideOpen, setIsSideOpen] = useState(false)
+    const [getCoordinate, setGetCoordinate] = useState([])
     const params = useSearchParams();
     const router = useRouter();
+
+    // Load cities.json
+    useEffect(() => {
+        fetch("/data/cities.json")
+            .then((r) => r.json())
+            .then((data) => setGetCoordinate(data || []));
+    }, []);
+
+
+    function getLatLon(cityName) {
+        const result = getCoordinate.find(item => item.city.toLowerCase() === cityName.toLowerCase());
+        if (result) {
+            return { lat: result.lat, lon: result.lng };
+        }
+        return null;
+    }
 
     const indexParam = params.get("index");
 
@@ -34,8 +52,6 @@ export default function KundaliInfoInner() {
 
     const ghaat = getGhaatChakraByRashi(kundali?.raw?.planets?.Moon?.rashiIndex, kundali?.meta?.gender);
 
-    console.log(kundali)
-
     useEffect(() => {
         async function load() {
             if (!indexParam) return;
@@ -50,6 +66,22 @@ export default function KundaliInfoInner() {
         }
         load();
     }, [indexParam, router]);
+
+    const cityName = kundali?.raw?.city;
+
+    let lat = null;
+    let lon = null;
+
+    if (cityName) {
+        const latAndLon = getLatLon(cityName);
+        lat = latAndLon?.lat ?? null;
+        lon = latAndLon?.lon ?? null;
+    }
+
+
+    const birthString = kundali?.raw?.meta?.datetimeUTC
+    const panchang = getPanchangDetails(birthString, lat, lon )
+
 
 
     if (!kundali) return <div className="p-4 text-white">Loading...</div>;

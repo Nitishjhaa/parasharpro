@@ -302,14 +302,214 @@ export const preditionOnDate = ({ birthDate }) => {
         predition.push({ type: "predition for 15/12 to 14/01", msg: `${day} तारीख को जन्मे जातक उच्च स्तरीय जीवनशैली के अभिलाषी होते हैं। वे भोग-विलासप्रिय होते हुए भी स्वभावतः सज्जन, व्यवहार-कुशल तथा धार्मिक प्रवृत्ति के होते हैं। सरकार अथवा शासन तंत्र द्वारा सम्मानित होने की संभावनाएँ इनके जीवन में प्रबल होती हैं। ये जातक शिल्प, तकनीक, अथवा चिकित्सा जैसे क्षेत्रों में विशेष दक्षता रखते हैं और ख्याति प्राप्ति की तीव्र इच्छा इनमें निहित रहती है।उत्साह एवं निष्कपटता इनके स्वभाव की विशेषताएँ होती हैं, किंतु वैवाहिक जीवन में मतभेद की स्थिति उत्पन्न हो सकती है — विशेषकर पति-पत्नी के विचारों में विरोध के कारण। जातक योग-मार्ग के अनुयायी, आस्तिक विचारधारा के पोषक, तथा साधु-संतों की सेवा में रत रहने वाले होते हैं। इन्हें समाज में सम्मान, प्रतिष्ठा एवं धार्मिक-आध्यात्मिक जगत में आदर प्राप्त होता है।` })
     }
     if ((months === 1 && day >= 15) || (months === 2 && day <= 14)) {
-        predition.push({type: "predition for 15/1 to 15/02", msg: `${day} तारीख को जन्मे जातक झगड़ालू स्वभाव के, उदंड प्रवृत्ति वाले तथा लोभवश अनुचित कार्य करने की ओर प्रवृत्त पाए जाते हैं। ये चंचल चित्त, वाचाल तथा कई बार दुराचार की प्रवृत्तियों से ग्रसित होते हैं। जीवन में इन्हें प्रायः छोटी स्तर की आजीविका प्राप्त होती है और शिक्षा का स्तर भी सीमित ही रहता है।ये जातक लघु व्यापार, दैनिक वस्तुओं के क्रय-विक्रय या स्वल्प स्तर के कारोबार में संलग्न होते हैं तथा दूसरों से धन प्राप्त करने की लालसा इनमें बनी रहती है। यद्यपि चित्त से सतर्क होते हैं, किंतु आचरण में गिरावट और निंदनीय प्रवृत्तियाँ भी देखी जाती हैं।परन्तु इनके भीतर परोपकार की भावना भी विद्यमान रहती है — ये दूसरों की उन्नति देखकर प्रसन्न होते हैं। विनोदी स्वभाव के होते हैं और अपने परिजनों की अपेक्षा बाहरी लोगों के बीच अधिक सुखी रहते हैं। यह भी देखा गया है कि इनके पिता प्रायः अल्पायु होते हैं, अथवा यदि जीवित रहते हैं तो उनके साथ आत्मीय संबंधों में मतभेद और मानसिक दूरी बनी रहती है। पिता से विशेष लाभ की संभावना कम होती है, और परस्पर विचारों में असमानता जीवन भर बनी रह सकती है।` })
+        predition.push({ type: "predition for 15/1 to 15/02", msg: `${day} तारीख को जन्मे जातक झगड़ालू स्वभाव के, उदंड प्रवृत्ति वाले तथा लोभवश अनुचित कार्य करने की ओर प्रवृत्त पाए जाते हैं। ये चंचल चित्त, वाचाल तथा कई बार दुराचार की प्रवृत्तियों से ग्रसित होते हैं। जीवन में इन्हें प्रायः छोटी स्तर की आजीविका प्राप्त होती है और शिक्षा का स्तर भी सीमित ही रहता है।ये जातक लघु व्यापार, दैनिक वस्तुओं के क्रय-विक्रय या स्वल्प स्तर के कारोबार में संलग्न होते हैं तथा दूसरों से धन प्राप्त करने की लालसा इनमें बनी रहती है। यद्यपि चित्त से सतर्क होते हैं, किंतु आचरण में गिरावट और निंदनीय प्रवृत्तियाँ भी देखी जाती हैं।परन्तु इनके भीतर परोपकार की भावना भी विद्यमान रहती है — ये दूसरों की उन्नति देखकर प्रसन्न होते हैं। विनोदी स्वभाव के होते हैं और अपने परिजनों की अपेक्षा बाहरी लोगों के बीच अधिक सुखी रहते हैं। यह भी देखा गया है कि इनके पिता प्रायः अल्पायु होते हैं, अथवा यदि जीवित रहते हैं तो उनके साथ आत्मीय संबंधों में मतभेद और मानसिक दूरी बनी रहती है। पिता से विशेष लाभ की संभावना कम होती है, और परस्पर विचारों में असमानता जीवन भर बनी रह सकती है।` })
     }
     if ((months === 2 && day >= 15) || (months === 3 && day <= 14)) {
-        predition.push({type: "predition for 15/2 to 14/03", msg: `${day} तारीख को जन्मे जातक को जीवन में धनाभाव, मानसिक तनाव और हृदय संबंधी रोगों की संभावना बनी रहती है। अतः जातक को किसी-न-किसी विशेष कार्य में कुशल, प्रतिभाशाली या हुनरमंद अवश्य बना देता है। चारित्रिक दृष्टिकोण से ऐसे जातक अक्सर स्वार्थी, मित्रों से विश्वासघात करने वाले, संशयी, और कभी-कभी गूढ़ विद्याओं जैसे—तंत्र-मंत्र, रहस्यवादी विषयों) में गहरी रुचि रखने वाले होते हैं। इनकी प्रवृत्ति में विद्रोही विचारधारा, सामाजिक ढाँचों से टकराव और निम्नवर्गीय या दुर्भाग्यशाली लोगों के साथ जुड़ाव की प्रवृत्ति भी देखी गई है। हालाँकि, इनमें विशिष्ट मानसिक क्षमता, विश्लेषणात्मक दृष्टि, और पारंपरिक सीमाओं को चुनौती देने का साहस भी होता है — जिससे ये कभी-कभी समाज में विशिष्ट पहचान बना लेते हैं।` })
+        predition.push({ type: "predition for 15/2 to 14/03", msg: `${day} तारीख को जन्मे जातक को जीवन में धनाभाव, मानसिक तनाव और हृदय संबंधी रोगों की संभावना बनी रहती है। अतः जातक को किसी-न-किसी विशेष कार्य में कुशल, प्रतिभाशाली या हुनरमंद अवश्य बना देता है। चारित्रिक दृष्टिकोण से ऐसे जातक अक्सर स्वार्थी, मित्रों से विश्वासघात करने वाले, संशयी, और कभी-कभी गूढ़ विद्याओं जैसे—तंत्र-मंत्र, रहस्यवादी विषयों) में गहरी रुचि रखने वाले होते हैं। इनकी प्रवृत्ति में विद्रोही विचारधारा, सामाजिक ढाँचों से टकराव और निम्नवर्गीय या दुर्भाग्यशाली लोगों के साथ जुड़ाव की प्रवृत्ति भी देखी गई है। हालाँकि, इनमें विशिष्ट मानसिक क्षमता, विश्लेषणात्मक दृष्टि, और पारंपरिक सीमाओं को चुनौती देने का साहस भी होता है — जिससे ये कभी-कभी समाज में विशिष्ट पहचान बना लेते हैं।` })
     }
     if ((months === 3 && day >= 15) || (months === 4 && day <= 13)) {
-        predition.push({type: "predition for 15/3 to 13/4", msg: `${day} तारीख को जन्मे जातक सामान्यतः ज्ञानी, विवेकी, स्थिर चित्त और बुद्धिमान होते हैं। ये अपने भाग्य के निर्माता स्वयं बनते हैं तथा जीवन में प्रगति हेतु कर्मशील रहते हैं। इनके जीवन में श्वसुर पक्ष (ससुराल) से धन प्राप्ति की प्रबल संभावना होती है। ऐसे जातक प्रायः आयात-निर्यात (इम्पोर्ट-एक्सपोर्ट), जल से संबंधित वस्तुएँ जैसे सिंघाड़ा, मोती, अथवा समुद्री उत्पादों से धन लाभ प्राप्त करते हैं। इनका मन धार्मिक प्रवृत्ति का होता है, इन्हें स्त्रियों द्वारा आदर एवं सम्मान भी प्राप्त होता है।` })
+        predition.push({ type: "predition for 15/3 to 13/4", msg: `${day} तारीख को जन्मे जातक सामान्यतः ज्ञानी, विवेकी, स्थिर चित्त और बुद्धिमान होते हैं। ये अपने भाग्य के निर्माता स्वयं बनते हैं तथा जीवन में प्रगति हेतु कर्मशील रहते हैं। इनके जीवन में श्वसुर पक्ष (ससुराल) से धन प्राप्ति की प्रबल संभावना होती है। ऐसे जातक प्रायः आयात-निर्यात (इम्पोर्ट-एक्सपोर्ट), जल से संबंधित वस्तुएँ जैसे सिंघाड़ा, मोती, अथवा समुद्री उत्पादों से धन लाभ प्राप्त करते हैं। इनका मन धार्मिक प्रवृत्ति का होता है, इन्हें स्त्रियों द्वारा आदर एवं सम्मान भी प्राप्त होता है।` })
     }
 
     return predition
 }
+
+
+export const checkManglik = (marsHouse) => {
+    const manglikHouses = [1, 4, 7, 8, 12];
+    const isManglik = manglikHouses.includes(marsHouse);
+
+    if (isManglik) {
+        return {
+            type: "मंगलीक",
+            status: "मांगलिक",
+            definition: "मांगलिक दोष वैदिक ज्योतिष में तब बनता है जब मंगल ग्रह व्यक्ति की जन्म कुंडली के प्रथम, चतुर्थ, सप्तम, अष्टम या द्वादश भाव में स्थित होता है। यह दोष विवाहिक जीवन पर प्रभाव डाल सकता है। इस स्थिति में जन्म लेने वाले व्यक्ति को 'मांगलिक' कहा जाता है।"
+        };
+    } else {
+        return {
+            type: "मंगलीक नहीं",
+            status: "की कुंडली में मंगलीक दोष नहीं",
+            definition: "जिन लोगों की कुंडली में मंगल ग्रह 1, 4, 7, 8 या 12वें भाव में नहीं होता, उन्हें मांगलिक दोष रहित माना जाता है।"
+        };
+    }
+};
+
+export const cheakMool = (moonNakName, charan) => {
+    const moolNakshatraDefinitions = {
+        "Ashwini": {
+            1: "अश्विनी नक्षत्र के पहले चरण में जन्म लेने पर पिता को कष्ट और धनहानि होती है",
+            2: "अश्विनी नक्षत्र के दूसरे चरण में जन्म लेने पर जातक को स्वास्थ्य संबंधित समस्याएँ हो सकती है और ज़्यादा ख़र्चा होता है।",
+            3: "अश्विनी नक्षत्र के तीसरे चरण में जन्म व्यक्ति के और पिता को आकस्मिक यात्रा करनी पड़ती है।",
+            4: "अश्विनी नक्षत्र के चौथे चरण में जन्म से करियर में बाधाएँ संभव हैं।"
+        },
+        "Ashlesha": {
+            1: "आश्लेषा नक्षत्र के पहले चरण में जन्म लेने से जातक को मानसिक तनाव का सामना करना पड़ सकता है।",
+            2: "आश्लेषा नक्षत्र के दूसरे चरण में जन्म से पारिवारिक जीवन में कठिनाइयाँ आ सकती हैं।",
+            3: "आश्लेषा नक्षत्र के तीसरे चरण में जन्म से माता-पिता के साथ मतभेद हो सकते हैं।",
+            4: "आश्लेषा नक्षत्र के चौथे चरण में जन्म से स्वास्थ्य पर विशेष ध्यान देने की आवश्यकता होती है।"
+        },
+        "Magha": {
+            1: "मघा नक्षत्र के पहले चरण में जन्म से जातक को पिता के साथ संबंधों में समस्या आ सकती है।",
+            2: "मघा नक्षत्र के दूसरे चरण में जन्म लेने पर नौकरी में अस्थिरता हो सकती है।",
+            3: "मघा नक्षत्र के तीसरे चरण में व्यवसायिक क्षेत्र में समस्याएँ हो सकती हैं।",
+            4: "मघा नक्षत्र के चौथे चरण में जातक को संतान पक्ष से परेशानी हो सकती है।"
+        },
+        "Jyeshtha": {
+            1: "ज्येष्ठा नक्षत्र के प्रथम चरण हो और मंगलवार भी उस दिन हो तो शिशु अपने बड़े भाई या स्त्री-जातक हो तो जेठ आदि के लिए घातक होता है। जन्म से मानसिक दबाव और संघर्ष देखने को मिल सकते हैं।",
+            2: "ज्येष्ठा नक्षत्र के द्वितीय चरण में जन्म हो तो बड़े भाई या बहन अथवा मामा, चाचा को घातक, जातक को निर्णय लेने में कठिनाई हो सकती है।",
+            3: "ज्येष्ठा नक्षत्र के तीसरे चरण में अगर जन्म हो तो पिता या माता को घातक होता है।।",
+            4: "ज्येष्ठा नक्षत्र के चौथे चरण में जन्म हो तो भाग्यवान, परन्तु अपने स्वास्थ्य के लिए हानिकारक होता है।"
+        },
+        "Mula": {
+            1: "मूल नक्षत्र के पहले चरण में जन्म से जीवन में अचानक परिवर्तन हो सकते हैं।",
+            2: "मूल नक्षत्र के दूसरे चरण में व्यक्ति को बार-बार स्थान परिवर्तन का सामना करना पड़ सकता है।",
+            3: "मूल नक्षत्र के तीसरे चरण में व्यवसायिक क्षेत्र में समस्याएँ हो सकती हैं।",
+            4: "मूल नक्षत्र के चौथे चरण में जातक को संतान पक्ष से परेशानी हो सकती है।"
+        },
+        "Revati": {
+            1: "रेवती नक्षत्र के पहले चरण में जन्म लेने से ऐश्वर्यवान और सुखी होता है ",
+            2: "रेवती नक्षत्र के दूसरे चरण में जन्म लेने से जातक धनी और अधिकार संपन्न होता है",
+            3: "रेवती नक्षत्र के तीसरे चरण में जन्म लेने से सुख और साधनों से युक्त होता है",
+            4: "रेवती नक्षत्र के चौथे चरण में जन्म लेने से अनेक प्रकार के कष्ट होते हैं"
+        }
+    };
+
+    if (moolNakshatraDefinitions[moonNakName]?.[charan]) {
+        return {
+            status: "गण्डमूल दोष उपस्थित",
+            definition: moolNakshatraDefinitions[moonNakName][charan],
+        };
+    }
+
+    else {
+        return {
+            status: "गण्डमूल दोष अनुपस्थित",
+            definition: "गण्डमूल दोष अनुपस्थित"
+        };
+    }
+};
+
+/**
+ * Returns an array of house numbers in the arc from start to end (inclusive)
+ * in a circular 1–12 system.
+ *
+ * @param {number} start - starting house (inclusive)
+ * @param {number} end - ending house (inclusive)
+ * @param {string} direction - "clockwise" or "anticlockwise"
+ * @returns {number[]} - array of houses in the arc
+ */
+const getArc = (start, end, direction = "clockwise") => {
+    const houses = [];
+    let current = start;
+    houses.push(current);
+    if (direction === "clockwise") {
+        while (current !== end) {
+            current = current === 12 ? 1 : current + 1;
+            houses.push(current);
+        }
+    } else if (direction === "anticlockwise") {
+        while (current !== end) {
+            current = current === 1 ? 12 : current - 1;
+            houses.push(current);
+        }
+    }
+    return houses;
+};
+
+/**
+ * Checks whether every planet's house is within the arc.
+ *
+ * @param {number[]} arc - array of houses representing the arc.
+ * @param {number[]} planetHouses - array of house numbers for planets.
+ * @returns {boolean}
+ */
+const allPlanetsInArc = (arc, planetHouses) => {
+    return planetHouses.every(house => arc.includes(house));
+};
+
+/**
+ * Determines the Kaal Sarp Yog name based on planet positions and the provided mapping.
+ *
+ * Naming mapping (for full Kaal Sarp Yog):
+ * - Rahu in 1, Ketu in 7 => "anant kaal-sarp yoga"
+ * - Rahu in 2, Ketu in 8 => "Kulik kaal-sarp yoga"
+ * - Rahu in 3, Ketu in 9 => "Vasuki kaal-sarp yoga"
+ * - Rahu in 4, Ketu in 10 => "SankhPal kaal-sarp yoga"
+ * - Rahu in 5, Ketu in 11 => "Padam kaal-sarp yoga"
+ * - Rahu in 6, Ketu in 12 => "Mahapadam kaal-sarp yoga"
+ * - Rahu in 7, Ketu in 1 => "Takshak kaal-sarp yoga"
+ * - Rahu in 8, Ketu in 2 => "Karkotak kaal-sarp yoga"
+ * - Rahu in 9, Ketu in 3 => "Sankhnaad kaal-sarp yoga"
+ * - Rahu in 10, Ketu in 4 => "Paatak kaal-sarp yoga"
+ * - Rahu in 11, Ketu in 5 => "Vishakt kaal-sarp yoga"
+ * - Rahu in 12, Ketu in 6 => "Shesnaag kaal-sarp yoga"
+ *
+ * @param {number} sunHouse
+ * @param {number} moonHouse
+ * @param {number} marsHouse
+ * @param {number} mercuryHouse
+ * @param {number} jupiterHouse
+ * @param {number} venusHouse
+ * @param {number} saturnHouse
+ * @param {number} rahuHouse
+ * @param {number} ketuHouse
+ * @returns {string} - If full Kaal Sarp Yog, returns the mapped name.
+ *                     Otherwise returns "Aansik Kaal Sarp Yog".
+ */
+export const kaalSarpYog = (sunHouse, moonHouse, marsHouse, mercuryHouse, jupiterHouse, venusHouse, saturnHouse, rahuHouse, ketuHouse) => {
+    // Collect planet positions.
+    const planets = [sunHouse, moonHouse, marsHouse, mercuryHouse, jupiterHouse, venusHouse, saturnHouse];
+
+    // Build both arcs between Rahu and Ketu.
+    const clockwiseArc = getArc(rahuHouse, ketuHouse, "clockwise");
+    const anticlockwiseArc = getArc(rahuHouse, ketuHouse, "anticlockwise");
+
+    // Count planets in each arc
+    const countInArc = (arc) => planets.filter(p => arc.includes(p)).length;
+    const clockwiseCount = countInArc(clockwiseArc);
+    const anticlockwiseCount = countInArc(anticlockwiseArc);
+
+    // Determine which arc is the clutch (the one with more planets).
+    let clutchArc;
+    let clutchCount;
+    if (clockwiseCount >= anticlockwiseCount) {
+        clutchArc = clockwiseArc;
+        clutchCount = clockwiseCount;
+    } else {
+        clutchArc = anticlockwiseArc;
+        clutchCount = anticlockwiseCount;
+    }
+
+    // The number of planets outside the clutch:
+    const outsideCount = planets.length - clutchCount;
+
+    // Determine the result:
+    // Full Kaal Sarp Yog: all planets are in one arc.
+    if (outsideCount === 0) {
+        const mapping = {
+            '1-7': 'Anant Kaal-Sarp Yoga',
+            '2-8': 'Kulik kaal-sarp yoga',
+            '3-9': 'Vasuki kaal-sarp yoga',
+            '4-10': 'SankhPal kaal-sarp yoga',
+            '5-11': 'Padam kaal-sarp yoga',
+            '6-12': 'Mahapadam kaal-sarp yoga',
+            '7-1': 'Takshak kaal-sarp yoga',
+            '8-2': 'Karkotak kaal-sarp yoga',
+            '9-3': 'Sankhnaad kaal-sarp yoga',
+            '10-4': 'Paatak kaal-sarp yoga',
+            '11-5': 'Vishakt kaal-sarp yoga',
+            '12-6': 'Shesnaag kaal-sarp yoga'
+        };
+
+        const key = `${rahuHouse}-${ketuHouse}`;
+        return mapping[key] || "Kaal Sarp Yog / काल सर्प योग";
+    };
+
+    // Aansik Kaal Sarp Yog: exactly one planet is outside.
+    if (outsideCount === 1) {
+        return "Aansik Kaal Sarp Yog / आंशिक काल सर्प योग";
+    }
+
+    // No Kaal Sarp Yog: more than one planet is outside.
+    return "No Kaal Sarp Yog / काल सर्प योग नहीं";
+};

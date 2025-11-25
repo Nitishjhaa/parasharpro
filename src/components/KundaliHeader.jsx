@@ -68,7 +68,11 @@ export default function KundaliHeader({
             </Link>
           </div>
 
-          <div className="border-b-2 py-2">दोष</div>
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/dosha?index=${indexParam}`}>
+              दोष
+            </Link>
+          </div>
 
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/ratna?index=${indexParam}`}>

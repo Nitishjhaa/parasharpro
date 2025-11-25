@@ -12,7 +12,7 @@ export default function HomeButton() {
 
   return (
     <Link href={pathname === "/kundali" ? "/" : "/kundali"}>
-      <div className="w-10 h-10 absolute right-8 top-8 bg-black rounded-full flex justify-center items-center text-white cursor-pointer">
+      <div className={`${pathname === "/kundali" ? 'top-10' : 'top-8'}  w-10 h-10 absolute right-8  bg-black rounded-full flex justify-center items-center text-white cursor-pointer`}>
         <IoHomeOutline />
       </div>
     </Link>

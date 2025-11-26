@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import { kaalSarpYog, cheakMool } from '../AstrologicalData'
+import { kaalSarpYog, cheakMool, checkManglik } from '../AstrologicalData'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -120,9 +120,14 @@ export default function KundaliInfoInner() {
         }
     };
 
+    // mool
     const gandMool = cheakMool(nakshatra, charan);
 
-    console.log(gandMool)
+    // manglik
+    const manglik = checkManglik(marsHouse)
+
+
+    console.log(manglik)
 
     return (
         <div className="p-2 overflow-hidden text-black">
@@ -135,8 +140,32 @@ export default function KundaliInfoInner() {
                     setIsSideOpen={setIsSideOpen}
                 />
 
-                <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
+                <div className="flex flex-col  bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
                     {/* mool */}
+                    {gandMool && <div>
+                        <div className="p-4">
+                            <div className={`${gandMool.status === "गण्डमूल दोष अनुपस्थित" ? "hidden" : ""} text-lg font-semibold`}>
+                                {gandMool.status}
+                            </div>
+                            <span className={`${gandMool.status === "गण्डमूल दोष अनुपस्थित" ? "text-lg font-semibold" : ""} `}>
+                                {gandMool.definition}
+
+                            </span>
+                        </div>
+                    </div>}
+
+                    {/* manglik */}
+                    {manglik && <div>
+                        <div className="p-4">
+                            <div className={`text-lg font-semibold`}>
+                                {manglik.status}
+                            </div>
+                            <span>
+                                {manglik.definition}
+
+                            </span>
+                        </div>
+                    </div>}
 
                     {/* kaalsarpyog */}
                     <div className="p-4">

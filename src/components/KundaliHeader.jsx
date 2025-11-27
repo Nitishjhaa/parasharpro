@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function KundaliHeader({
   title = "कुंडली",
@@ -8,6 +10,38 @@ export default function KundaliHeader({
   isSideOpen,
   setIsSideOpen,
 }) {
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+
+  // ---------- SWIPE DETECTION ----------
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      setStartX(e.touches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+      setCurrentX(e.touches[0].clientX);
+
+      // Swipe from LEFT EDGE to OPEN
+      if (startX < 20 && currentX - startX > 50) {
+        setIsSideOpen(true);
+      }
+
+      // Swipe to CLOSE
+      if (isSideOpen && startX > 240 && startX - currentX > 50) {
+        setIsSideOpen(false);
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchmove", handleTouchMove);
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [startX, currentX, isSideOpen, setIsSideOpen]);
+
   return (
     <>
       {/* ---------- TOP HEADER ---------- */}
@@ -24,16 +58,26 @@ export default function KundaliHeader({
         </div>
       </div>
 
-      {/* ---------- SIDE MENU (Mobile) ---------- */}
-      <div
-        // max-md:block hidden
-        className={`h-screen w-70 bg-black absolute z-20 rounded-3xl p-3 transition-all duration-300 delay-150 top-2 ${isSideOpen ? "left-2" : "-left-80"
-          }`}
+      {/* ---------- OVERLAY ---------- */}
+      {isSideOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-10"
+          onClick={() => setIsSideOpen(false)}
+        />
+      )}
+
+      {/* ---------- FRAMER MOTION SIDE DRAWER ---------- */}
+      <motion.div
+        initial={{ x: -260 }}
+        animate={{ x: isSideOpen ? 8 : -260 }}
+        transition={{ type: "spring", stiffness: 260, damping: 30 }}
+        className="fixed top-2 left-0 h-screen w-70 bg-black z-20 rounded-3xl p-3"
+        style={{ width: "260px" }}
       >
         <img
           src="/images/kundaliHead.png"
           className={`${isSideOpen ? "rotate-180" : ""} transition-all duration-300 w-12 brightness-0 invert-100`}
-          onClick={() => setIsSideOpen(!isSideOpen)}
+          onClick={() => setIsSideOpen(false)}
         />
 
         <div
@@ -82,7 +126,7 @@ export default function KundaliHeader({
 
           <div className="border-b-2 py-2">उपाय</div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

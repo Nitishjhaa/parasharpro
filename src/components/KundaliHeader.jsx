@@ -80,7 +80,7 @@ export default function KundaliHeader({
         animate={{ x: isSideOpen ? 0 : -260 }}   // FULL OPEN = 0
         transition={{ type: "spring", stiffness: 260, damping: 30 }}
         className="fixed top-0 left-0 h-screen bg-black z-20 rounded-r-3xl p-3"
-        style={{ width: "260px" }}
+        style={{ width: "270px" }}
       >
         <img
           src="/images/kundaliHead.png"
@@ -113,6 +113,18 @@ export default function KundaliHeader({
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/Info?index=${indexParam}`}>
               सामान्य परिचय
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/astaVargaChakra?index=${indexParam}`}>
+              अष्टकवर्ग चक्र
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/sodasVargaKundali?index=${indexParam}`}>
+              षोडश वर्ग कुंडली
             </Link>
           </div>
 

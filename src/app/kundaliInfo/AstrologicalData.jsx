@@ -513,3 +513,152 @@ export const kaalSarpYog = (sunHouse, moonHouse, marsHouse, mercuryHouse, jupite
     // No Kaal Sarp Yog: more than one planet is outside.
     return "No Kaal Sarp Yog / काल सर्प योग नहीं";
 };
+
+
+/**
+ * computeAshtakavarga.js
+ *
+ * Usage:
+ *   const res = computeAshtakavarga({
+ *     positions: { sun:3, moon:8, mars:11, mercury:2, jupiter:7, venus:10, saturn:12, rahu:5 },
+ *     lagna: 1, // optional, numeric 1..12
+ *     includeNodes: true, // include rahu/ketu in SAV if provided
+ *     customRules: { rahu: [ /* custom distance list */ 
+
+const DEFAULT_RULES = {
+  // NOTE: these are *common* classical-style rule sets used by many Ashtakavarga implementations.
+  // If your app has different rule rules, pass `customRules` to override any planet key.
+  sun:     [1,2,4,7,8,9,10,11],
+  moon:    [3,6,7,8,10,11],
+  mars:    [3,6,10,11],
+  mercury: [2,4,6,8,10,11],
+  jupiter: [2,5,6,9,11],
+  venus:   [1,2,3,4,8,9,11],
+  saturn:  [3,6,11],
+  // default placeholders for nodes (Rahu/Ketu). Many classical systems do not include Rahu/Ketu
+  // in standard Ashtakavarga — but you asked for Rahu: provide here or override via customRules.
+  rahu:    [3,6,9,11], // DEFAULT EXAMPLE — **override if your system uses different rules**
+  ketu:    [3,6,9,11],
+};
+
+/** normalize sign to 1..12 */
+function normSign(n) {
+  let m = Number(n);
+  if (!Number.isFinite(m)) throw new Error("sign must be number 1..12");
+  m = ((m - 1) % 12) + 1;
+  if (m <= 0) m += 12;
+  return m;
+}
+
+/** returns distance 1..12 from planetSign -> targetSign (clockwise) */
+function houseDistance(planetSign, targetSign) {
+  const p = normSign(planetSign), t = normSign(targetSign);
+  let d = t - p;
+  if (d <= 0) d += 12;
+  return d; // 1..12
+}
+
+/**
+ * computeAshtakavarga
+ * @param {Object} opts
+ *   - positions: { sun:1..12, moon:1..12, mars:.. }  // required at least for planets you want
+ *   - lagna: 1..12 (optional)
+ *   - includeNodes: boolean (if true and rahu/ketu provided, include them in SAV)
+ *   - customRules: { planetName: [distances...] } override defaults (very important for app parity)
+ * @returns {Object} result with per-planet arrays, totals, sarvashtakavarga and chakra layout
+ */
+export function computeAshtakavarga({
+  positions = {},
+  lagna = null,
+  includeNodes = false,
+  customRules = {},
+} = {}) {
+  // merge rules: custom overrides defaults
+  const RULES = { ...DEFAULT_RULES, ...(customRules || {}) };
+
+  // planets to compute: use keys present in positions or in RULES (except ketu/rahu logic handled by includeNodes)
+  const planetsToCompute = Object.keys(positions).filter(k => !!positions[k]);
+
+  // ensure only valid planets (we'll compute for these)
+  const planetaryTables = {}; // planet -> [12 bindus]
+  const planetTotals = {}; // planet -> total bindus (0..12 normally)
+  const DRAWER = []; // chakra rows: index 0..11 for sign 1..12
+
+  // initialize chakra array (12 signs) with per-planet entries
+  for (let i = 1; i <= 12; i++) {
+    DRAWER[i-1] = { sign: i, byPlanet: {} };
+  }
+
+  // compute each planetary ashtakavarga
+  planetsToCompute.forEach((planet) => {
+    const planetSign = normSign(positions[planet]);
+    const rule = RULES[planet] || []; // allow missing rule -> zeroes
+
+    const arr = [];
+    for (let targetSign = 1; targetSign <= 12; targetSign++) {
+      const dist = houseDistance(planetSign, targetSign); // 1..12
+      const bindu = rule.includes(dist) ? 1 : 0;
+      arr.push(bindu);
+      DRAWER[targetSign-1].byPlanet[planet] = bindu;
+    }
+
+    planetaryTables[planet] = arr;
+    planetTotals[planet] = arr.reduce((s,v) => s+v, 0);
+  });
+
+  // Lagna Ashtakavarga (if lagna provided) - compute like a "planet" named 'lagna'
+  let lagnaTable = null;
+  if (lagna != null) {
+    const lagnaSign = normSign(lagna);
+    // standard practice: Lagna contribution is often computed by same rules as Moon or special table.
+    // We'll compute using a simple "lagna-rule" approach: if customRules.lagna present use it,
+    // else use moon's rule as default fallback (common approach in some softwares).
+    const lagnaRule = customRules.lagna || RULES.lagna || RULES.moon || [];
+    lagnaTable = [];
+    for (let ts = 1; ts <= 12; ts++) {
+      const dist = houseDistance(lagnaSign, ts);
+      const bindu = lagnaRule.includes(dist) ? 1 : 0;
+      lagnaTable.push(bindu);
+      DRAWER[ts-1].byPlanet['lagna'] = bindu;
+    }
+    planetaryTables['lagna'] = lagnaTable;
+    planetTotals['lagna'] = lagnaTable.reduce((s,v) => s+v, 0);
+  }
+
+  // compute Sarvashtakavarga: sum of all planetary arrays included
+  // which planets count? classical SAV: sum of 7 planets + Lagna. You asked to include Rahu -> use includeNodes flag.
+  const sav = new Array(12).fill(0);
+  Object.keys(planetaryTables).forEach((p) => {
+    // if p is rahu/ketu and includeNodes==false, skip them
+    if ((p === 'rahu' || p === 'ketu') && !includeNodes) return;
+    planetaryTables[p].forEach((v, idx) => { sav[idx] += v; });
+  });
+
+  // prepare per-sign totals & enriched chakra structure
+  const signTotals = sav.map((v, idx) => ({ sign: idx+1, total: v, byPlanet: DRAWER[idx].byPlanet }));
+
+  // rankings of signs by SAV total
+  const signRanking = [...signTotals].sort((a,b) => b.total - a.total).map((x,i) => ({ rank: i+1, sign: x.sign, total: x.total }));
+
+  // planet rankings by their totals
+  const planetRanking = Object.entries(planetTotals)
+    .map(([p,t]) => ({ planet: p, total: t }))
+    .sort((a,b) => b.total - a.total);
+
+  // return a rich object
+  return {
+    planetaryTables,    // { sun: [12], moon: [12], ... }
+    planetTotals,       // { sun: 8, moon: 6, ... }
+    sav,                // [12] totals per sign (Sarvashtakavarga)
+    signTotals,         // [{sign:1,total:..., byPlanet:{sun:1,...}}, ...]
+    signRanking,        // sorted ranking of signs by total
+    planetRanking,      // ranked planets by their bindu totals
+    chakra: DRAWER,     // chakra array for UI display
+    meta: {
+      usedRules: RULES,
+      includeNodes: !!includeNodes,
+      computedFor: Object.keys(planetaryTables),
+    }
+  };
+}
+

@@ -13,6 +13,8 @@ export default function KundaliInfoInner() {
   const [isSideOpen, setIsSideOpen] = useState(false)
   const params = useSearchParams();
   const router = useRouter();
+  const [lagna, setLagna] = useState([]);
+
 
   const indexParam = params.get("index");
 
@@ -31,6 +33,14 @@ export default function KundaliInfoInner() {
     load();
   }, [indexParam, router]);
 
+  useEffect(() => {
+    fetch('/data/lagans.json')
+      .then((r) => r.json())
+      .then((data) => setLagna(data));
+  }, []);
+
+  console.log(lagna)
+
   if (!kundali) return <div className="p-4 text-white">Loading...</div>;
 
   return (
@@ -43,6 +53,7 @@ export default function KundaliInfoInner() {
           isSideOpen={isSideOpen}
           setIsSideOpen={setIsSideOpen}
         />
+
         <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
           <KundaliStructure kundali={kundali} title="लग्न कुंडली" />
           <PlanetTable kundali={kundali} />

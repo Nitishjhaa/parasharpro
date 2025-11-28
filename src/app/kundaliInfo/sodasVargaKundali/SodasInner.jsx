@@ -45,7 +45,7 @@ export default function Page() {
     return (
         <div className="p-2">
             <KundaliHeader
-                title="अष्टकवर्ग चक्र"
+                title="षोडश वर्ग कुंडली"
                 indexParam={indexParam}
                 isSideOpen={isSideOpen}
                 setIsSideOpen={setIsSideOpen}

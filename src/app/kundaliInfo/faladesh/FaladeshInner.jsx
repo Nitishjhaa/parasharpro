@@ -40,8 +40,9 @@ export default function KundaliInfoInner() {
 
         fetch('/data/planetsinnakshatras.json')
             .then((r) => r.json())
-            .then((data) => setPlanetsInNakshatras(data)); // data is ARRAY
+            .then((data) => setPlanetsInNakshatras(data));
     }, []);
+
 
     // Helper to get data for any planet
     function getPlanetNakshatraMeaning(planet) {

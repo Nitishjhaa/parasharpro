@@ -69,7 +69,7 @@ export default function KundaliInfoInner() {
               लग्न परिचय
             </div>
 
-            <div className="border w-[97%] mx-auto h-fit p-4 rounded-xl bg-white text-black">
+            <div className="border w-[97%] mx-auto h-fit p-4 rounded-xl text-black">
 
               {selectedLagna ? (
                 <div className="space-y-3">

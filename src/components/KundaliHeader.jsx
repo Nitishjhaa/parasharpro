@@ -55,9 +55,8 @@ export default function KundaliHeader({
         <div className="bg-linear-to-r from-[#FFE984] to-[#FFB111] p-5 flex gap-4 items-center">
           <img
             src="/images/kundaliHead.png"
-            className={`${
-              isSideOpen ? "rotate-180" : ""
-            } transition-all duration-300 w-12 brightness-0`}
+            className={`${isSideOpen ? "rotate-180" : ""
+              } transition-all duration-300 w-12 brightness-0`}
             onClick={() => setIsSideOpen(!isSideOpen)}
           />
           <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent text-xl">
@@ -84,9 +83,8 @@ export default function KundaliHeader({
       >
         <img
           src="/images/kundaliHead.png"
-          className={`${
-            isSideOpen ? "rotate-180" : ""
-          } transition-all duration-300 w-12 brightness-0 invert-100`}
+          className={`${isSideOpen ? "rotate-180" : ""
+            } transition-all duration-300 w-12 brightness-0 invert-100`}
           onClick={() => setIsSideOpen(false)}
         />
 
@@ -146,7 +144,11 @@ export default function KundaliHeader({
             </Link>
           </div>
 
-          <div className="border-b-2 py-2">उपाय</div>
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/remedies?index=${indexParam}`}>
+              उपाय
+            </Link>
+          </div>
         </div>
       </motion.div>
     </>

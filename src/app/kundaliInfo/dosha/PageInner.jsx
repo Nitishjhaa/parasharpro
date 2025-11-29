@@ -74,9 +74,6 @@ export default function KundaliInfoInner() {
         ketuHouse
     );
 
-    console.log()
-    console.log()
-
     // find full description in JSON
     function getKaalSharpaYoga(kaalYog) {
         if (!kaalYog) return null;
@@ -125,9 +122,6 @@ export default function KundaliInfoInner() {
 
     // manglik
     const manglik = checkManglik(marsHouse)
-
-
-    console.log(manglik)
 
     return (
         <div className="p-2 overflow-hidden text-black">

@@ -15,7 +15,6 @@ export default function KundaliInfoInner() {
   const router = useRouter();
   const [lagna, setLagna] = useState([]);
 
-
   const indexParam = params.get("index");
 
   useEffect(() => {
@@ -39,9 +38,15 @@ export default function KundaliInfoInner() {
       .then((data) => setLagna(data));
   }, []);
 
-  console.log(lagna)
-
   if (!kundali) return <div className="p-4 text-white">Loading...</div>;
+  if (!kundali?.raw?.ascendant?.rashiIndex) return <div className="p-4 text-white">Loading...</div>;
+
+  const lagnaIndex = kundali?.raw?.ascendant?.rashiIndex;
+
+  const selectedLagna = lagna?.[lagnaIndex] || null;
+
+  const isValid = (value) =>
+    value !== null && value !== undefined && value !== "";
 
   return (
     <div className="p-2 overflow-hidden text-black" >
@@ -58,6 +63,66 @@ export default function KundaliInfoInner() {
           <KundaliStructure kundali={kundali} title="लग्न कुंडली" />
           <PlanetTable kundali={kundali} />
           <PlanetAspectTable kundali={kundali} />
+
+          <div className="h-fit w-full flex flex-col justify-center items-center mt-10">
+            <div className="w-40 h-full rounded-2xl flex justify-center items-center text-2xl">
+              लग्न परिचय
+            </div>
+
+            <div className="border w-[97%] mx-auto h-fit p-4 rounded-xl bg-white text-black">
+
+              {selectedLagna ? (
+                <div className="space-y-3">
+
+                  {isValid(selectedLagna.nameOfLagan) && (
+                    <p><strong>लग्न:</strong> {selectedLagna.nameOfLagan}</p>
+                  )}
+
+                  {isValid(selectedLagna.malik) && (
+                    <p><strong>स्वामी:</strong> {selectedLagna.malik}</p>
+                  )}
+
+                  {isValid(selectedLagna.subh) && (
+                    <p><strong>शुभ ग्रह:</strong> {selectedLagna.subh}</p>
+                  )}
+
+                  {isValid(selectedLagna.ashubh) && (
+                    <p><strong>अशुभ ग्रह:</strong> {selectedLagna.ashubh}</p>
+                  )}
+
+                  {isValid(selectedLagna.raajyogKarak) && (
+                    <p><strong>राजयोग कारक:</strong> {selectedLagna.raajyogKarak}</p>
+                  )}
+
+                  {isValid(selectedLagna.maarak) && (
+                    <p><strong>मारक:</strong> {selectedLagna.maarak}</p>
+                  )}
+
+                  <div className={`${!isValid(selectedLagna.ghaatak) ? "hidden" : ""}`}>
+                    {isValid(selectedLagna.ghaatak) && (
+                      <p><strong>घातक:</strong> {selectedLagna.ghaatak}</p>
+                    )}
+                  </div>
+
+                  <div className={`${!isValid(selectedLagna.parampaapi) ? "hidden" : ""}`}>
+                    {isValid(selectedLagna.parampaapi) && (
+                      <p><strong>परम पापी:</strong> {selectedLagna.parampaapi}</p>
+                    )}
+                  </div>
+
+
+                  {isValid(selectedLagna.description) && (
+                    <p className="whitespace-pre-line leading-7">
+                      {selectedLagna.description}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p>लग्न विवरण उपलब्ध नहीं है।</p>
+              )}
+
+            </div>
+          </div>
         </div>
       </div>
     </div>

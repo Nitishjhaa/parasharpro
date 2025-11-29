@@ -1,6 +1,6 @@
 [{
   "nameOfLagan": "Aries",
-  "numberOfLagan": 1,
+  "numberOfLagan": 0,
   "ashubh": "शनि,बुध,शुक्र,गुरु",
   "subh": "गुरु,सूर्य",
   "maarak": "शुक्र",
@@ -12,7 +12,7 @@
 },
 {
   "nameOfLagan": "Taurus",
-  "numberOfLagan": 2,
+  "numberOfLagan": 1,
   "ashubh": "गुरु,शुक्र,चंद्र,शनि,बुध",
   "subh": "सूर्य",
   "maarak": "गुरु",
@@ -24,7 +24,7 @@
 },
 {
   "nameOfLagan": "Gemini",
-  "numberOfLagan": 3,
+  "numberOfLagan": 2,
   "ashubh": "मंगल,शुक्र",
   "subh": "बुध,शनि",
   "maarak": "शनि",
@@ -36,7 +36,7 @@
 },
 {
   "nameOfLagan": "Cancer",
-  "numberOfLagan": 4,
+  "numberOfLagan": 3,
   "ashubh": "शुक्र,बुध,शनि",
   "subh": "सूर्य,गुरु",
   "maarak": "सूर्य,शुक्र",
@@ -48,19 +48,21 @@
 },
 {
   "nameOfLagan": "Leo",
-  "numberOfLagan": 5,
+  "numberOfLagan": 4,
+  
   "ashubh": "चंद्र",
   "subh": "सूर्य,मंगल",
   "maarak": "बुध,शनि",
   "raajyogKarak": "मंगल,गुरु",
   "parampaapi": "बुध,शनि",
   "ghaatak": "",
+  
   "malik": "Sun / सूर्य",
   "description": "सिंह लग्न में जन्म लेने वाले जातक के शरीर का रंग पाण्डुवर्ण का होता है। वह पित्त एवं वायु के विकार से पीड़ित रहता है। ऐसा व्यक्ति रजोगुणी, वौर, साहसी, अत्यन्त पराक्रमी, अहंकारी, क्रोधी, उग्रस्वभावी, अस्त्र-शस्त्र विद्या में निपुण, ढीठ, भोगी, तीक्ष्णबुद्धि, घुड़सवारी से प्रेम रखने वाला तथा मांस एवं रसीली वस्तुओं का भोजन करने वाला होता है। इसके हाथ बड़े होते हैं तथा छाती चौड़ी होती है। यह उदार तथा साधुसन्त सेवी भी होता है। ये जातक अपनी प्रारंभिक अवस्था में सुखी, मध्यावस्था में दुःखी तथा अन्तिमावस्था में पूर्ण सुखी रहता है। इसका भाग्योदय 21 अथवा 28 वर्ष की आयु में होता है। ये पराक्रमी होता है. वहाँ आलसी भी पाया जाता है। परन्तु समय पड़ने पर वह अपना कमात प्रदर्शित कर दिखाता है।"
 },
 {
   "nameOfLagan": "Virgo",
-  "numberOfLagan": 6,
+  "numberOfLagan": 5,
   "ashubh": "मंगल,शुक्र,चंद्र",
   "subh": "शुक्र",
   "maarak": "सूर्य,मंगल",
@@ -72,7 +74,7 @@
 },
 {
   "nameOfLagan": "Libra",
-  "numberOfLagan": 7,
+  "numberOfLagan": 6,
   "ashubh": "सूर्य,गुरु,मंगल",
   "subh": "बुध,शनि",
   "maarak": "मंगल",
@@ -84,7 +86,7 @@
 },
 {
   "nameOfLagan": "Scorpio",
-  "numberOfLagan": 8,
+  "numberOfLagan": 7,
   "ashubh": "मंगल,बुध,शनि",
   "subh": "गुरु",
   "maarak": "शुक्र,बुध",
@@ -96,7 +98,7 @@
 },
 {
   "nameOfLagan": "Sagittarius",
-  "numberOfLagan": 9,
+  "numberOfLagan": 8,
   "ashubh": "शनि,चंद्र,शुक्र",
   "subh": "सूर्य,बुध,गुरु,मंगल",
   "maarak": "शुक्र,बुध",
@@ -108,7 +110,7 @@
 },
 {
   "nameOfLagan": "Capricorn",
-  "numberOfLagan": 10,
+  "numberOfLagan": 9,
   "ashubh": "चंद्र,गुरु,मंगल",
   "subh": "शुक्र,बुध",
   "maarak": "चंद्र,मंगल",
@@ -120,7 +122,7 @@
 },
 {
   "nameOfLagan": "Aquarius",
-  "numberOfLagan": 11,
+  "numberOfLagan": 10,
   "ashubh": "चंद्र,गुरु,मंगल",
   "subh": "शुक्र",
   "maarak": "सूर्य",
@@ -132,7 +134,7 @@
 },
 {
   "nameOfLagan": "Pisces",
-  "numberOfLagan": 12,
+  "numberOfLagan": 11,
   "ashubh": "सूर्य,शनि,शुक्र,बुध",
   "subh": "चंद्र,मंगल",
   "maarak": "शनि,बुध",

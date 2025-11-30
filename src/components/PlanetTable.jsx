@@ -10,9 +10,11 @@ export default function PlanetTable({ kundali }) {
     if (!kundali) return null;
 
     const planets = kundali.planets || kundali.raw?.planets || {};
+    const ascendant = kundali.raw?.ascendant;
     const tatvas = computePlanetTatvas(kundali);
 
     const rows = [
+        { hi: "लग्न", en: "Ascendant" },
         { hi: "सूर्य", en: "Sun" },
         { hi: "चंद्र", en: "Moon" },
         { hi: "मंगल", en: "Mars" },
@@ -45,8 +47,8 @@ export default function PlanetTable({ kundali }) {
                     <tbody>
                         {rows.map((p) => {
                             const data = planets[p.en];
-                            const tatva = tatvas[p.en]?.tatva;
-
+                            const tatva = tatvas?.out[p.en]?.tatva;
+                            const ascTatva = tatvas?.ascTatva;
                             return (
                                 <tr key={p.en}>
                                     {/* ग्रह */}
@@ -56,24 +58,30 @@ export default function PlanetTable({ kundali }) {
 
                                     {/* अंश */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
-                                        {data?.anshDMS
+                                        {p.hi === "लग्न" ? ascendant?.anshDMS
+                                            ? `${ascendant.anshDMS.d}:${ascendant.anshDMS.m}:${ascendant.anshDMS.s}`
+                                            : "--" : data?.anshDMS
                                             ? `${data.anshDMS.d}:${data.anshDMS.m}:${data.anshDMS.s}`
-                                            : "--"}
+                                            : "--"
+                                        }
                                     </td>
 
                                     {/* नक्षत्र + चरण */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
-                                        {getHindiNakshatra(data?.nakshatra)} ({data?.pada})
+                                        {p.hi === "लग्न" ?
+                                            getHindiNakshatra(ascendant?.nakshatra) + " (" + ascendant?.pada + ")" :
+                                            getHindiNakshatra(data?.nakshatra) + " (" + data?.pada + ")"}
                                     </td>
 
                                     {/* राशि */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
-                                        {getHindiRashi(data?.rashi)}
+                                        {p.hi === "लग्न" ? getHindiRashi(ascendant?.rashi)
+                                            : getHindiRashi(data?.rashi)}
                                     </td>
 
                                     {/* तत्त्व */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
-                                        {tatva || "--"}
+                                        {p.hi === "लग्न" ? ascTatva || "--" : tatva || "--"}
                                     </td>
                                 </tr>
                             );

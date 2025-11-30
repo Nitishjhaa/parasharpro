@@ -6,7 +6,7 @@ export const rashiTattvas = {
     3: "वायु",
     4: "जल",
     5: "अग्नि",
-    6: "पृथ्वी",
+    6: "পृथ्वी",
     7: "वायु",
     8: "जल",
     9: "अग्नि",
@@ -26,30 +26,40 @@ export const rashiTattvas = {
 export function computePlanetTatvas(kundali) {
     if (!kundali) return {};
 
+    // Ascendant object
     const asc = kundali.ascendant || kundali.raw?.ascendant;
-    const ascRashiIndex = asc?.rashiIndex ?? 0; // 0..11
 
+    // Ascendant rashiIndex (0–11)
+    const ascRashiIndex = asc?.rashiIndex ?? 0;
+
+    // Convert to rashi number 1–12
+    const ascRashiNumber = ascRashiIndex + 1;
+
+    // Final tatva of ascendant
+    const ascTatva = rashiTattvas[ascRashiNumber];
+
+    // Planet list
     const planets = kundali.planets || kundali.raw?.planets || {};
 
     const out = {};
 
     for (const [name, data] of Object.entries(planets)) {
-        const house = data.house; // 1..12
+        const house = data.house; // 1–12
 
         if (!house) {
-            out[name] = { tatva: null, rashiNumber: null };
+            out[name] = { tatva: null, rashiNumber: null, house: null, ascTatva };
             continue;
         }
 
-        // House -> actual rashi number based on ascendant
+        // House → actual rashi number
         const rashiNumber = ((ascRashiIndex + house - 1) % 12) + 1;
 
         out[name] = {
             tatva: rashiTattvas[rashiNumber],
             rashiNumber,
-            house
+            house,
         };
     }
 
-    return out;
+    return {out, ascTatva};
 }

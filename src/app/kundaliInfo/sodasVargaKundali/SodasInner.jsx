@@ -34,8 +34,6 @@ export default function Page() {
         load();
     }, [indexParam]);
 
-    console.log(kundali);
-
 
     // Show loading only until BOTH kundali and d9 are ready
     if (!kundali) {

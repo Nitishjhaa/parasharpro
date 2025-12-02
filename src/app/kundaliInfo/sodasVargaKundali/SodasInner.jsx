@@ -8,6 +8,16 @@ import PlanetTable from "@/components/PlanetTable";
 import KundaliHeader from '@/components/KundaliHeader';
 import { computeD9Chart } from "@/lib/computeD9";
 import NavamshaPlanetTable from '@/components/NavamshaPlanetTable'
+import { computeD2Chart } from "@/lib/computeD2";
+import HoraPlanetTable from "@/components/HoraPlanetTable";
+// import { computeD3Chart } from "@/lib/computeD3";
+// import DrekkanaPlanetTable from '@/components/DrekkanaPlanetTable'
+// import { computeD4Chart } from "@/lib/computeD4";
+// import ChaturthamshaPlanetTable from '@/components/ChaturthamshaPlanetTable'
+// import { computeD7Chart } from "@/lib/computeD7";
+// import { computeD10Chart } from "@/lib/computeD10";
+// import { computeD12Chart } from "@/lib/computeD12";
+// import { computeD16Chart } from "@/lib/computeD16";
 
 
 
@@ -16,7 +26,14 @@ export default function KundaliInfoInner() {
     const [isSideOpen, setIsSideOpen] = useState(false)
     const params = useSearchParams();
     const router = useRouter();
+    const [d2, setD2] = useState(null);
+    const [d3, setD3] = useState(null);
+    const [d4, setD4] = useState(null);
+    const [d7, setD7] = useState(null);
     const [d9, setD9] = useState(null);
+    const [d10, setD10] = useState(null);
+    const [d12, setD12] = useState(null);
+    const [d16, setD16] = useState(null);
     const [selectedChart, setSelectedChart] = useState("लग्न / D1");
 
     const charts = [
@@ -37,9 +54,29 @@ export default function KundaliInfoInner() {
 
             setKundali(record);
 
-            // Compute and store D9
+            const d2Chart = computeD2Chart(record.raw);
+            setD2(d2Chart);
+
+            // const d3Chart = computeD3Chart(record.raw);
+            // setD3(d3Chart);
+
+            // const d4Chart = computeD4Chart(record.raw);
+            // setD4(d4Chart);
+
+            // const d7Chart = computeD7Chart(record.raw);
+            // setD7(d7Chart);
+
             const d9Chart = computeD9Chart(record.raw);
             setD9(d9Chart);
+
+            // const d10Chart = computeD10Chart(record.raw);
+            // setD10(d10Chart);
+
+            // const d12Chart = computeD12Chart(record.raw);
+            // setD12(d12Chart);
+
+            // const d16Chart = computeD16Chart(record.raw);
+            // setD16(d16Chart);
         }
         load();
     }, [indexParam, router]);
@@ -85,7 +122,27 @@ export default function KundaliInfoInner() {
                         </>
                     )}
 
-                    {!["लग्न / D1", "नवमांश / D9"].includes(selectedChart) && (
+                    {selectedChart === "होरा / D2" && (
+                        <>
+                            <KundaliStructure kundali={d2} title="होरा कुंडली" />
+                            <HoraPlanetTable d2={d2} />
+                        </>
+                    )}
+
+                    {/* {selectedChart === "द्रेक्काण / D3" && (
+                        <>
+                            <KundaliStructure kundali={d3} title="द्रेक्काण कुंडली" />
+                            <DrekkanaPlanetTable d3={d3} />
+                        </>
+                    )}
+                        {selectedChart === "चतुर्थांश / D4" && (
+                        <>
+                            <KundaliStructure kundali={d4} title="चतुर्थांश कुंडली" />
+                            <ChaturthamshaPlanetTable d4={d4} />
+                        </>
+                    )} */}
+
+                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2"].includes(selectedChart) && (
                         <div className="p-10 text-center text-lg font-semibold">
                             {selectedChart} Chart Coming Soon...
                         </div>

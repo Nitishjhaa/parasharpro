@@ -25,7 +25,7 @@ export default function AdminPanchang() {
   const saveData = async () => {
     setMessage("Saving...");
 
-    const res = await fetch("/panchang/admin", {
+    const res = await fetch("/api/panchang/admin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

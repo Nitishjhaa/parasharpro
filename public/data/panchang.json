@@ -1,1 +1,16 @@
-[{}]
+{
+    "2026": {
+        "2": {
+            "gaadi_lene_ki_taarik": "15,17,19",
+            "vivaah_ki_taarik": "25",
+            "grah_parvesh": "28",
+            "pashu_lene_ki_taarik": "12"
+        },
+        "01": {
+            "gaadi_lene_ki_taarik": "10",
+            "vivaah_ki_taarik": "15",
+            "grah_parvesh": "28",
+            "pashu_lene_ki_taarik": "30"
+        }
+    }
+}

@@ -1,57 +1,52 @@
-export function computeD2Chart(kundali) {
+export function computeD3Chart(kundali) {
     if (!kundali) return null;
 
     const asc = kundali.ascendant;
     const planets = kundali.planets;
 
-    const d2 = {
+    const d3 = {
         ascendant: {},
         planets: {}
     };
 
-    // D2 (HORA) rules
-    const SUN_HORA = 4;   // Leo
-    const MOON_HORA = 3;  // Cancer
+    const DREKKANA_SIZE = 30 / 3; // 10°
 
-    const getD2Rashi = (rashiIndex, ansh) => {
-        const isOddSign = [0, 2, 4, 6, 8, 10].includes(rashiIndex);
+    const getDrekkanaIndex = (deg) => Math.floor(deg / DREKKANA_SIZE);
 
-        if (isOddSign) {
-            // Odd signs
-            return ansh < 15 ? SUN_HORA : MOON_HORA;
-        } else {
-            // Even signs
-            return ansh < 15 ? MOON_HORA : SUN_HORA;
-        }
+    const getD3Rashi = (rashiIndex, ansh) => {
+        const drekIdx = getDrekkanaIndex(ansh); // 0, 1, or 2
+
+        // The Drekkana Lords are:
+        // Index 0 (0-10°): The sign itself (+0)
+        // Index 1 (10-20°): The 5th sign (trine) (+4)
+        // Index 2 (20-30°): The 9th sign (trine) (+8)
+
+        let startRashiOffset = 0;
+        if (drekIdx === 1) startRashiOffset = 4;
+        if (drekIdx === 2) startRashiOffset = 8;
+
+        return (rashiIndex + startRashiOffset) % 12;
     };
 
-    const getD2Degree = (ansh) => {
-        // Degree within each 15° Hora
-        return ansh % 15;
+    const getD3Degree = (ansh) => {
+        // Degree within the 10° Drekkana
+        return ansh % DREKKANA_SIZE;
     };
 
+    // Tattva map is consistent across all charts
     const tattvaMap = {
-        0: "अग्नि",
-        1: "पृथ्वी",
-        2: "वायु",
-        3: "जल",
-        4: "अग्नि",
-        5: "पृथ्वी",
-        6: "वायु",
-        7: "जल",
-        8: "अग्नि",
-        9: "पृथ्वी",
-        10: "वायु",
-        11: "जल"
+        0: "अग्नि", 1: "पृथ्वी", 2: "वायु", 3: "जल",
+        4: "अग्नि", 5: "पृथ्वी", 6: "वायु", 7: "जल",
+        8: "अग्नि", 9: "पृथ्वी", 10: "वायु", 11: "जल"
     };
 
     // ASCENDANT
     const ascRashiIndex = asc.rashiIndex;
-    const ascD2Rashi = getD2Rashi(ascRashiIndex, asc.ansh);
+    const ascD3RashiIndex = getD3Rashi(ascRashiIndex, asc.ansh);
 
-    d2.ascendant = {
-        rashiIndex: ascD2Rashi,
-        rashi: ascD2Rashi,
+    d3.ascendant = {
+        rashiIndex: ascD3RashiIndex,
+        rashi: ascD3RashiIndex,
         house: 1
     };
 
@@ -60,18 +55,18 @@ export function computeD2Chart(kundali) {
         const rashiIndex = p.rashiIndex;
         const ansh = p.ansh;
 
-        const d2Rashi = getD2Rashi(rashiIndex, ansh);
-        const d2Degree = getD2Degree(ansh);
+        const d3Rashi = getD3Rashi(rashiIndex, ansh);
+        const d3Degree = getD3Degree(ansh);
 
-        const house = ((d2Rashi - ascD2Rashi + 12) % 12) + 1;
+        const house = ((d3Rashi - ascD3RashiIndex + 12) % 12) + 1;
 
-        d2.planets[name] = {
-            rashiIndex: d2Rashi,
-            degree: d2Degree,
-            tatva: tattvaMap[d2Rashi],
+        d3.planets[name] = {
+            rashiIndex: d3Rashi,
+            degree: d3Degree,
+            tatva: tattvaMap[d3Rashi],
             house
         };
     }
 
-    return d2;
+    return d3;
 }

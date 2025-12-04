@@ -10,8 +10,8 @@ import { computeD9Chart } from "@/lib/computeD9";
 import NavamshaPlanetTable from '@/components/NavamshaPlanetTable'
 import { computeD2Chart } from "@/lib/computeD2";
 import HoraPlanetTable from "@/components/HoraPlanetTable";
-// import { computeD3Chart } from "@/lib/computeD3";
-// import DrekkanaPlanetTable from '@/components/DrekkanaPlanetTable'
+import { computeD3Chart } from "@/lib/computeD3";
+import DrekkanaPlanetTable from '@/components/DrekkanaPlanetTable'
 // import { computeD4Chart } from "@/lib/computeD4";
 // import ChaturthamshaPlanetTable from '@/components/ChaturthamshaPlanetTable'
 // import { computeD7Chart } from "@/lib/computeD7";
@@ -57,8 +57,8 @@ export default function KundaliInfoInner() {
             const d2Chart = computeD2Chart(record.raw);
             setD2(d2Chart);
 
-            // const d3Chart = computeD3Chart(record.raw);
-            // setD3(d3Chart);
+            const d3Chart = computeD3Chart(record.raw);
+            setD3(d3Chart);
 
             // const d4Chart = computeD4Chart(record.raw);
             // setD4(d4Chart);
@@ -129,20 +129,20 @@ export default function KundaliInfoInner() {
                         </>
                     )}
 
-                    {/* {selectedChart === "द्रेक्काण / D3" && (
+                    {selectedChart === "द्रेक्काण / D3" && (
                         <>
                             <KundaliStructure kundali={d3} title="द्रेक्काण कुंडली" />
                             <DrekkanaPlanetTable d3={d3} />
                         </>
                     )}
-                        {selectedChart === "चतुर्थांश / D4" && (
+                        {/* {selectedChart === "चतुर्थांश / D4" && (
                         <>
                             <KundaliStructure kundali={d4} title="चतुर्थांश कुंडली" />
                             <ChaturthamshaPlanetTable d4={d4} />
                         </>
                     )} */}
 
-                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2"].includes(selectedChart) && (
+                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2", "द्रेक्काण / D3"].includes(selectedChart) && (
                         <div className="p-10 text-center text-lg font-semibold">
                             {selectedChart} Chart Coming Soon...
                         </div>

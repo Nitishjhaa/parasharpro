@@ -12,6 +12,10 @@ import { computeD2Chart } from "@/lib/computeD2";
 import HoraPlanetTable from "@/components/HoraPlanetTable";
 import { computeD3Chart } from "@/lib/computeD3";
 import DrekkanaPlanetTable from '@/components/DrekkanaPlanetTable'
+import { getChandraData } from "@/lib/moonKundali";
+import MoonKundaliStructure from "@/components/MoonKundaliStructure";
+import { getSunData } from "@/lib/sunKundali";
+import SunKundaliStructure from "@/components/SunKundaliStructure";
 // import { computeD4Chart } from "@/lib/computeD4";
 // import ChaturthamshaPlanetTable from '@/components/ChaturthamshaPlanetTable'
 // import { computeD7Chart } from "@/lib/computeD7";
@@ -37,7 +41,7 @@ export default function KundaliInfoInner() {
     const [selectedChart, setSelectedChart] = useState("लग्न / D1");
 
     const charts = [
-        "लग्न / D1", "होरा / D2", "द्रेक्काण / D3", "चतुर्थांश / D4", "सप्तमांश / D7", "नवमांश / D9", "दशमांश / D10", "द्वादशांश / D12", "षोडशांश / D16", "विंशांश / D20", "चतुर्विंशांश(सिद्धांश) / D24", "सप्तविंशांश (भाम्स) / D27", "त्रिंशांश / D30", "खवेदांश / D40", "अक्षवेदांश / D45", "षष्ट्यांश / D60", " / Moon", " / Sun"
+        "लग्न / D1", "होरा / D2", "द्रेक्काण / D3", "चतुर्थांश / D4", "सप्तमांश / D7", "नवमांश / D9", "दशमांश / D10", "द्वादशांश / D12", "षोडशांश / D16", "विंशांश / D20", "चतुर्विंशांश(सिद्धांश) / D24", "सप्तविंशांश (भाम्स) / D27", "त्रिंशांश / D30", "खवेदांश / D40", "अक्षवेदांश / D45", "षष्ट्यांश / D60", "चन्द्र / Moon", "सूर्य / Sun"
     ];
 
     const indexParam = params.get("index");
@@ -80,6 +84,33 @@ export default function KundaliInfoInner() {
         }
         load();
     }, [indexParam, router]);
+
+    console.log(kundali)
+
+    const ascendantStr = kundali?.raw?.ascendant?.rashi;
+
+    const sunHousePosition = kundali?.raw?.planets?.Sun?.house;
+    const moonHousePosition = kundali?.raw?.planets?.Moon?.house;
+    const marsHousePosition = kundali?.raw?.planets?.Mars?.house;
+    const mercuryHousePosition = kundali?.raw?.planets?.Mercury?.house;
+    const jupiterHousePosition = kundali?.raw?.planets?.Jupiter?.house;
+    const venusHousePosition = kundali?.raw?.planets?.Venus?.house;
+    const saturnHousePosition = kundali?.raw?.planets?.Saturn?.house;
+    const rahuHousePosition = kundali?.raw?.planets?.Rahu?.house;
+    const ketuHousePosition = kundali?.raw?.planets?.Ketu?.house;
+
+    if (!ascendantStr || !moonHousePosition) return <div className="p-4 text-white">Loading Kundali chandra data...</div>;
+    if (!ascendantStr || !sunHousePosition) return <div className="p-4 text-white">Loading Kundali sun data...</div>;
+
+
+    const sunData = getSunData(ascendantStr, sunHousePosition);
+    const chandraData = getChandraData(ascendantStr, moonHousePosition);
+
+    const sunZodiac = sunData.sunZodiac;
+    const sunOffset = sunData.offset;
+    const chandraMoonZodiac = chandraData.chandraMoonZodiac;
+    const chandraOffset = chandraData.offset;
+
 
     return (
         <div className="p-2 overflow-hidden text-black" >
@@ -135,14 +166,31 @@ export default function KundaliInfoInner() {
                             <DrekkanaPlanetTable d3={d3} />
                         </>
                     )}
-                        {/* {selectedChart === "चतुर्थांश / D4" && (
+
+                    {selectedChart === "चन्द्र / Moon" && (
+                        <>
+                            <MoonKundaliStructure ascendant={chandraMoonZodiac} sun={sunHousePosition} moon={moonHousePosition} mars={marsHousePosition} mercury={mercuryHousePosition} jupiter={jupiterHousePosition} venus={venusHousePosition} saturn={saturnHousePosition} rahu={rahuHousePosition} ketu={ketuHousePosition} moonOffset={chandraOffset} title="चन्द्र कुंडली" />
+                            <PlanetTable kundali={kundali} />
+                        </>
+                    )}
+
+
+                    {selectedChart === "सूर्य / Sun" && (
+                        <>
+                            <SunKundaliStructure ascendant={sunZodiac} sun={sunHousePosition} moon={moonHousePosition} mars={marsHousePosition} mercury={mercuryHousePosition} jupiter={jupiterHousePosition} venus={venusHousePosition} saturn={saturnHousePosition} rahu={rahuHousePosition} ketu={ketuHousePosition} sunOffset={sunOffset} title="सूर्य कुंडली" />
+                            <PlanetTable kundali={kundali} />
+                        </>
+                    )}
+
+
+                    {/* {selectedChart === "चतुर्थांश / D4" && (
                         <>
                             <KundaliStructure kundali={d4} title="चतुर्थांश कुंडली" />
                             <ChaturthamshaPlanetTable d4={d4} />
                         </>
                     )} */}
 
-                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2", "द्रेक्काण / D3"].includes(selectedChart) && (
+                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2", "द्रेक्काण / D3", "चन्द्र / Moon", "सूर्य / Sun"].includes(selectedChart) && (
                         <div className="p-10 text-center text-lg font-semibold">
                             {selectedChart} Chart Coming Soon...
                         </div>

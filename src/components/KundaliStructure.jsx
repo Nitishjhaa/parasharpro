@@ -21,7 +21,7 @@ export default function KundaliStructure({ kundali, title = "कुंडली"
 
   const ascHouse = (ascendant?.rashiIndex ?? 0) + 1; // 1..12
 
-  // ⭕ FIXED SVG HOUSE COORDINATES (YOUR ORIGINAL EXACT POSITIONS)
+  // FIXED SVG HOUSE COORDINATES (YOUR ORIGINAL EXACT POSITIONS)
   const housePositions = [
     { x: 193, y: 70 },
     { x: 170, y: 65 },
@@ -37,7 +37,7 @@ export default function KundaliStructure({ kundali, title = "कुंडली"
     { x: 220, y: 64 },
   ];
 
-  // ⭕ FIXED PLANET POSITIONS (YOUR EXACT POINTS)
+  //  FIXED PLANET POSITIONS (YOUR EXACT POINTS)
   const planetPositions = [
     { x: 185, y: 85 },    //1
     { x: 118, y: 63 },    //2

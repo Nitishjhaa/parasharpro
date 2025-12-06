@@ -22,6 +22,8 @@ import SunKundaliStructure from "@/components/SunKundaliStructure";
 // import { computeD10Chart } from "@/lib/computeD10";
 // import { computeD12Chart } from "@/lib/computeD12";
 // import { computeD16Chart } from "@/lib/computeD16";
+import { getHouseLordsWithPositions } from "../AstrologicalData";
+
 
 
 
@@ -88,6 +90,7 @@ export default function KundaliInfoInner() {
     console.log(kundali)
 
     const ascendantStr = kundali?.raw?.ascendant?.rashi;
+    const ascendantNumber = kundali?.raw?.ascendant?.rashiIndex;
 
     const sunHousePosition = kundali?.raw?.planets?.Sun?.house;
     const moonHousePosition = kundali?.raw?.planets?.Moon?.house;
@@ -98,6 +101,24 @@ export default function KundaliInfoInner() {
     const saturnHousePosition = kundali?.raw?.planets?.Saturn?.house;
     const rahuHousePosition = kundali?.raw?.planets?.Rahu?.house;
     const ketuHousePosition = kundali?.raw?.planets?.Ketu?.house;
+
+
+    // these are the positions of the planets in the kundali which i will use to find lagesh and other planets
+    // const planetPositions = {
+    //     Sun: sunHousePosition,
+    //     Moon: moonHousePosition,
+    //     Mars: marsHousePosition,
+    //     Mercury: mercuryHousePosition,
+    //     Jupiter: jupiterHousePosition,
+    //     Venus: venusHousePosition,
+    //     Saturn: saturnHousePosition,
+    //     Rahu: rahuHousePosition,
+    //     Ketu: ketuHousePosition
+    // }
+
+    // const laganesh = getHouseLordsWithPositions(ascendantNumber,planetPositions);
+
+    // console.log(laganesh)
 
     if (!ascendantStr || !moonHousePosition) return <div className="p-4 text-white">Loading Kundali chandra data...</div>;
     if (!ascendantStr || !sunHousePosition) return <div className="p-4 text-white">Loading Kundali sun data...</div>;

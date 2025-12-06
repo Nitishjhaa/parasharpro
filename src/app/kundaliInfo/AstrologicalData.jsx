@@ -662,3 +662,41 @@ export function computeAshtakavarga({
   };
 }
 
+
+export const getHouseLordsWithPositions = (ascendant, planetPositions) => {
+    const houseLordMap = {
+        0: ["Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter"],
+        1: ["Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars"],
+        2: ["Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus"],
+        3: ["Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury"],
+        4: ["Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon"],
+        5: ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun"],
+        6: ["Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury"],
+        7: ["Mars", "Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus"],
+        8: ["Jupiter", "Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars"],
+        9: ["Saturn", "Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter"],
+        10: ["Saturn", "Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"],
+        11: ["Jupiter", "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn",]
+    };
+
+    if (!houseLordMap[ascendant]) {
+        return "Invalid Ascendant Number";
+    }
+
+    const houseLords = houseLordMap[ascendant];
+
+    const houseNames = [
+        "Lagnesh", "Dwityesh", "Trityesh", "Chaturthesh", "Panchamesh", "Shashthesh",
+        "Saptamesh", "Ashtamesh", "Navamesh", "Dashmesh", "Ekadashesh", "Dwadashesh"
+    ];
+
+    const result = {};
+
+    houseNames.forEach((name, i) => {
+        const lord = houseLords[i];
+        result[name] = lord;
+        result[`${name}Position`] = planetPositions[lord] || null;
+    });
+
+    return result;
+}

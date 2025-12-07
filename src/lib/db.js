@@ -42,3 +42,34 @@ export const loadKundaliByIndex = async (index) => {
 export const clearKundalis = async () => {
   await del(KEY);
 };
+
+
+const CHILD_KEY = "child_kundali_list_v1";
+
+// Save a new child kundali record (keep last 100)
+export const saveChildKundali = async (entry) => {
+  let list = (await get(CHILD_KEY)) || [];
+
+  const record = {
+    id: Date.now(),
+    createdAt: new Date().toISOString(),
+    ...entry,
+  };
+
+  list.unshift(record);
+  list = list.slice(0, 1);
+
+  await set(CHILD_KEY, list);
+  return record;
+};
+
+// Get all saved child kundalis
+export const loadChildKundalis = async () => {
+  return (await get(CHILD_KEY)) || [];
+};
+
+// Get one child kundali by index
+export const loadChildKundaliByIndex = async (index) => {
+  const list = (await get(CHILD_KEY)) || [];
+  return list[index] || null;
+};

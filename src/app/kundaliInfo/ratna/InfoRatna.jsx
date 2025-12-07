@@ -63,13 +63,13 @@ export default function KundaliInfoInner() {
                 <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
 
                     {/* Render all valid gemstones */}
-                    <div className="w-full grid lg:grid-cols-3 xl:grid-cols-5 grid-cols-2 gap-5 mt-6 p-5 lg:p-10">
+                    <div className="w-full grid grid-cols-3 xl:grid-cols-5 gap-5 mt-6 p-5 lg:p-10">
                         {Object.entries(ratna)
                             .filter(([key, value]) => value && value.planet) // render only valid entries
                             .map(([key, value]) => (
-                                <div key={key} className="lg:w-40 w-30 h-30 shadow-2xl lg:h-40 flex flex-col justify-center items-center rounded-2xl">
+                                <div key={key} className="lg:w-40 w-25 h-25 shadow-2xl lg:h-40 flex flex-col justify-center items-center rounded-2xl">
                                     {/* Category Hindi Title */}
-                                    <h3 className="font-bold text-base text-center">
+                                    <h3 className="font-bold md:text-base text-sm text-center">
                                         {value.categoryHindi}
                                     </h3>
 

@@ -2,7 +2,7 @@ import { MhahPanchang } from 'mhah-panchang'
 
 export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
 
-     if (!birthDate || !birthTime) {
+    if (!birthDate || !birthTime) {
         return { error: "Invalid date or time" };
     }
 
@@ -167,8 +167,6 @@ export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
                 return "राक्षस"
         }
     }
-
-
 
     // Get the converted month
     const purnimantaMonth = tithiIndex !== -1 ? convertToPurnimanta(amantaMonth, tithiIndex) : "Unknown"

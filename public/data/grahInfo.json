@@ -1,0 +1,454 @@
+[
+    {
+        "sun": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "moon": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "mars": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "mercury": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "jupiter": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "venus": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "saturn": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "rahu": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        },
+        "ketu": {
+            "1": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "2": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "3": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "4": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "5": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "6": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "7": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "8": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "9": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "10": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "11": {
+                "subh": "",
+                "ashubh": ""
+            },
+            "12": {
+                "subh": "",
+                "ashubh": ""
+            }
+        }
+    }
+]

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadChildKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliStructure from '@/components/KundaliStructure';
-import KundaliHeader from '@/components/KundaliHeader';
+import ChildHeader from '@/components/ChildHeader';
 
 import { rashi, nakshatra, getMoonPaaye, getNakPaaye, getLords, kaalSarpYog, cheakMool, checkManglik } from "../../kundaliInfo/AstrologicalData";
 import getPanchangDetails from '@/lib/panchang'
@@ -371,7 +371,7 @@ export default function KundaliInfoInner() {
     <div className="p-2 overflow-hidden text-black" >
       <div className="w-[98%] mx-auto">
 
-        <KundaliHeader
+        <ChildHeader
           title="परिचय"
           indexParam={indexParam}
           isSideOpen={isSideOpen}

@@ -59,9 +59,34 @@ export default function KundaliInfoInner() {
         Ketu: ketuHousePosition
     }
 
-    const laganesh = getHouseLordsWithPositions(ascendantNumber, planetPositions);
+    const bhavesh = getHouseLordsWithPositions(ascendantNumber, planetPositions);
 
-    console.log(laganesh)
+    console.log(bhavesh);
+
+    const lagnesh = bhavesh.Lagnesh;
+    const lagneshPosition = bhavesh.LagneshPosition;    
+    const dwityesh = bhavesh.Dwityesh;
+    const dwityeshPosition = bhavesh.DwityeshPosition;
+    const trityesh = bhavesh.Trityesh;
+    const trityeshPosition = bhavesh.TrityeshPosition;
+    const chaturthesh = bhavesh.Chaturthesh;
+    const chaturtheshPosition = bhavesh.ChaturtheshPosition;
+    const panchamesh = bhavesh.Panchamesh;
+    const panchameshPosition = bhavesh.PanchameshPosition;
+    const shashthesh = bhavesh.Shashthesh;
+    const shashtheshPosition = bhavesh.ShashtheshPosition;
+    const saptamesh = bhavesh.Saptamesh;
+    const saptameshPosition = bhavesh.SaptameshPosition;
+    const ashtamesh = bhavesh.Ashtamesh;
+    const ashtameshPosition = bhavesh.AshtameshPosition;
+    const navamesh = bhavesh.Navamesh;
+    const navameshPosition = bhavesh.NavameshPosition;
+    const dashmesh = bhavesh.Dashmesh;
+    const dashmeshPosition = bhavesh.DashmeshPosition;
+    const ekadashesh = bhavesh.Ekadashesh;
+    const ekadasheshPosition = bhavesh.EkadasheshPosition;
+    const dwadashesh = bhavesh.Dwadashesh;
+    const dwadasheshPosition = bhavesh.DwadasheshPosition;
 
     if (!ascendantStr || !moonHousePosition) return <div className="p-4 text-white">Loading Kundali chandra data...</div>;
     if (!ascendantStr || !sunHousePosition) return <div className="p-4 text-white">Loading Kundali sun data...</div>;
@@ -72,7 +97,7 @@ export default function KundaliInfoInner() {
             <div className="w-[98%] mx-auto">
 
                 <KundaliHeader
-                    title="अन्य वर्ग-कुंडली"
+                    title="भावेश के योग"
                     indexParam={indexParam}
                     isSideOpen={isSideOpen}
                     setIsSideOpen={setIsSideOpen}
@@ -85,3 +110,4 @@ export default function KundaliInfoInner() {
         </div>
     );
 }
+

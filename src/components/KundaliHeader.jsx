@@ -146,7 +146,7 @@ export default function KundaliHeader({
 
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/grahyog?index=${indexParam}`}>
-              ग्रहों के योग
+              भावेश के योग
             </Link>
           </div>
 

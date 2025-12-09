@@ -92,6 +92,12 @@ export default function KundaliHeader({
           className="w-full text-white mt-5 text-lg"
           onClick={() => setIsSideOpen(false)}
         >
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/Info?index=${indexParam}`}>
+              सामान्य परिचय
+            </Link>
+          </div>
+
           <div className="border-b-2 pb-2">
             <Link href={`/kundaliInfo?index=${indexParam}`}>लग्न कुंडली</Link>
           </div>
@@ -105,24 +111,6 @@ export default function KundaliHeader({
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/mahadasha?index=${indexParam}`}>
               महादशा
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/Info?index=${indexParam}`}>
-              सामान्य परिचय
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/astaVargaChakra?index=${indexParam}`}>
-              अष्टकवर्ग चक्र
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/sodasVargaKundali?index=${indexParam}`}>
-              षोडश वर्ग कुंडली
             </Link>
           </div>
 
@@ -147,6 +135,30 @@ export default function KundaliHeader({
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/remedies?index=${indexParam}`}>
               उपाय
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/grah?index=${indexParam}`}>
+              ग्रहों की स्थिति
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/grahyog?index=${indexParam}`}>
+              ग्रहों के योग
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/astaVargaChakra?index=${indexParam}`}>
+              अष्टकवर्ग चक्र
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/sodasVargaKundali?index=${indexParam}`}>
+              षोडश वर्ग कुंडली
             </Link>
           </div>
         </div>

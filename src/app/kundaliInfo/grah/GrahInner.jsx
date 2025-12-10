@@ -11,7 +11,19 @@ export default function KundaliInfoInner() {
     const [isSideOpen, setIsSideOpen] = useState(false)
     const params = useSearchParams();
     const router = useRouter();
+    const [grahInfo, setGrahInfo] = useState(null);
     const indexParam = params.get("index");
+
+    useEffect(() => {
+        async function load() {
+            const response = await fetch("/data/grahInfo.json");
+            const data = await response.json();
+            setGrahInfo(data);
+        }
+        load();
+    }, []);
+
+    console.log(grahInfo)
 
     useEffect(() => {
         async function load() {
@@ -24,8 +36,6 @@ export default function KundaliInfoInner() {
             if (!record) return;
 
             setKundali(record);
-
-
         }
         load();
     }, [indexParam, router]);
@@ -57,11 +67,11 @@ export default function KundaliInfoInner() {
         Saturn: saturnHousePosition,
         Rahu: rahuHousePosition,
         Ketu: ketuHousePosition
-    }
+    };
+
+    console.log(sunHousePosition)
 
     const bhavesh = getHouseLordsWithPositions(ascendantNumber, planetPositions);
-
-    console.log(bhavesh);
 
     const lagnesh = bhavesh.Lagnesh;
     const lagneshPosition = bhavesh.LagneshPosition;    

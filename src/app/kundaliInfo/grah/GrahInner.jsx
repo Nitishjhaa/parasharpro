@@ -69,12 +69,10 @@ export default function KundaliInfoInner() {
         Ketu: ketuHousePosition
     };
 
-    console.log(sunHousePosition)
-
     const bhavesh = getHouseLordsWithPositions(ascendantNumber, planetPositions);
 
     const lagnesh = bhavesh.Lagnesh;
-    const lagneshPosition = bhavesh.LagneshPosition;    
+    const lagneshPosition = bhavesh.LagneshPosition;
     const dwityesh = bhavesh.Dwityesh;
     const dwityeshPosition = bhavesh.DwityeshPosition;
     const trityesh = bhavesh.Trityesh;
@@ -98,14 +96,41 @@ export default function KundaliInfoInner() {
     const dwadashesh = bhavesh.Dwadashesh;
     const dwadasheshPosition = bhavesh.DwadasheshPosition;
 
-    if (!ascendantStr || !moonHousePosition) return <div className="p-4 text-white">Loading Kundali chandra data...</div>;
-    if (!ascendantStr || !sunHousePosition) return <div className="p-4 text-white">Loading Kundali sun data...</div>;
+    if (!kundali) return <div className="p-4 text-white">Loading Kundali data...</div>;
+    if (!grahInfo) return <div className="p-4 text-white">Loading grahInfo data...</div>;
+
+    const planetsConfig = [
+        { key: 'Sun', jsonKey: 'sun', label: 'सूर्य (Sun)' },
+        { key: 'Moon', jsonKey: 'moon', label: 'चंद्र (Moon)' },
+        { key: 'Mars', jsonKey: 'mars', label: 'मंगल (Mars)' },
+        { key: 'Mercury', jsonKey: 'mercury', label: 'बुध (Mercury)' },
+        { key: 'Jupiter', jsonKey: 'jupiter', label: 'गुरु (Jupiter)' },
+        { key: 'Venus', jsonKey: 'venus', label: 'शुक्र (Venus)' },
+        { key: 'Saturn', jsonKey: 'saturn', label: 'शनि (Saturn)' },
+        { key: 'Rahu', jsonKey: 'rahu', label: 'राहु (Rahu)' },
+        { key: 'Ketu', jsonKey: 'ketu', label: 'केतु (Ketu)' }
+    ];
+
+    const FormattedText = ({ text }) => {
+        if (!text) return null;
+
+        return (
+            <div>
+                {text
+                    .match(/\d+\.\s[^]+?(?=\s\d+\.|$)/g) // extract each point
+                    ?.map((item, index) => (
+                        <div key={index} className="mb-2">{item.trim()}</div>
+                    ))}
+            </div>
+        );
+    };
+
+
 
 
     return (
-        <div className="p-2 overflow-hidden text-black" >
+        <div className="p-2 overflow-hidden text-black">
             <div className="w-[98%] mx-auto">
-
                 <KundaliHeader
                     title="ग्रहों की स्थिति"
                     indexParam={indexParam}
@@ -113,8 +138,37 @@ export default function KundaliInfoInner() {
                     setIsSideOpen={setIsSideOpen}
                 />
 
-                <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
+                <div className="flex flex-col gap-6 bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl p-6">
+                    {planetsConfig.map((planet) => {
+                        const housePosition = kundali?.raw?.planets?.[planet.key]?.house;
+                        const info = grahInfo?.[0]?.[planet.jsonKey]?.[housePosition];
 
+                        if (!housePosition || !info) return null;
+
+                        return (
+                            <div key={planet.key} className="p-6 border bg-white/50 rounded-xl shadow-sm">
+                                <h2 className="text-xl font-bold mb-4 border-b pb-2 border-orange-400 inline-block text-orange-800">
+                                    {planet.label} - भाव {housePosition}
+                                </h2>
+
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <div className="bg-green-50/80 p-4 rounded-lg border border-green-100">
+                                        <h3 className="font-semibold text-green-800 mb-2">शुभ फल:</h3>
+                                        <div className="text-sm text-gray-800">
+                                            <FormattedText text={info.subh} />
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-red-50/80 p-4 rounded-lg border border-red-100">
+                                        <h3 className="font-semibold text-red-800 mb-2">अशुभ फल:</h3>
+                                        <div className="text-sm text-gray-800">
+                                            <FormattedText text={info.ashubh} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>

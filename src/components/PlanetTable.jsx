@@ -3,9 +3,12 @@
 import { computePlanetTatvas } from "@/lib/getTatva";
 import { getHindiNakshatra } from "@/lib/nakshatra";
 import { getHindiRashi } from "@/lib/rashi";
+import { useRouter, useSearchParams } from "next/navigation";
 
 
 export default function PlanetTable({ kundali }) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
     if (!kundali) return null;
 
@@ -25,6 +28,16 @@ export default function PlanetTable({ kundali }) {
         { hi: "राहु", en: "Rahu" },
         { hi: "केतु", en: "Ketu" },
     ];
+
+    const handleRowClick = (planetName) => {
+        if (planetName === "Ascendant") return; // Usually no specific page for Ascendant in this context, or maybe there is? User said "planet".
+
+        const index = searchParams.get("index");
+        console.log(index);
+        if (index) {
+            router.push(`/kundaliInfo/planet/${planetName}?index=${index}`);
+        }
+    };
 
     return (
         <div className="w-full p-1.5">
@@ -49,8 +62,15 @@ export default function PlanetTable({ kundali }) {
                             const data = planets[p.en];
                             const tatva = tatvas?.out[p.en]?.tatva;
                             const ascTatva = tatvas?.ascTatva;
+
+                            const isClickable = p.en !== "Ascendant";
+
                             return (
-                                <tr key={p.en}>
+                                <tr
+                                    key={p.en}
+                                    onClick={() => handleRowClick(p.en)}
+                                    className={isClickable ? "cursor-pointer hover:bg-orange-100 transition-colors" : ""}
+                                >
                                     {/* ग्रह */}
                                     <td className="border-2 border-black px-2 py-2 text-center font-semibold">
                                         {p.hi}

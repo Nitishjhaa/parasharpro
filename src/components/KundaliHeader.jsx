@@ -139,12 +139,6 @@ export default function KundaliHeader({
           </div>
 
           <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/grah?index=${indexParam}`}>
-              ग्रहों की स्थिति
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/grahyog?index=${indexParam}`}>
               भावेश के योग
             </Link>

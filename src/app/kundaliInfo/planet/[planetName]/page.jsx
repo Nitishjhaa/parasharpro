@@ -5,6 +5,7 @@ import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter, useParams } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader';
 import { RiArrowGoBackLine } from "react-icons/ri";
+import { getHindiNakshatra } from '@/lib/nakshatra';
 
 export default function PlanetInfoPage() {
     const params = useParams();
@@ -14,13 +15,12 @@ export default function PlanetInfoPage() {
     const [kundali, setKundali] = useState(null);
     const [grahInfo, setGrahInfo] = useState(null);
     const [isSideOpen, setIsSideOpen] = useState(false);
+    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]); // FIXED
+    const [remedies, setRemedies] = useState([]);
+
 
     const indexParam = searchParams.get("index");
     const planetName = params.planetName; // This will be the English name from URL
-
-    // Map URL param to internal keys if needed, but assuming direct match for now or simple case handling
-    // The PlanetTable uses English names like "Sun", "Moon", etc.
-    // grahInfo.json uses lowercase keys: "sun", "moon", etc.
 
     useEffect(() => {
         async function loadData() {
@@ -37,6 +37,16 @@ export default function PlanetInfoPage() {
     }, []);
 
     useEffect(() => {
+        fetch('/data/planetsinnakshatras.json')
+            .then((r) => r.json())
+            .then((data) => setPlanetsInNakshatras(data));
+
+        fetch('/data/remedies.json')
+            .then((e) => e.json())
+            .then((data) => setRemedies(data))
+    }, []);
+
+    useEffect(() => {
         async function loadKundali() {
             if (!indexParam) return;
 
@@ -50,6 +60,79 @@ export default function PlanetInfoPage() {
         }
         loadKundali();
     }, [indexParam]);
+
+    // Helper to get data for any planet
+    function getPlanetNakshatraMeaning(planet) {
+        if (!planetsInNakshatras || planetsInNakshatras.length === 0) return null;
+
+        const root = planetsInNakshatras[0];  // FIXED ROOT
+
+        const nakRaw = kundali?.raw?.planets?.[planet]?.nakshatra;
+        const pada = kundali?.raw?.planets?.[planet]?.pada;
+
+        if (!nakRaw || !pada) return null;
+
+        const nak = nakRaw;
+        const planetLower = planet.toLowerCase();
+
+        const planetData = root[planetLower];
+        if (!planetData) return null;
+
+        if (!planetData[nak]) return null;
+
+        return planetData[nak][pada] || null;
+    }
+
+    const nakAndPaad = (planet) => {
+        const nakRaw = kundali?.raw?.planets?.[planet]?.nakshatra;
+        const narmalizedName = nakRaw
+        const nakRawName = getHindiNakshatra(narmalizedName)
+        const pada = kundali?.raw?.planets?.[planet]?.pada;
+
+        return `${nakRawName} : ${pada} `
+    }
+
+    const nakshataraIndex = kundali?.raw?.planets?.Moon?.nakshatraIndex;
+
+    const sunMeaning = getPlanetNakshatraMeaning("Sun");
+    const moonMeaning = getPlanetNakshatraMeaning("Moon");
+    const mercuryMeaning = getPlanetNakshatraMeaning("Mercury");
+    const venusMeaning = getPlanetNakshatraMeaning("Venus");
+    const jupiterMeaning = getPlanetNakshatraMeaning("Jupiter");
+    const saturnMeaning = getPlanetNakshatraMeaning("Saturn");
+    const rahuMeaning = getPlanetNakshatraMeaning("Rahu");
+    const ketuMeaning = getPlanetNakshatraMeaning("Ketu");
+
+    // House Number
+
+    // ------- HOUSE NUMBERS -------
+    const houseNumbers = {
+        Sun: kundali?.raw?.planets?.Sun?.house,
+        Moon: kundali?.raw?.planets?.Moon?.house,
+        Mars: kundali?.raw?.planets?.Mars?.house,
+        Mercury: kundali?.raw?.planets?.Mercury?.house,
+        Jupiter: kundali?.raw?.planets?.Jupiter?.house,
+        Venus: kundali?.raw?.planets?.Venus?.house,
+        Saturn: kundali?.raw?.planets?.Saturn?.house,
+        Rahu: kundali?.raw?.planets?.Rahu?.house,
+        Ketu: kundali?.raw?.planets?.Ketu?.house,
+    };
+
+
+    // ------- Get Remedies for Single Planet -------
+    function getRemediesForPlanet(planetName) {
+        const planetRemedyObj = remedies.find(r => r.grah === planetName);
+        if (!planetRemedyObj) return null;
+
+        const house = houseNumbers[planetName];
+        if (!house) return null;
+
+        const houseEntry = planetRemedyObj.houses.find(h => h.houseNumber === house);
+        return houseEntry?.remedies || null;
+    }
+
+    // ------- FINAL REMEDIES OUTPUT -------
+
 
     if (!kundali || !grahInfo) return <div className="p-4 text-black">Loading...</div>;
 
@@ -79,13 +162,9 @@ export default function PlanetInfoPage() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // Get house position from kundali
-    // Note: kundali.raw.planets keys are Capitalized (Sun, Moon...)
     const planetDataKey = capitalizeFirstLetter(planetKey);
     const housePosition = kundali?.raw?.planets?.[planetDataKey]?.house;
 
-    // Get info from grahInfo
-    // grahInfo is an array with one object usually, based on previous file inspection
     const info = grahInfo?.[0]?.[planetConfig.jsonKey]?.[housePosition];
 
     const FormattedText = ({ text }) => {
@@ -100,7 +179,17 @@ export default function PlanetInfoPage() {
             </div>
         );
     };
-    /* Fallback to simple div if regex doesn't match or for simple text */
+
+    const RemediesFormattedText = ({ text }) => {
+        if (!text) return null;
+        return (
+            <div>
+                {text.split('\n').filter(line => line.trim() !== '').map((item, index) => (
+                    <div key={index} className="mb-1">{item.trim()}</div>
+                ))}
+            </div>
+        );
+    };
 
     return (
         <div className="p-2 overflow-hidden text-black">
@@ -120,11 +209,11 @@ export default function PlanetInfoPage() {
                                 onClick={() => router.back()}
                                 className="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition"
                             >
-                               <RiArrowGoBackLine />
+                                <RiArrowGoBackLine />
                             </button>
                         </div>
                     ) : (
-                        <div className="p-6 border bg-white/50 rounded-xl shadow-sm">
+                        <div className="p-6 bg-white/50 rounded-xl shadow-sm">
                             <div className="flex justify-between items-center mb-4 border-b pb-2 border-orange-400">
                                 <h2 className="text-xl font-bold text-black">
                                     {planetConfig.label} - भाव {housePosition}
@@ -137,7 +226,7 @@ export default function PlanetInfoPage() {
                                 </button>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
+                            <div className="grid md:grid-cols-2 gap-6 mb-6">
                                 <div className="bg-green-50/80 p-4 rounded-lg border border-green-100">
                                     <h3 className="font-semibold text-green-800 mb-2">शुभ फल:</h3>
                                     <div className="text-sm text-gray-800">
@@ -152,10 +241,34 @@ export default function PlanetInfoPage() {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* New Nakshatra Meaning Section */}
+                            <div className="bg-blue-50/80 p-4 rounded-lg border border-blue-100 mb-6">
+                                <h3 className="font-semibold text-gray-800 mb-2">नक्षत्र फल - <br />
+                                    <div className="mt-3 text-blue-800">
+                                        {planetConfig.label} : {nakAndPaad(planetConfig.key)}
+                                    </div>
+                                </h3>
+                                <div className="text-sm text-gray-800">
+                                    <FormattedText text={getPlanetNakshatraMeaning(planetConfig.key)} />
+                                </div>
+                            </div>
+
+                            {/* Remedies Section */}
+                            <div className="bg-purple-50/80 p-4 rounded-lg border border-purple-100">
+                                <h3 className="font-semibold text-purple-800 mb-2">उपाय:</h3>
+                                <div className="text-sm text-gray-800">
+                                    {getRemediesForPlanet(planetConfig.key) ? (
+                                        <RemediesFormattedText text={getRemediesForPlanet(planetConfig.key)} />
+                                    ) : (
+                                        <p>इस समय कोई विशिष्ट उपाय उपलब्ध नहीं है।</p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

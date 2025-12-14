@@ -103,8 +103,6 @@ export default function PlanetInfoPage() {
     const rahuMeaning = getPlanetNakshatraMeaning("Rahu");
     const ketuMeaning = getPlanetNakshatraMeaning("Ketu");
 
-    // House Number
-
     // ------- HOUSE NUMBERS -------
     const houseNumbers = {
         Sun: kundali?.raw?.planets?.Sun?.house,

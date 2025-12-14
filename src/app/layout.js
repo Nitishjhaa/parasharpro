@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 import HomeButton from "@/components/HomeButton";
+import ClientProtector from "@/components/ClientProtector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,23 +24,28 @@ export const metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/icons/icon-192.png",
-    apple: "/icons/icon-512.png"
-  }
+    apple: "/icons/icon-512.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
         <meta name="theme-color" content="#000000" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-512.png" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Toaster richColors position="top-center" />
-        <HomeButton />
-        {children}
+        <ClientProtector>
+          <Toaster richColors position="top-center" />
+          <HomeButton />
+          {children}
+        </ClientProtector>
       </body>
     </html>
   );

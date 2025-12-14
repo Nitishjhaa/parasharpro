@@ -1,8 +1,22 @@
 @import "tailwindcss";
 
+html, body, * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+
 html, body {
   touch-action: pan-x pan-y;
 }
+
 
 :root {
   --background: #ffffff;
@@ -30,5 +44,5 @@ body {
 }
 
 .card-bg {
-  @apply bg-radial from-[#104072]/50 to-[#070D1E] hover:bg-[#F26A20]/80 transition-all duration-300 rounded-3xl shadow-sm hover:shadow-md cursor-pointer;
+  @apply bg-radial from-[#104072]/50 to-[#070D1E] hover:bg-[#104072]/80 transition-all duration-300 rounded-3xl shadow-sm hover:shadow-md cursor-pointer;
 }

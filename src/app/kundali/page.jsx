@@ -363,6 +363,7 @@ export default function KundaliPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={2}
+                      type="number"
                       placeholder="DD"
                       ref={ddRef}
                       value={form.birthDate.split("-")[0] || ""}
@@ -376,6 +377,7 @@ export default function KundaliPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={2}
+                      type="number"
                       placeholder="MM"
                       ref={mmRef}
                       value={form.birthDate.split("-")[1] || ""}
@@ -435,6 +437,7 @@ export default function KundaliPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
+                      type="number"
                       placeholder="YYYY"
                       ref={yyyyRef}
                       value={form.birthDate.split("-")[2] || ""}
@@ -454,6 +457,7 @@ export default function KundaliPage() {
                     {/* HH */}
                     <input
                       maxLength={2}
+                      type="number"
                       placeholder="HH"
                       ref={hhRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
@@ -467,6 +471,7 @@ export default function KundaliPage() {
                     {/* MM */}
                     <input
                       maxLength={2}
+                      type="number"
                       placeholder="MM"
                       ref={minRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"

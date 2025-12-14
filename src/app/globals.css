@@ -11,12 +11,10 @@ input, textarea {
   -webkit-user-select: text !important;
   user-select: text !important;
 }
-
-
+   
 html, body {
   touch-action: pan-x pan-y;
 }
-
 
 :root {
   --background: #ffffff;

@@ -117,7 +117,7 @@ export default function Page() {
         <div className="mx-auto w-[98%] min-h-screen">
           <div className="flex flex-col gap-3 h-screen">
             <div className="flex-[0.5] rounded-3xl overflow-hidden">
-              <div className="dark:bg-[#232323] bg-[#c9c9c9] w-full h-full flex justify-between items-center">
+              <div className="card-bg w-full h-full flex justify-between items-center">
                 <div className="ml-3 text-4xl flex gap-5 items-center w-full mr-3 rounded-3xl">
                   <img src='images/kundaliHead.png' className="w-15" />
                   <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent">
@@ -193,7 +193,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="flex-[0.5] rounded-3xl dark:bg-[#232323] bg-[#dedede]"></div>
+            <div className="flex-[0.5] rounded-3xl card-bg"></div>
           </div>
         </div>
       </div>

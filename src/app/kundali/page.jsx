@@ -493,6 +493,7 @@ export default function KundaliPage() {
                     {/* SS */}
                     <input
                       maxLength={2}
+                      type="number"
                       placeholder="SS"
                       ref={secRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"

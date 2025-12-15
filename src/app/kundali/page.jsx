@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 import { saveKundali, loadKundalis } from "@/lib/db";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { CiShare2 } from "react-icons/ci";
 
 
 export default function KundaliPage() {
@@ -63,6 +64,65 @@ export default function KundaliPage() {
 
   const cityInputRef = useRef(null);
   const suggestionsRef = useRef(null);
+
+  // Sharing State
+  const [showShareInput, setShowShareInput] = useState(false);
+  const [shareCode, setShareCode] = useState("");
+  const [generatedCode, setGeneratedCode] = useState(null);
+
+  // HANDLE SHARE (Generate Code)
+  async function handleShare() {
+    if (!form.name || !form.birthDate || !form.birthTime || !form.city) {
+      toast.error("Please fill all details to share.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/share', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setGeneratedCode(data.code);
+        navigator.clipboard.writeText(data.code);
+        toast.success(`Code ${data.code} copied to clipboard!`);
+      } else {
+        toast.error("Share failed: " + data.error);
+      }
+    } catch (e) {
+      toast.error("Share error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // HANDLE RECEIVE (Load Code)
+  async function handleReceiveShare() {
+    if (shareCode.length !== 6) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/share?code=${shareCode}`);
+      const data = await res.json();
+
+      if (data.success && data.data) {
+        setForm(data.data);
+        toast.success("Details loaded from shared code!");
+        setShowShareInput(false);
+        setShareCode("");
+      } else {
+        toast.error(data.error || "Invalid Code");
+      }
+    } catch (e) {
+      toast.error("Fetch error");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   // Load cities.json
   useEffect(() => {
@@ -572,8 +632,45 @@ export default function KundaliPage() {
                 >
                   <span className="text-white text-xl"><CiClock2 size={25} color="black" /></span>
                 </button>
-              </div>
 
+                <button
+                  className="w-12 h-12 bg-[#ccc] rounded-lg flex items-center justify-center relative"
+                  onClick={() => setShowShareInput(!showShareInput)}
+                >
+                  <CiShare2 size={25} color="black" />
+                  {/* Pink Dot Indicator (Visual only as requested) */}
+                  <span className="absolute top-1 right-1 w-3 h-3 rounded-full "></span>
+                </button>
+              </div>
+            </div>
+
+            {/* SHARE / RECEIVE INPUT AREA */}
+            <div className={`transition-all duration-300 overflow-hidden ${showShareInput ? 'max-h-40 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="bg-[#1e1e1e] p-4 rounded-xl border border-gray-700">
+                <div className="flex gap-2">
+                  <input
+                    className="flex-1 bg-black/50 text-white rounded-lg px-3 py-2 outline-none border border-gray-600"
+                    placeholder="Enter 6-digit Code"
+                    value={shareCode}
+                    onChange={(e) => setShareCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  />
+                  <button
+                    onClick={handleReceiveShare}
+                    disabled={shareCode.length !== 6 || loading}
+                    className="bg-blue-600 px-4 py-2 rounded-lg font-semibold disabled:opacity-50"
+                  >
+                    Load
+                  </button>
+                </div>
+                <div className="text-center mt-2 text-sm text-gray-400">OR</div>
+                <button
+                  onClick={handleShare}
+                  disabled={loading}
+                  className="w-full mt-2 bg-pink-600 py-2 rounded-lg font-semibold disabled:opacity-50"
+                >
+                  {generatedCode ? `Code: ${generatedCode} (Copied!)` : "Share Current Details"}
+                </button>
+              </div>
             </div>
 
             {/* SUBMIT */}
@@ -712,6 +809,51 @@ export default function KundaliPage() {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* SHARE / RECEIVE SECTION (DESKTOP) */}
+            <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-[#e29d00] font-semibold text-lg">Share / Load Kundali</h3>
+                <button
+                  className="w-10 h-10 bg-white shadow rounded-lg flex items-center justify-center relative hover:bg-gray-50"
+                  onClick={() => setShowShareInput(!showShareInput)}
+                >
+                  <CiShare2 size={20} color="#e29d00" />
+                  {/* Pink Dot Indicator */}
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
+                </button>
+              </div>
+
+              <div className={`transition-all duration-300 overflow-hidden ${showShareInput ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="flex gap-4">
+                  <div className="flex-1 flex gap-2">
+                    <input
+                      className="flex-1 bg-white border border-yellow-300 rounded-lg px-4 py-2 outline-none text-black"
+                      placeholder="Enter 6-digit Code"
+                      value={shareCode}
+                      onChange={(e) => setShareCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    />
+                    <button
+                      onClick={handleReceiveShare}
+                      disabled={shareCode.length !== 6 || loading}
+                      className="bg-[#104072] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#0d335b] disabled:opacity-50"
+                    >
+                      Load
+                    </button>
+                  </div>
+
+                  <div className="border-l border-yellow-300 pl-4 flex items-center">
+                    <button
+                      onClick={handleShare}
+                      disabled={loading}
+                      className="bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-pink-700 disabled:opacity-50 whitespace-nowrap"
+                    >
+                      {generatedCode ? `Code: ${generatedCode} (Copied!)` : "Share Details"}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* SUBMIT */}

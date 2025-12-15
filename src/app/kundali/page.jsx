@@ -497,7 +497,7 @@ export default function KundaliPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
-                      type="number"
+                      // type="number"
                       placeholder="YYYY"
                       ref={yyyyRef}
                       value={form.birthDate.split("-")[2] || ""}
@@ -666,7 +666,7 @@ export default function KundaliPage() {
                 <button
                   onClick={handleShare}
                   disabled={loading}
-                  className="w-full mt-2 bg-pink-600 py-2 rounded-lg font-semibold disabled:opacity-50"
+                  className="w-full mt-2 bg-red-600 py-2 rounded-lg font-semibold disabled:opacity-50"
                 >
                   {generatedCode ? `Code: ${generatedCode} (Copied!)` : "Share Current Details"}
                 </button>
@@ -821,7 +821,7 @@ export default function KundaliPage() {
                 >
                   <CiShare2 size={20} color="#e29d00" />
                   {/* Pink Dot Indicator */}
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-pink-500 rounded-full"></span>
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-pink-900 rounded-full"></span>
                 </button>
               </div>
 
@@ -847,7 +847,7 @@ export default function KundaliPage() {
                     <button
                       onClick={handleShare}
                       disabled={loading}
-                      className="bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-pink-700 disabled:opacity-50 whitespace-nowrap"
+                      className="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-600 disabled:opacity-50 whitespace-nowrap"
                     >
                       {generatedCode ? `Code: ${generatedCode} (Copied!)` : "Share Details"}
                     </button>

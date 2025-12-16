@@ -189,6 +189,241 @@ export default function PlanetInfoPage() {
         );
     };
 
+    const planetsInformation = {
+        Sun: {
+            mitraGraha: "चंद्र, मंगल, गुरु",
+            shatruGraha: "शुक्र, शनि",
+            samaGraha: "बुध",
+            adhipati: "सिंह",
+            uach: "मेष",
+            neech: "तुला",
+            ling: "पुरुष",
+            disha: "पूर्व (East)",
+            color: "लाल/सुनहरा",
+            ratan: "माणिक",
+            uach_Ghar: "1",
+            neech_Ghar: "6,7,10",
+            shrest_Ghar: "1,5,8,9,11,12",
+            god: "अग्नि, ",
+            beej_mantra : "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
+            daan: "गेहूँ, तांबा, माणिक, गुड़, लाल कपड़ा, लाल फूल, चंदन की लकड़ी, केसर"
+
+        },
+        Moon: {
+            mitraGraha: "सूर्य, बुध",
+            shatruGraha: "कोई नहीं",
+            samaGraha: "मंगल, गुरु, शुक्र, शनि",
+            adhipati: "कर्क",
+            uach: "वृषभ",
+            neech: "वृश्चिक",
+            ling: "स्त्री",
+            disha: "वायव्य (North-West)",
+            color: "सफेद/चांदी",
+            ratan: "मोती",
+            uach_Ghar: "4",
+            neech_Ghar: "6,8,10,11,12",
+            shrest_Ghar: "1,2,3,4,5,7,9",
+            god: "जल देव, ",
+            beej_mantra : "",
+            daan: "चावल, दूध, सफेद वस्त्र, चांदी, मोती, सफेद फूल"
+
+        },
+        Mars: {
+            mitraGraha: "सूर्य, चंद्र, गुरु",
+            shatruGraha: "बुध",
+            samaGraha: "शुक्र, शनि",
+            adhipati: "मेष, वृश्चिक",
+            uach: "मकर",
+            neech: "कर्क",
+            ling: "पुरुष",
+            disha: "दक्षिण (South)",
+            color: "लाल",
+            ratan: "मूंगा",
+            uach_Ghar: "1,8",
+            neech_Ghar: "3,6,11,12",
+            shrest_Ghar: "2,4,5,7,9,10",
+            god: "कार्तिकेय",
+            beej_mantra : "",
+            daan: "मूंगा, मसूर दाल, लाल चंदन, गुड़, तांबे के बर्तन"
+
+        },
+        Mercury: {
+            mitraGraha: "सूर्य, शुक्र",
+            shatruGraha: "चंद्र",
+            samaGraha: "मंगल, गुरु, शनि",
+            adhipati: "मिथुन, कन्या",
+            uach: "कन्या",
+            neech: "मीन",
+            ling: "नपुंसक",
+            disha: "उत्तर (North)",
+            color: "हरा",
+            ratan: "पन्ना",
+            uach_Ghar: "3,6",
+            neech_Ghar: "7,8,9,12",
+            shrest_Ghar: "1,2,4,5,10,11",
+            god: "नारायण",
+            beej_mantra : "",
+            daan: "पन्ना, हरी सब्ज़ियाँ, मूँग की दाल, हरा कपड़ा, दूर्वा घास"
+        },
+        Jupiter: {
+            mitraGraha: "सूर्य, चंद्र, मंगल",
+            shatruGraha: "शुक्र, बुध",
+            samaGraha: "शनि",
+            adhipati: "धनु, मीन",
+            uach: "कर्क",
+            neech: "मकर",
+            ling: "पुरुष",
+            disha: "ईशान (North-East)",
+            color: "पीला/सुनहरा",
+            ratan: "पुखराज",
+            uach_Ghar: "9,12",
+            neech_Ghar: "6,7,10",
+            shrest_Ghar: "2,5,8,9,12",
+            god: "बृहस्पति, ",
+            beej_mantra : "",
+            daan: "चना दाल, हल्दी, पुखराज, पीला वस्त्र, पीला फूल, केसर"
+        },
+        Venus: {
+            mitraGraha: "",
+            shatruGraha: "",
+            samaGraha: "",
+            adhipati: "",
+            uach: "",
+            neech: "",
+            ling: "",
+            disha: "",
+            color: "",
+            ratan: "",
+            uach_Ghar: "",
+            neech_Ghar: "",
+            shrest_Ghar: "",
+            god: "",
+            beej_mantra : "",
+            daan: ""
+        },
+        Saturn: {
+            mitraGraha: "",
+            shatruGraha: "",
+            samaGraha: "",
+            adhipati: "",
+            uach: "",
+            neech: "",
+            ling: "",
+            disha: "",
+            color: "",
+            ratan: "",
+            uach_Ghar: "",
+            neech_Ghar: "",
+            shrest_Ghar: "",
+            god: "",
+            beej_mantra : "",
+            daan: ""
+        },
+        Rahu: {
+            mitraGraha: "",
+            shatruGraha: "",
+            samaGraha: "",
+            adhipati: "",
+            uach: "",
+            neech: "",
+            ling: "",
+            disha: "",
+            color: "",
+            ratan: "",
+            uach_Ghar: "",
+            neech_Ghar: "",
+            shrest_Ghar: "",
+            god: "",
+            beej_mantra : "",
+            daan: ""
+        },
+        Ketu: {
+            mitraGraha: "",
+            shatruGraha: "",
+            samaGraha: "",
+            adhipati: "",
+            uach: "",
+            neech: "",
+            ling: "",
+            disha: "",
+            color: "",
+            ratan: "",
+            uach_Ghar: "",
+            neech_Ghar: "",
+            shrest_Ghar: "",
+            god: "",
+            beej_mantra : "",
+            daan: ""
+        },
+
+    }
+
+    const planetExtraInfo = (planet) => {
+        return (
+            <>
+                <div className="grid grid-cols-2 gap-3">
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">मित्र ग्रह :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].mitraGraha}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">शत्रु ग्रह :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].shatruGraha}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">सम ग्रह :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].samaGraha}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">आधिपति :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].adhipati}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">उच्च :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].uach}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">नीच :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].neech}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">लिंग :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].ling}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">दिशा :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].disha}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">रत्न :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].ratan}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">पक्का घर :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].uach_Ghar}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">नीच घर :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].neech_Ghar}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">श्रेष्ठ घर :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].shrest_Ghar}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">देवता :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].god}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">दान :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].daan}</p>
+                    </div>
+                </div>
+            </>
+        )
+    };
+
+
     return (
         <div className="p-2 overflow-hidden text-black">
             <div className="w-[98%] mx-auto">
@@ -211,7 +446,7 @@ export default function PlanetInfoPage() {
                             </button>
                         </div>
                     ) : (
-                        <div className="p-6 bg-white/50 rounded-xl shadow-sm">
+                        <div className="p-3 bg-white/50 rounded-xl shadow-sm">
                             <div className="flex justify-between items-center mb-4 border-b pb-2 border-orange-400">
                                 <h2 className="text-xl font-bold text-black">
                                     {planetConfig.label} - भाव {housePosition}
@@ -262,6 +497,10 @@ export default function PlanetInfoPage() {
                                         <p>इस समय कोई विशिष्ट उपाय उपलब्ध नहीं है।</p>
                                     )}
                                 </div>
+                            </div>
+
+                            <div className="bg-teal-50/80 p-4 rounded-lg border border-teal-100 mt-5">
+                                {planetExtraInfo(planetConfig.key)}
                             </div>
                         </div>
                     )}

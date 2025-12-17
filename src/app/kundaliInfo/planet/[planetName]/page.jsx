@@ -206,6 +206,7 @@ export default function PlanetInfoPage() {
             shrest_Ghar: "1,5,8,9,11,12",
             god: "अग्नि, ",
             beej_mantra : "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
+            vaar: "रविवार",
             daan: "गेहूँ, तांबा, माणिक, गुड़, लाल कपड़ा, लाल फूल, चंदन की लकड़ी, केसर"
 
         },
@@ -224,7 +225,8 @@ export default function PlanetInfoPage() {
             neech_Ghar: "6,8,10,11,12",
             shrest_Ghar: "1,2,3,4,5,7,9",
             god: "जल देव, ",
-            beej_mantra : "",
+            beej_mantra : "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः",
+            vaar: "सोमवार",
             daan: "चावल, दूध, सफेद वस्त्र, चांदी, मोती, सफेद फूल"
 
         },
@@ -243,7 +245,8 @@ export default function PlanetInfoPage() {
             neech_Ghar: "3,6,11,12",
             shrest_Ghar: "2,4,5,7,9,10",
             god: "कार्तिकेय",
-            beej_mantra : "",
+            beej_mantra : "ॐ क्रां क्रीं क्रौं सः भौमाय नमः",
+            vaar: "मंगलवार",
             daan: "मूंगा, मसूर दाल, लाल चंदन, गुड़, तांबे के बर्तन"
 
         },
@@ -262,7 +265,8 @@ export default function PlanetInfoPage() {
             neech_Ghar: "7,8,9,12",
             shrest_Ghar: "1,2,4,5,10,11",
             god: "नारायण",
-            beej_mantra : "",
+            beej_mantra : "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः",
+            vaar: "बुधवार",
             daan: "पन्ना, हरी सब्ज़ियाँ, मूँग की दाल, हरा कपड़ा, दूर्वा घास"
         },
         Jupiter: {
@@ -280,80 +284,85 @@ export default function PlanetInfoPage() {
             neech_Ghar: "6,7,10",
             shrest_Ghar: "2,5,8,9,12",
             god: "बृहस्पति, ",
-            beej_mantra : "",
+            beej_mantra : "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः",
+            vaar: "गुरुवार",
             daan: "चना दाल, हल्दी, पुखराज, पीला वस्त्र, पीला फूल, केसर"
         },
         Venus: {
-            mitraGraha: "",
-            shatruGraha: "",
-            samaGraha: "",
-            adhipati: "",
-            uach: "",
-            neech: "",
-            ling: "",
-            disha: "",
-            color: "",
-            ratan: "",
-            uach_Ghar: "",
-            neech_Ghar: "",
-            shrest_Ghar: "",
-            god: "",
-            beej_mantra : "",
-            daan: ""
+            mitraGraha: "बुध, शनि",
+            shatruGraha: "सूर्य, चंद्र, गुरु",
+            samaGraha: "मंगल",
+            adhipati: "वृषभ, तुला",
+            uach: "मीन",
+            neech: "कन्या",
+            ling: "स्त्री",
+            disha: "आग्नेय (South-East)",
+            color: "सफेद/गुलाबी",
+            ratan: "हीरा",
+            uach_Ghar: "2,7",
+            neech_Ghar: "1,6,9,10,11",
+            shrest_Ghar: "2,3,4,7,12",
+            god: "शुक्राचार्य",
+            beej_mantra : "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः",
+            vaar: "शुक्रवार",
+            daan: "हीरा, दही, सफेद कपड़े, सफेद चावल, चांदी, सुगंधित द्रव्य"
         },
         Saturn: {
-            mitraGraha: "",
-            shatruGraha: "",
-            samaGraha: "",
-            adhipati: "",
-            uach: "",
-            neech: "",
-            ling: "",
-            disha: "",
-            color: "",
-            ratan: "",
-            uach_Ghar: "",
-            neech_Ghar: "",
-            shrest_Ghar: "",
-            god: "",
-            beej_mantra : "",
-            daan: ""
+            mitraGraha: "बुध, शुक्र, राहु, केतु",
+            shatruGraha: "सूर्य, चंद्र, गुरु",
+            samaGraha: "मंगल, गुरु",
+            adhipati: "मकर, कुंभ",
+            uach: "तुला",
+            neech: "मेष",
+            ling: "पुरुष",
+            disha: "दक्षिण (South)",
+            color: "नीला/काला",
+            ratan: "नीलम",
+            uach_Ghar: "10, 11",
+            neech_Ghar: "1,4,5,6",
+            shrest_Ghar: "1,3,7,12",
+            god: "शनि ",
+            beej_mantra : "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः",
+            vaar: "शनिवार",
+            daan: "तिल, काली उड़द, नीलम, लोहा, काला कपड़ा, तेल"
         },
         Rahu: {
-            mitraGraha: "",
-            shatruGraha: "",
-            samaGraha: "",
-            adhipati: "",
-            uach: "",
-            neech: "",
-            ling: "",
-            disha: "",
-            color: "",
-            ratan: "",
-            uach_Ghar: "",
-            neech_Ghar: "",
-            shrest_Ghar: "",
-            god: "",
-            beej_mantra : "",
-            daan: ""
+            mitraGraha: "बुध, शुक्र, शनि ",
+            shatruGraha: "सूर्य, चंद्र, गुरु",
+            samaGraha: "मंगल, गुरु",
+            adhipati: "कोई नहीं",
+            uach: "वृषभ",
+            neech: "वृश्चिक",
+            ling: "पुरुष",
+            disha: "दक्षिण-पश्चिम (South-West)",
+            color: "गहरा नीला / धुंधला",
+            ratan: "गोमेद",
+            uach_Ghar: "12",
+            neech_Ghar: "1,2,4,5,7,12",
+            shrest_Ghar: "3,4,6",
+            god: "सरस्वती",
+            beej_mantra : "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः",
+            vaar: "शनिवार",
+            daan: "तिल, सरसों का तेल, काला कपड़ा, कंबल, नारियल"
         },
         Ketu: {
-            mitraGraha: "",
-            shatruGraha: "",
-            samaGraha: "",
-            adhipati: "",
-            uach: "",
-            neech: "",
-            ling: "",
-            disha: "",
-            color: "",
-            ratan: "",
-            uach_Ghar: "",
-            neech_Ghar: "",
-            shrest_Ghar: "",
-            god: "",
-            beej_mantra : "",
-            daan: ""
+            mitraGraha: "मंगल, शुक्र, शनि",
+            shatruGraha: "सूर्य, चंद्र",
+            samaGraha: "बुध, गुरु",
+            adhipati: "कोई नहीं",
+            uach: "वृश्चिक",
+            neech: "वृषभ",
+            ling: "पुरुष",
+            disha: "उत्तर-पश्चिम (North-West)",
+            color: "धुंधला / राखी",
+            ratan: "लहसुनिया",
+            uach_Ghar: "6",
+            neech_Ghar: "8,7,11",
+            shrest_Ghar: "3,6,9,10,12",
+            god: "गणेश",
+            beej_mantra : "ॐ स्रां स्रीं स्रौं सः केतवे नमः",
+            vaar: "मंगलवार और शनिवार",
+            daan: "नीले फूल, कंबल, काले तिल, लहसुनिया, धूप, चंदन"
         },
 
     }
@@ -415,8 +424,19 @@ export default function PlanetInfoPage() {
                         <p className="text-xs mt-2">{planetsInformation[planet].god}</p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">वार :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].vaar}</p>
+                    </div>
+                    
+                </div>
+                <div className="grid grid-cols-1 gap-3 mt-3">
+                    <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">दान :</div>
                         <p className="text-xs mt-2">{planetsInformation[planet].daan}</p>
+                    </div>
+                    <div className="border border-black/20 p-2 rounded-lg">
+                        <div className="text-sm">मंत्र :</div>
+                        <p className="text-xs mt-2">{planetsInformation[planet].beej_mantra}</p>
                     </div>
                 </div>
             </>

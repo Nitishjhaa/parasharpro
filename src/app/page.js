@@ -96,7 +96,7 @@ export default function Page() {
               {recent.length === 0 && (
                 <div className="text-gray-600 col-span-full">No recent kundalis</div>
               )}
-              {recent.slice(0,5).map((r, idx) => (
+              {recent.slice(0, 5).map((r, idx) => (
                 <div
                   key={r.id}
                   onClick={() => router.push(`/kundaliInfo?index=${idx}`)}
@@ -115,10 +115,10 @@ export default function Page() {
       {/* =======for mobile======= */}
       <div className="max-md:block hidden pb-10 pt-2">
         <div className="mx-auto w-[98%] min-h-screen">
-          <div className="flex flex-col gap-3 h-screen">
+          <div className="flex flex-col gap-3 h-fit">
             <div className="flex-[0.5] rounded-3xl overflow-hidden">
-              <div className="card-bg w-full h-full flex justify-between items-center">
-                <div className="ml-3 text-4xl flex gap-5 items-center w-full mr-3 rounded-3xl">
+              <div className="card-bg w-full h-full flex justify-between items-center p-3">
+                <div className=" text-4xl flex gap-5 items-center w-full mr-3 rounded-3xl">
                   <img src='images/kundaliHead.png' className="w-15" />
                   <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent">
                     Horescope
@@ -178,7 +178,7 @@ export default function Page() {
                     {recent.length === 0 && (
                       <div className="text-gray-500">No recent kundalis</div>
                     )}
-                    {recent.slice(0,5).map((r, idx) => (
+                    {recent.slice(0, 5).map((r, idx) => (
                       <div
                         key={r.id}
                         className="p-3 rounded-md bg-white/80 dark:bg-[#1f1f1f] cursor-pointer"
@@ -193,7 +193,17 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="flex-[0.5] rounded-3xl card-bg"></div>
+            <div className="flex-[0.5] rounded-3xl card-bg">
+              <Link href="/mantras" className="rounded-3xl relative">
+                <div className="flex justify-between items-center relative p-5">
+
+                  <div className="text-2xl">
+                    Mantras
+                  </div>
+                  <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-5" />
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

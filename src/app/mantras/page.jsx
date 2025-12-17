@@ -50,7 +50,7 @@ const page = () => {
                             <div className='grid grid-cols-2 gap-3'>
                                 {
                                     stotram.map((item, index) => (
-                                        <div className="border border-white/20 p-2 rounded-lg">
+                                        <div key={index} className="border border-white/20 p-2 rounded-lg">
                                             <div className='text-xs font-bold'>
                                                 <a href={item.link}>{item.name}</a>
                                             </div>

@@ -33,7 +33,6 @@ export default function PlanetTable({ kundali }) {
         if (planetName === "Ascendant") return; // Usually no specific page for Ascendant in this context, or maybe there is? User said "planet".
 
         const index = searchParams.get("index");
-        console.log(index);
         if (index) {
             router.push(`/kundaliInfo/planet/${planetName}?index=${index}`);
         }

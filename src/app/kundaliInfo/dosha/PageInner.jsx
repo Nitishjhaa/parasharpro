@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import { kaalSarpYog, cheakMool, checkManglik } from '../AstrologicalData'
+import { kaalSarpYog, cheakMool, checkManglik, cheakGuruChandaalYoga } from '../AstrologicalData'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
@@ -123,6 +123,9 @@ export default function KundaliInfoInner() {
     // manglik
     const manglik = checkManglik(marsHouse)
 
+    // guru chandaal yoga
+    const guruChandaalYoga = cheakGuruChandaalYoga(jupiterHouse, rahuHouse, ketuHouse)
+
     return (
         <div className="p-2 overflow-hidden text-black">
             <div className="w-[98%] mx-auto">
@@ -134,9 +137,9 @@ export default function KundaliInfoInner() {
                     setIsSideOpen={setIsSideOpen}
                 />
 
-                <div className="flex flex-col  bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
+                <div className="flex flex-col bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10 p-3 mt-3">
                     {/* mool */}
-                    {gandMool && <div>
+                    {gandMool && <div className="border rounded-2xl border-black/30">
                         <div className="p-4">
                             <div className={`${gandMool.status === "गण्डमूल दोष अनुपस्थित" ? "hidden" : ""} text-lg font-semibold`}>
                                 {gandMool.status}
@@ -149,7 +152,7 @@ export default function KundaliInfoInner() {
                     </div>}
 
                     {/* manglik */}
-                    {manglik && <div>
+                    {manglik && <div className="border rounded-2xl border-black/30 mt-3">
                         <div className="p-4">
                             <div className={`text-lg font-semibold`}>
                                 {manglik.status}
@@ -161,14 +164,42 @@ export default function KundaliInfoInner() {
                         </div>
                     </div>}
 
+                    {/* guru chandaal yoga */}
+                    {guruChandaalYoga && <div className="border rounded-2xl border-black/30 mt-3">
+                        <div className="p-4">
+                            <div className={`text-lg font-semibold`}>
+                                {guruChandaalYoga.status}
+                            </div>
+                            <span>
+                                {guruChandaalYoga.definition}
+                            </span>
+                            <div>
+                                <button onClick={(e) => setIsRemeadyOpen(!isRemeadyOpen)} className="w-full p-2 mt-5 rounded-2xl bg-neutral-300">
+                                    <h3 className="text-lg font-semibold ">उपाय</h3>
+                                </button>
+                                {isRemeadyOpen && <p className={`mt-5`}>
+                                    <ul className="space-y-1">
+                                        {guruChandaalYoga.remedies
+                                            .split("\n")
+                                            .map((line, index) => (
+                                                <li key={index} className="text-md leading-relaxed">
+                                                    {line}
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </p>}
+                            </div>
+                        </div>
+                    </div>}
+
                     {/* kaalsarpyog */}
-                    <div className="p-4">
+                    <div className="p-4 border rounded-2xl border-black/30 mt-3">
                         {!matchedYog &&
-                            <p className="text-lg font-semibold">
+                            <p className="text-lg font-semibold ">
                                 काल सर्प योग नहीं है।
                             </p>}
                         {matchedYog && (
-                            <div className="mt-4">
+                            <div className="mt-4 border rounded-2xl border-black/30">
                                 <p className="font-bold text-xl">{kaalSarpHindiMap(matchedYog.name)}</p>
                                 <p className="mt-2 text-md leading-relaxed">{matchedYog.description}</p>
 

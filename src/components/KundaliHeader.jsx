@@ -121,6 +121,12 @@ export default function KundaliHeader({
           </div>
 
           <div className="border-b-2 py-2">
+            <Link href={`/kundaliInfo/grahyog?index=${indexParam}`}>
+              भावेश के योग
+            </Link>
+          </div>
+
+          <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/dosha?index=${indexParam}`}>
               दोष
             </Link>
@@ -135,12 +141,6 @@ export default function KundaliHeader({
           <div className="border-b-2 py-2">
             <Link href={`/kundaliInfo/remedies?index=${indexParam}`}>
               उपाय
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/grahyog?index=${indexParam}`}>
-              भावेश के योग
             </Link>
           </div>
 

@@ -4,6 +4,10 @@ const page = () => {
 
     const stotram = [
         {
+            name: "स्वस्तिवाचन",
+            link: "/data/strotraAndMantra/svastivachan.pdf"
+        },
+        {
             name: "आदित्य हृदय स्तोत्र",
             link: "/data/strotraAndMantra/adityahriday.pdf"
         },
@@ -19,10 +23,7 @@ const page = () => {
             name: "पुरुष सूक्तम",
             link: "/data/strotraAndMantra/purushsukta.pdf"
         },
-        {
-            name: "स्वस्तिवाचन",
-            link: "/data/strotraAndMantra/svastivachan.pdf"
-        },
+        
     ]
 
 

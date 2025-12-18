@@ -131,15 +131,25 @@ const withPWACustom = withPWA({
       },
     },
     {
+      urlPattern: /\.(?:pdf)$/i,
+      handler: "StaleWhileRevalidate",
+      options: {
+        cacheName: "static-pdf-assets",
+        expiration: {
+          maxEntries: 32,
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
+    },
+    {
       urlPattern: /.*/i,
-      handler: "NetworkFirst",
+      handler: "StaleWhileRevalidate",
       options: {
         cacheName: "others",
         expiration: {
           maxEntries: 32,
           maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
-        networkTimeoutSeconds: 10,
       },
     },
   ],

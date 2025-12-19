@@ -23,16 +23,12 @@ const PLANET_HINDI = {
 export default function MahadashaPage() {
     const [sequence, setSequence] = useState([]);
     const [loading, setLoading] = useState(true);
-
     const [openMD, setOpenMD] = useState(null);
     const [openAD, setOpenAD] = useState(null);
-
     const [modalOpen, setModalOpen] = useState(false);
     const [modalText, setModalText] = useState("");
-
     const [isSideOpen, setIsSideOpen] = useState(false);
-
-    const [indexParam, setIndexParam] = useState(null); // <-- FIXED
+    const [indexParam, setIndexParam] = useState(null);
 
     function openModal(text) {
         setModalText(text || "कोई व्याख्या उपलब्ध नहीं है।");
@@ -101,11 +97,10 @@ export default function MahadashaPage() {
                         return (
                             <div
                                 key={mdIndex}
-                                className={`rounded-xl shadow border ${
-                                    mdCurrent
+                                className={`rounded-xl shadow border ${mdCurrent
                                         ? "bg-[#ffe49b] border-[#ffb300]"
                                         : "bg-white border-yellow-300"
-                                }`}
+                                    }`}
                             >
                                 {/* MAHADASHA HEADER */}
                                 <button
@@ -141,11 +136,10 @@ export default function MahadashaPage() {
                                             return (
                                                 <div
                                                     key={adIndex}
-                                                    className={`rounded-lg p-4 border ${
-                                                        adCurrent
+                                                    className={`rounded-lg p-4 border ${adCurrent
                                                             ? "bg-[#ffe49b] border-[#ffb300]"
                                                             : "bg-[#fff2d9] border-yellow-200"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {/* Antardasha Header */}
                                                     <button
@@ -191,11 +185,10 @@ export default function MahadashaPage() {
                                                                 return (
                                                                     <div
                                                                         key={pdIndex}
-                                                                        className={`p-3 rounded-lg ${
-                                                                            pdCurrent
+                                                                        className={`p-3 rounded-lg ${pdCurrent
                                                                                 ? "bg-[#ffe49b] border border-[#ffb300]"
                                                                                 : "bg-[#fff9e6]"
-                                                                        }`}
+                                                                            }`}
                                                                     >
                                                                         <div className="flex justify-between items-start">
                                                                             <div>

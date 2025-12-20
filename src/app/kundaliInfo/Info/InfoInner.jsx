@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords } from "../AstrologicalData";
+import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords, getNakshatraGana } from "../AstrologicalData";
 import getPanchangDetails from '@/lib/panchang'
 
 export default function KundaliInfoInner() {
@@ -110,7 +110,7 @@ export default function KundaliInfoInner() {
             "नक्षत्रपति": getLords("nakshatra", chandraRelated?.nakshatra),
             "पाये (राशि से)": getMoonPaaye(chandraRelated?.house),
             "पाये (नक्षत्र से)": getNakPaaye(chandraRelated?.nakshatra),
-            "गण": panchang.gana,
+            "गण": getNakshatraGana(chandraRelated?.nakshatraIndex + 1),
             "मास": panchang.purnimantaMonth,
             "पक्ष": panchang.paksha,
             "तिथि": tithi,

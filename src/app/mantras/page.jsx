@@ -23,7 +23,30 @@ const page = () => {
             name: "पुरुष सूक्तम",
             link: "/data/strotraAndMantra/purushsukta.pdf"
         },
-        
+        {
+            name: "श्री दुर्गा कवच",
+            link: "/data/strotraAndMantra/devikawach.pdf"
+        },
+        {
+            name: "कनकधारा स्तोत्र",
+            link: "/data/strotraAndMantra/kanakdhara.pdf"
+        },
+
+    ]
+    const aarti = [
+        {
+            name: "गणेश आरती",
+            link: "/data/strotraAndMantra/ganesh.pdf"
+        },
+        {
+            name: "विष्णु आरती",
+            link: "/data/strotraAndMantra/Jagdish.pdf"
+        },
+        {
+            name: "सत्यनारायण आरती",
+            link: "/data/strotraAndMantra/satyanarayan.pdf"
+        },
+
     ]
 
 
@@ -48,9 +71,24 @@ const page = () => {
                     </div>
                     <div className="flex-3 rounded-xl overflow-hidden dark:bg-[#232323] bg-[#dedede] p-3">
                         <div className='card-bg p-2 rounded-xl!'>
+                            <h2 className="text-lg py-3 font-bold">मंत्र और स्तोत्र</h2>
                             <div className='grid grid-cols-2 gap-3'>
                                 {
                                     stotram.map((item, index) => (
+                                        <div key={index} className="border border-white/20 p-2 rounded-lg">
+                                            <div className='text-xs font-bold'>
+                                                <a href={item.link}>{item.name}</a>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <div className='card-bg p-2 rounded-xl! mt-3'>
+                            <h2 className="text-lg py-3 font-bold">आरती</h2>
+                            <div className='grid grid-cols-2 gap-3'>
+                                {
+                                    aarti.map((item, index) => (
                                         <div key={index} className="border border-white/20 p-2 rounded-lg">
                                             <div className='text-xs font-bold'>
                                                 <a href={item.link}>{item.name}</a>

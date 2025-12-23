@@ -1,6 +1,5 @@
 import { getHindiGrah } from '@/lib/grah'
 
-
 // ---- RASHI FUNCTION ----
 export const rashi = (rashiIndex) => {
     if (rashiIndex === undefined || rashiIndex === null) {

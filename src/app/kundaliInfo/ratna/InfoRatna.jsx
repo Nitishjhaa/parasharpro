@@ -5,7 +5,6 @@ import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from "@/components/KundaliHeader";
 import { gemForLagan } from "@/lib/gemsForLagan";
-import { getDrishtiFromHouses } from '../AstrologicalData'
 
 export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);

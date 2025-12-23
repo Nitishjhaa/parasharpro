@@ -46,9 +46,6 @@ export default function KundaliInfoInner() {
             .then((data) => setRemedies(data))
     }, []);
 
-    // if (!kundali) return <div className="p-4 text-white">Loading...</div>;
-    // if (!kundali?.raw?.ascendant?.rashiIndex) return <div className="p-4 text-white">Loading...</div>;
-
     const lagnaIndex = kundali?.raw?.ascendant?.rashiIndex;
 
     const selectedLagna = lagna?.[lagnaIndex] || null;

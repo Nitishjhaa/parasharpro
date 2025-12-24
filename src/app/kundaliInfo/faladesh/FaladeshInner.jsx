@@ -11,7 +11,7 @@ export default function KundaliInfoInner() {
     const [kundali, setKundali] = useState(null);
     const [isSideOpen, setIsSideOpen] = useState(false);
     const [nakshatara, setNakshatara] = useState([]);
-    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]); // FIXED
+    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]);
 
     const params = useSearchParams();
     const router = useRouter();

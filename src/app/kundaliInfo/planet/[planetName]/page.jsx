@@ -15,7 +15,7 @@ export default function PlanetInfoPage() {
     const [kundali, setKundali] = useState(null);
     const [grahInfo, setGrahInfo] = useState(null);
     const [isSideOpen, setIsSideOpen] = useState(false);
-    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]); // FIXED
+    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]); 
     const [remedies, setRemedies] = useState([]);
 
 

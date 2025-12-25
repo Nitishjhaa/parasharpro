@@ -199,11 +199,11 @@ export default function KundaliInfoInner() {
                                 काल सर्प योग नहीं है।
                             </p>}
                         {matchedYog && (
-                            <div className="mt-4 border rounded-2xl border-black/30">
+                            <div className="mt-4 rounded-2xl ">
                                 <p className="font-bold text-xl">{kaalSarpHindiMap(matchedYog.name)}</p>
                                 <p className="mt-2 text-md leading-relaxed">{matchedYog.description}</p>
 
-                                <button onClick={(e) => setIsRemeadyOpen(!isRemeadyOpen)} className="w-full p-3 mt-5 rounded-2xl bg-neutral-300">
+                                <button onClick={(e) => setIsRemeadyOpen(!isRemeadyOpen)} className="w-full mt-5 rounded-2xl bg-neutral-300">
                                     <h3 className="text-lg font-semibold ">उपाय</h3>
                                 </button>
                                 {isRemeadyOpen && <p className={`mt-5`}>
@@ -213,7 +213,7 @@ export default function KundaliInfoInner() {
                                             .map((line, index) => (
                                                 <li key={index} className="text-md leading-relaxed">
                                                     {line}
-                                                    <hr />
+                                                    
                                                 </li>
                                             ))
                                         }

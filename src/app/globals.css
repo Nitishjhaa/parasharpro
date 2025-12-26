@@ -44,3 +44,13 @@ body {
 .card-bg {
   @apply bg-radial from-[#104072]/50 to-[#070D1E] hover:bg-[#104072]/80 transition-all duration-300 rounded-3xl shadow-sm hover:shadow-md cursor-pointer;
 }
+
+
+/*for test*/
+_bg_red {
+ border :1px solid red;
+}
+
+_bg_blue {
+  border :1px solid blue: 
+}

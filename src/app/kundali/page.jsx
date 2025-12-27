@@ -56,7 +56,7 @@ export default function KundaliPage() {
     gender: "",
     birthDate: "",
     birthTime: "",
-    city: "",
+    city: "Delhi",
   });
 
   const [result, setResult] = useState(null);

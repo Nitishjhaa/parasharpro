@@ -28,9 +28,14 @@ export default function HomeButton() {
     href = pathname === "/mantras" ? "/" : "/mantras";
   }
 
+  else if (pathname.startsWith("/matchmatching")) {
+    // If exactly on /matchmatching, go Home. Else go back to /matchmatching
+    href = pathname === "/matchmatching" ? "/" : "/matchmatching";
+  }
+
   // Adjust top position for consistency (main section pages have different spacing?)
   // Original only checked "/kundali". Assuming "/child" needs same spacing.
-  const isSectionRoot = pathname === "/kundali" || pathname === "/child" || pathname === "/mantras";
+  const isSectionRoot = pathname === "/kundali" || pathname === "/child" || pathname === "/mantras" || pathname === "/matchmatching";
 
   return (
     <Link href={href}>

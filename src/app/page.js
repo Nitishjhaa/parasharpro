@@ -146,13 +146,13 @@ export default function Page() {
                     {/* Right Column */}
                     <div className="flex-1 flex flex-col gap-3 ">
                       <Link href="/panchang" className="flex-1 rounded-3xl card-bg p-5 relative">
-                        <div className="text-lg">
+                        <div className="text-lg text-white">
                           Panchang
                         </div>
                         <img src="/images/homeChild.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                       </Link>
                       <Link href="/child" className="flex-1 rounded-3xl card-bg p-5 relative">
-                        <div className="text-lg">
+                        <div className="text-lg text-white">
                           Child
                         </div>
                         <img src="/images/matchKundali.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
@@ -162,7 +162,7 @@ export default function Page() {
 
                   {/* Middle Full Box */}
                   <Link href="/matchmatching" className="flex-1 rounded-3xl card-bg p-5 relative">
-                    <div className="text-lg">
+                    <div className="text-lg text-white">
                       Match Matching
                     </div>
                     <img src="/images/homePanchange.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
@@ -171,7 +171,7 @@ export default function Page() {
 
                 {/* Bottom Box */}
                 <div className="flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700 card-bg p-5 overflow-y-auto">
-                  <div className="mb-1">
+                  <div className="mb-1 text-white">
                     Recent Kundali.
                   </div>
                   <div className="mt-3 space-y-2 p-2 rounded overflow-y-auto">
@@ -190,20 +190,23 @@ export default function Page() {
                     ))}
                   </div>
                 </div>
+
+                <div className="flex-[0.5] rounded-3xl card-bg">
+                  <Link href="/mantras" className="rounded-3xl relative">
+                    <div className="flex justify-between items-center relative p-5">
+
+                      <div className="text-2xl text-white">
+                        Mantras
+                      </div>
+                      <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-5" />
+                    </div>
+                  </Link>
+                </div>
+
               </div>
             </div>
 
-            <div className="flex-[0.5] rounded-3xl card-bg">
-              <Link href="/mantras" className="rounded-3xl relative">
-                <div className="flex justify-between items-center relative p-5">
 
-                  <div className="text-2xl">
-                    Mantras
-                  </div>
-                  <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-5" />
-                </div>
-              </Link>
-            </div>
           </div>
         </div>
       </div>

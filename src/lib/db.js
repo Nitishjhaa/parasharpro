@@ -73,3 +73,29 @@ export const loadChildKundaliByIndex = async (index) => {
   const list = (await get(CHILD_KEY)) || [];
   return list[index] || null;
 };
+
+
+const MATCH_KEY = "match_making_data_v1";
+
+// Save match making data (male + female kundali)
+export const saveMatchMaking = async (matchData) => {
+  // matchData should be { male: {...}, female: {...} }
+  const record = {
+    id: Date.now(),
+    createdAt: new Date().toISOString(),
+    ...matchData,
+  };
+
+  await set(MATCH_KEY, record);
+  return record;
+};
+
+// Load the most recent match making data
+export const loadMatchMaking = async () => {
+  return (await get(MATCH_KEY)) || null;
+};
+
+// Clear match making data
+export const clearMatchMaking = async () => {
+  await del(MATCH_KEY);
+};

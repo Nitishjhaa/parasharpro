@@ -726,4 +726,3 @@ export function getNakshatraGana(number) {
 
     return null;
 }
-

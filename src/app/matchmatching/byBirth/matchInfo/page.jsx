@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { loadMatchMaking } from "@/lib/db";
 import MatchHeader from "@/components/MatchHeader";
 import { rashi, nakshatra, getGhaatChakraByRashi, getMoonPaaye, getNakPaaye, getLords, getNakshatraGana, checkManglik } from "@/app/kundaliInfo/AstrologicalData";
-import { getNonCompatibleNakshatrasInHindi, hasSunSaturnRahuDosha } from "@/app/matchmatching/MatchUtils";
+import { getNonCompatibleNakshatrasInHindi, hasSunSaturnRahuDosha, calculateTaraPoints, getVarna, getVashya } from "@/app/matchmatching/MatchUtils";
+import KundaliStructure from "@/components/KundaliStructure";
 
 const MatchInfoPage = () => {
     const [matchData, setMatchData] = useState(null);
@@ -48,6 +49,14 @@ const MatchInfoPage = () => {
     const boy = matchData.male;
     const girl = matchData.female;
 
+    const taraPoints = calculateTaraPoints(matchData.male.raw?.planets?.Moon?.nakshatra, matchData.female.raw?.planets?.Moon?.nakshatra);
+
+    const boyVarna = getVarna(matchData.male.raw?.planets?.Moon?.rashiIndex);
+    const girlVarna = getVarna(matchData.female.raw?.planets?.Moon?.rashiIndex);
+
+    const boyVashya = getVashya(matchData.male.raw?.planets?.Moon?.rashiIndex);
+    const girlVashya = getVashya(matchData.female.raw?.planets?.Moon?.rashiIndex);
+
     const info = [
         {
             label: "नाम",
@@ -69,11 +78,7 @@ const MatchInfoPage = () => {
             male: boy.meta.city,
             female: girl.meta.city,
         },
-        {
-            label: "राशि",
-            male: rashi(boy.raw?.planets?.Moon.rashiIndex),
-            female: rashi(girl.raw?.planets?.Moon.rashiIndex),
-        },
+
         {
             label: "लग्न",
             male: rashi(boy.raw?.ascendant?.rashiIndex),
@@ -106,18 +111,18 @@ const MatchInfoPage = () => {
         },
         {
             label: "वर्ण",
-            male: getNakshatraGana(boy.raw?.planets?.Moon.nakshatraIndex + 1),
-            female: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
+            male: boyVarna,
+            female: girlVarna,
         },
         {
             label: "वश्य",
-            male: getNakshatraGana(boy.raw?.planets?.Moon.nakshatraIndex + 1),
-            female: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
+            male: boyVashya,
+            female: girlVashya,
         },
         {
             label: "तारा",
-            male: getNakshatraGana(boy.raw?.planets?.Moon.nakshatraIndex + 1),
-            female: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
+            male: taraPoints.taraBoyToGirl,
+            female: taraPoints.taraGirlToBoy,
         },
         {
             label: "योनि",
@@ -136,8 +141,8 @@ const MatchInfoPage = () => {
         },
         {
             label: "राशि",
-            male: getNakshatraGana(boy.raw?.planets?.Moon.nakshatraIndex + 1),
-            female: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
+            male: rashi(boy.raw?.planets?.Moon.rashiIndex),
+            female: rashi(girl.raw?.planets?.Moon.rashiIndex),
         },
         {
             label: "नाड़ी",
@@ -145,6 +150,10 @@ const MatchInfoPage = () => {
             female: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
         },
     ];
+
+    console.log(taraPoints)
+
+    console.log(boy.raw?.planets?.Moon?.rashiIndex)
 
     const noncompboy = getNonCompatibleNakshatrasInHindi(matchData.male.raw?.planets?.Moon.nakshatra)
     const noncompgirl = getNonCompatibleNakshatrasInHindi(matchData.female.raw?.planets?.Moon.nakshatra);
@@ -182,15 +191,15 @@ const MatchInfoPage = () => {
     const sunSaturnRahuDoshaForGirl = hasSunSaturnRahuDosha(girlSunHouseNumber, girlSaturnHouseNumber, girlRahuHouseNumber);
 
     const isBoyManglik = checkManglik(boyMarsHouseNumber)
-    const isGirlManglik = checkManglik(girlMarsHouseNumber)
-
-    console.log(isBoyManglik, isGirlManglik)
+    const isGirlManglik = checkManglik(girlMarsHouseNumber);
 
     const manglikResult = (isBoyManglik, isGirlManglik) => {
-        if(isBoyManglik.type === isGirlManglik.type) {
+        if (isBoyManglik.type === isGirlManglik.type) {
             return "लड़के और लड़की दोनों की कुंडली में मांगलिक दोष है इसली मांगलिक द्रष्टिकोण से विवाह को अनुमती दी जा सकती है"
         }
-    }        
+    }
+
+    console.log(boy)
 
     return (
         <div className="min-h-screen p-2">
@@ -246,20 +255,30 @@ const MatchInfoPage = () => {
                             </tbody>
                         </table>
 
+                        <div className="text-black w-full flex flex-col lg:flex-row" >
+                            <div className="w-[92%] ">
+                                <KundaliStructure kundali={matchData.male} title="लड़के की कुंडली" />
+                            </div>
+
+                            <div className="w-[92%] ">
+                                <KundaliStructure kundali={matchData.female} title="लड़की की कुंडली" />
+                            </div>
+                        </div>
+
                         <div className="mt-6 text-black p-2">
 
                             <h2 className="text-xl font-semibold underline underline-offset-4">मिलान :-</h2>
                             <div className="border p-1 mt-3 rounded-2xl border-black/40">
-                                <h2 className="text-base font-semibold underline underline-offset-4 mt-2">नक्षत्र के हिसाब से :-</h2>
+                                <h2 className="text-base font-semibold underline underline-offset-4 mt-2">नक्षत्र विचार :-</h2>
                                 <p className="mt-3">{Compatibility(nakshataraBoy, nakshataraGirl)}</p>
                             </div>
                             <div className="border p-1 mt-3 rounded-2xl border-black/40">
                                 <h2 className="text-base font-semibold underline underline-offset-4 mt-2">मांगलिक दोष विचार :-</h2>
-                                <p className="mt-3">लड़के की {isBoyManglik.status}</p>
-                                <p className="mt-3">लड़की की {isGirlManglik.status}</p>
+                                <p className="mt-3 text-red-600">- लड़के की {isBoyManglik.status}</p>
+                                <p className="mt-3 text-red-600">- लड़की की {isGirlManglik.status}</p>
                                 <p className="mt-2">{manglikResult(isBoyManglik, isGirlManglik)}</p>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

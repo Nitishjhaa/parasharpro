@@ -225,20 +225,20 @@ export const getVashya = (rashiIndex) => {
 
 export const getYoni = (nakshatraIndex) => {
   const yoniMap = {
-    ashaw: [],
-    gaj: [],
-    mesh: [],
-    sarpa: [],
-    shavaan: [],
-    mousak: [],
-    marjaar: [],
-    go: [],
-    mahis: [],
-    bayagra:[],
-    mrig:[],
-    vaanar:[],
-    nakul:[],
-    singh:[],
+    ashaw: [1,24],
+    gaj: [2,27],
+    mesh: [3,8],
+    sarpa: [4,5],
+    shavaan: [6,19],
+    mousak: [10, 11],
+    marjaar: [7,9],
+    go: [12,26],
+    mahis: [13,15],
+    bayagra:[14,16],
+    mrig:[17,18],
+    vaanar:[20,22],
+    nakul:[21],
+    singh:[23,25],
     
    
   }

@@ -713,15 +713,15 @@ export const getHouseLordsWithPositions = (ascendant, planetPositions) => {
 
 export function getNakshatraGana(number) {
     if ([1,5,7,8,13,15,17,22,27].includes(number)) {
-        return "देव गण";
+        return "देव";
     }
 
     if ([2,4,6,11,12,20,21,25,26].includes(number)) {
-        return "मनुष्य गण";
+        return "मनुष्य";
     }
 
     if ([3,9,10,14,16,18,19,23,24].includes(number)) {
-        return "राक्षस गण";
+        return "राक्षस";
     }
 
     return null;

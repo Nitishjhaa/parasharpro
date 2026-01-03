@@ -191,71 +191,85 @@ export function calculateTaraPoints(girlNakshatra, boyNakshatra) {
   };
 }
 
-export const getVarna = (rashiIndex) => {
-  rashiIndex = rashiIndex + 1;
+// ---------- NORMALIZER ----------
+const normalize = (v) => v?.trim?.() ?? v;
 
-  const varnaMap = {
-    brahman: [4, 8, 12],
-    kshatriya: [1, 5, 9],
-    vaishya: [2, 6, 10],
-    shudra: [3, 7, 11],
-  }
-
-  const varna = varnaMap.brahman.includes(rashiIndex) ? "ब्राह्मण" : varnaMap.kshatriya.includes(rashiIndex) ? "क्षत्रिय" : varnaMap.vaishya.includes(rashiIndex) ? "वैश्य" : "शूद्र";
-
-  return varna;
-
-}
-
-export const getVashya = (rashiIndex) => {
-  rashiIndex = rashiIndex + 1;
-
-  const vashyaMap = {
-    chatuspaad: [1, 2],
-    manav: [3, 6, 7, 9, 11],
-    jalchar: [4, 10, 12],
-    vanchar: [5],
-    kitta: [8],
-  }
-
-  const vashya = vashyaMap.chatuspaad.includes(rashiIndex) ? "चतुष्पद" : vashyaMap.manav.includes(rashiIndex) ? "मानव" : vashyaMap.jalchar.includes(rashiIndex) ? "जलचर" : vashyaMap.vanchar.includes(rashiIndex) ? "वनचर" : "कीट";
-
-  return vashya;
-}
-
+// ---------- YONI ----------
 export const getYoni = (nakshatraIndex) => {
+  nakshatraIndex = nakshatraIndex + 1;
+
   const yoniMap = {
-    ashaw: [1,24],
-    gaj: [2,27],
-    mesh: [3,8],
-    sarpa: [4,5],
-    shavaan: [6,19],
-    mousak: [10, 11],
-    marjaar: [7,9],
-    go: [12,26],
-    mahis: [13,15],
-    bayagra:[14,16],
-    mrig:[17,18],
-    vaanar:[20,22],
-    nakul:[21],
-    singh:[23,25],
-    
-   
+    अश्व: [1, 24],
+    गज: [2, 27],
+    मेष: [3, 8],
+    सर्प: [4, 5],
+    शवान: [6, 19],
+    मर्जार: [7, 9],
+    मूसक: [10, 11],
+    गौ: [12, 26],
+    महिष: [13, 15],
+    व्याघ्र: [14, 16],
+    मृग: [17, 18],
+    वानर: [20, 22],
+    नकुल: [21],
+    सिंह: [23, 25],
+  };
+
+  for (const [yoni, list] of Object.entries(yoniMap)) {
+    if (list.includes(nakshatraIndex)) {
+      return normalize(yoni);
+    }
   }
-}
+  return "";
+};
 
-export const getGrahMaitri = () => {
+// ---------- NAADI ----------
+export const getNaadi = (nakshatraIndex) => {
+  nakshatraIndex += 1;
 
-}
+  const naadiMap = {
+    आद्य: [1, 6, 7, 12, 13, 18, 19, 24, 25],
+    मध्य: [2, 5, 8, 11, 14, 17, 20, 23, 26],
+    अन्त्य: [3, 4, 9, 10, 15, 16, 21, 22, 27],
+  };
 
-export const getRashi = () => {
+  for (const [k, v] of Object.entries(naadiMap)) {
+    if (v.includes(nakshatraIndex)) return normalize(k);
+  }
+};
 
-}
+// ---------- VARNA ----------
+export const getVarna = (rashiIndex) => {
+  rashiIndex += 1;
 
-export const getNaadi = (nakshatra) => {
+  const map = {
+    ब्राह्मण: [4, 8, 12],
+    क्षत्रिय: [1, 5, 9],
+    वैश्य: [2, 6, 10],
+    शूद्र: [3, 7, 11],
+  };
 
-}
+  for (const [k, v] of Object.entries(map)) {
+    if (v.includes(rashiIndex)) return normalize(k);
+  }
+};
 
+// ---------- VASHYA ----------
+export const getVashya = (rashiIndex) => {
+  rashiIndex += 1;
+
+  const map = {
+    चतुष्पद: [1, 2],
+    मानव: [3, 6, 7, 9, 11],
+    जलचर: [4, 10, 12],
+    वनचर: [5],
+    कीट: [8],
+  };
+
+  for (const [k, v] of Object.entries(map)) {
+    if (v.includes(rashiIndex)) return normalize(k);
+  }
+};
 
 // gun cal
 const gunScoreTables = {
@@ -276,76 +290,76 @@ const gunScoreTables = {
 
   yoni: {
     अश्व: {
-      अश्व: 4, गज: 2, मेष: 3, सर्प: 2, शवान: 2, बिल्ली: 3, मूसक: 3,
+      अश्व: 4, गज: 2, मेष: 3, सर्प: 2, शवान: 2, मर्जार: 3, मूसक: 3,
       गौ: 3, महिष: 0, व्याघ्र: 1, मृग: 3, वानर: 2, नकुल: 2, सिंह: 1
     },
     गज: {
-      अश्व: 2, गज: 4, मेष: 3, सर्प: 2, शवान: 2, बिल्ली: 3, मूसक: 3,
+      अश्व: 2, गज: 4, मेष: 3, सर्प: 2, शवान: 2, मर्जार: 3, मूसक: 3,
       गौ: 3, महिष: 3, व्याघ्र: 1, मृग: 2, वानर: 3, नकुल: 2, सिंह: 0
     },
     मेष: {
-      अश्व: 3, गज: 3, मेष: 4, सर्प: 3, शवान: 2, बिल्ली: 3, मूसक: 1,
+      अश्व: 3, गज: 3, मेष: 4, सर्प: 3, शवान: 2, मर्जार: 3, मूसक: 1,
       गौ: 3, महिष: 3, व्याघ्र: 1, मृग: 3, वानर: 0, नकुल: 3, सिंह: 1
     },
     सर्प: {
-      अश्व: 2, गज: 2, मेष: 2, सर्प: 4, शवान: 2, बिल्ली: 2, मूसक: 1,
+      अश्व: 2, गज: 2, मेष: 2, सर्प: 4, शवान: 2, मर्जार: 2, मूसक: 1,
       गौ: 1, महिष: 2, व्याघ्र: 2, मृग: 2, वानर: 2, नकुल: 0, सिंह: 2
     },
     शवान: {
-      अश्व: 2, गज: 2, मेष: 2, सर्प: 2, शवान: 4, बिल्ली: 1, मूसक: 1,
+      अश्व: 2, गज: 2, मेष: 2, सर्प: 2, शवान: 4, मर्जार: 1, मूसक: 1,
       गौ: 2, महिष: 2, व्याघ्र: 1, मृग: 0, वानर: 2, नकुल: 2, सिंह: 1
     },
-    बिल्ली: {
-      अश्व: 2, गज: 2, मेष: 3, सर्प: 2, शवान: 1, बिल्ली: 4, मूसक: 0,
+    मर्जार: {
+      अश्व: 2, गज: 2, मेष: 3, सर्प: 2, शवान: 1, मर्जार: 4, मूसक: 0,
       गौ: 2, महिष: 2, व्याघ्र: 1, मृग: 2, वानर: 2, नकुल: 2, सिंह: 2
     },
     मूसक: {
-      अश्व: 2, गज: 2, मेष: 2, सर्प: 1, शवान: 1, बिल्ली: 0, मूसक: 4,
+      अश्व: 2, गज: 2, मेष: 2, सर्प: 1, शवान: 1, मर्जार: 0, मूसक: 4,
       गौ: 2, महिष: 2, व्याघ्र: 2, मृग: 2, वानर: 2, नकुल: 2, सिंह: 1
     },
     गौ: {
-      अश्व: 3, गज: 2, मेष: 3, सर्प: 1, शवान: 2, बिल्ली: 2, मूसक: 2,
+      अश्व: 3, गज: 2, मेष: 3, सर्प: 1, शवान: 2, मर्जार: 2, मूसक: 2,
       गौ: 4, महिष: 3, व्याघ्र: 0, मृग: 3, वानर: 2, नकुल: 3, सिंह: 1
     },
     महिष: {
-      अश्व: 0, गज: 3, मेष: 3, सर्प: 2, शवान: 2, बिल्ली: 2, मूसक: 2,
+      अश्व: 0, गज: 3, मेष: 3, सर्प: 2, शवान: 2, मर्जार: 2, मूसक: 2,
       गौ: 3, महिष: 4, व्याघ्र: 1, मृग: 2, वानर: 2, नकुल: 2, सिंह: 3
     },
     व्याघ्र: {
-      अश्व: 1, गज: 2, मेष: 1, सर्प: 2, शवान: 1, बिल्ली: 1, मूसक: 2,
+      अश्व: 1, गज: 2, मेष: 1, सर्प: 2, शवान: 1, मर्जार: 1, मूसक: 2,
       गौ: 0, महिष: 1, व्याघ्र: 4, मृग: 2, वानर: 1, नकुल: 2, सिंह: 2
     },
     मृग: {
-      अश्व: 3, गज: 2, मेष: 3, सर्प: 2, शवान: 0, बिल्ली: 2, मूसक: 2,
+      अश्व: 3, गज: 2, मेष: 3, सर्प: 2, शवान: 0, मर्जार: 2, मूसक: 2,
       गौ: 3, महिष: 2, व्याघ्र: 1, मृग: 4, वानर: 2, नकुल: 2, सिंह: 2
     },
     वानर: {
-      अश्व: 2, गज: 3, मेष: 0, सर्प: 2, शवान: 2, बिल्ली: 2, मूसक: 2,
+      अश्व: 2, गज: 3, मेष: 0, सर्प: 2, शवान: 2, मर्जार: 2, मूसक: 2,
       गौ: 2, महिष: 2, व्याघ्र: 1, मृग: 2, वानर: 4, नकुल: 2, सिंह: 3
     },
     नकुल: {
-      अश्व: 2, गज: 2, मेष: 3, सर्प: 0, शवान: 2, बिल्ली: 2, मूसक: 2,
+      अश्व: 2, गज: 2, मेष: 3, सर्प: 0, शवान: 2, मर्जार: 2, मूसक: 2,
       गौ: 3, महिष: 2, व्याघ्र: 2, मृग: 2, वानर: 2, नकुल: 4, सिंह: 2
     },
     सिंह: {
-      अश्व: 1, गज: 0, मेष: 1, सर्प: 2, शवान: 1, बिल्ली: 2, मूसक: 1,
+      अश्व: 1, गज: 0, मेष: 1, सर्प: 2, शवान: 1, मर्जार: 2, मूसक: 1,
       गौ: 1, महिष: 3, व्याघ्र: 2, मृग: 2, वानर: 2, नकुल: 2, सिंह: 4
     }
   },
   grahaMaitri: {
-    रवि: { रवि: 5, चन्द्र: 5, भौम: 5, बुध: 4, बृहस्पति: 5, शुक्र: 0, शनि: 0 },
-    चन्द्र: { रवि: 5, चन्द्र: 5, भौम: 4, बुध: 1, बृहस्पति: 4, शुक्र: 0.5, शनि: 0.5 },
-    भौम: { रवि: 5, चन्द्र: 4, भौम: 5, बुध: 0.5, बृहस्पति: 5, शुक्र: 3, शनि: 0.5 },
-    बुध: { रवि: 4, चन्द्र: 1, भौम: 0.5, बुध: 5, बृहस्पति: 0.5, शुक्र: 5, शनि: 4 },
-    बृहस्पति: { रवि: 5, चन्द्र: 4, भौम: 5, बुध: 0.5, बृहस्पति: 5, शुक्र: 0.5, शनि: 3 },
-    शुक्र: { रवि: 0, चन्द्र: 0.5, भौम: 3, बुध: 5, बृहस्पति: 0.5, शुक्र: 5, शनि: 5 },
-    शनि: { रवि: 0, चन्द्र: 0.5, भौम: 0.5, बुध: 4, बृहस्पति: 3, शुक्र: 5, शनि: 5 }
+    सूर्य: { सूर्य: 5, चन्द्र: 5, मंगल: 5, बुध: 4, गुरु: 5, शुक्र: 0, शनि: 0 },
+    चन्द्र: { सूर्य: 5, चन्द्र: 5, मंगल: 4, बुध: 1, गुरु: 4, शुक्र: 0.5, शनि: 0.5 },
+    मंगल: { सूर्य: 5, चन्द्र: 4, मंगल: 5, बुध: 0.5, गुरु: 5, शुक्र: 3, शनि: 0.5 },
+    बुध: { सूर्य: 4, चन्द्र: 1, मंगल: 0.5, बुध: 5, गुरु: 0.5, शुक्र: 5, शनि: 4 },
+    गुरु: { सूर्य: 5, चन्द्र: 4, मंगल: 5, बुध: 0.5, गुरु: 5, शुक्र: 0.5, शनि: 3 },
+    शुक्र: { सूर्य: 0, चन्द्र: 0.5, मंगल: 3, बुध: 5, गुरु: 0.5, शुक्र: 5, शनि: 5 },
+    शनि: { सूर्य: 0, चन्द्र: 0.5, मंगल: 0.5, बुध: 4, गुरु: 3, शुक्र: 5, शनि: 5 }
   },
 
   gana: {
-    देव: { देव: 6, मानव: 6, दानव: 0 },
-    मानव: { देव: 5, मानव: 6, दानव: 0 },
-    दानव: { देव: 0, मानव: 0, दानव: 6 }
+    देव: { देव: 6, मनुष्य: 6, दानव: 0 },
+    मनुष्य: { देव: 5, मनुष्य: 6, दानव: 0 },
+    दानव: { देव: 0, मनुष्य: 0, दानव: 6 }
   },
 
 
@@ -370,37 +384,33 @@ const gunScoreTables = {
   },
 };
 
+// ---------- GUN MILAN ----------
+export function calculateGunMilanScore(boyData, girlData) {
+  const getScore = (table, boyVal, girlVal) =>
+    table?.[normalize(boyVal)]?.[normalize(girlVal)] ?? 0;
 
-// total gan
-
-function calculateGunMilanScore(boyData, girlData) {
   const scores = {
-    varna: 0,
-    vashya: 0,
-    yoni: 0,
-    grahaMaitri: 0,
-    gana: 0,
-    bhakoot: 0,
-    nadi: 0
+    varna: getScore(gunScoreTables.varna, boyData.varna, girlData.varna),
+    vashya: getScore(gunScoreTables.vashya, boyData.vashya, girlData.vashya),
+    yoni: getScore(gunScoreTables.yoni, boyData.yoni, girlData.yoni),
+    grahaMaitri: getScore(
+      gunScoreTables.grahaMaitri,
+      normalize(boyData.grahaMaitri).replace("चंद्र", "चन्द्र"),
+      normalize(girlData.grahaMaitri).replace("चंद्र", "चन्द्र")
+    ),
+    gana: getScore(
+      gunScoreTables.gana,
+      normalize(boyData.gana).replace("राक्षस", "दानव"),
+      normalize(girlData.gana).replace("राक्षस", "दानव")
+    ),
+    bhakoot: getScore(gunScoreTables.bhakoot, boyData.bhakoot, girlData.bhakoot),
+    nadi: getScore(gunScoreTables.nadi, boyData.nadi, girlData.nadi),
   };
 
-  // Helper to safely get scores from nested tables
-  const getScore = (table, boyVal, girlVal) =>
-    table?.[boyVal]?.[girlVal] ?? 0;
-
-  scores.varna = getScore(gunScoreTables.varna, boyData.varna, girlData.varna);
-  scores.vashya = getScore(gunScoreTables.vashya, boyData.vashya, girlData.vashya);
-  scores.yoni = getScore(gunScoreTables.yoni, boyData.yoni, girlData.yoni);
-  scores.grahaMaitri = getScore(gunScoreTables.grahaMaitri, boyData.grahaMaitri, girlData.grahaMaitri);
-  scores.gana = getScore(gunScoreTables.gana, boyData.gana, girlData.gana);
-  scores.bhakoot = getScore(gunScoreTables.bhakoot, boyData.bhakoot, girlData.bhakoot);
-  scores.nadi = getScore(gunScoreTables.nadi, boyData.nadi, girlData.nadi);
-
-  // Optional: total score
-  const total = Object.values(scores).reduce((sum, val) => sum + val, 0);
+  const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
 
   return {
     individualScores: scores,
-    totalScore: total
+    totalScore,
   };
 }

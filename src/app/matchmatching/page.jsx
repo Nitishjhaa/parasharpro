@@ -30,6 +30,7 @@ const page = () => {
               <img src="/images/mmn.png" alt="" className="w-20 h-20 absolute bottom-0 right-0" />
             </Link>
           </div>
+
         </div>
       </div>
     </div>

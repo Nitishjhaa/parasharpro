@@ -84,7 +84,7 @@ const MatchMakingByNamePage = () => {
         <div className="card-bg p-5 flex gap-4 items-center">
           <img src="/images/kundaliHead.png" className="w-12" />
           <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent text-2xl">
-            Match Making (By Name)
+            Match Making 
           </span>
         </div>
       </div>

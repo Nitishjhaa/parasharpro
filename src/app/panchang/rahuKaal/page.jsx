@@ -55,6 +55,10 @@ export default function RahuKaalPage() {
                         </span>
                     </div>
 
+                    <div className="text-center">
+                        <h1 className="text-2xl font-bold text-black mb-4">समय सारणी</h1>
+                    </div>
+
                     <div className="flex flex-col text-black">
                         <div className="flex">
                             <div className="w-[30%] py-3 text-center border">दिन</div>

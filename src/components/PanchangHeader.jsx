@@ -4,9 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-export default function KundaliHeader({
+export default function PanchangHeader({
   title = "कुंडली",
-  indexParam,
   isSideOpen,
   setIsSideOpen,
 }) {
@@ -92,63 +91,24 @@ export default function KundaliHeader({
           className="w-full text-white mt-5 text-lg"
           onClick={() => setIsSideOpen(false)}
         >
-          <div className="border-b-2 pb-2">
-            <Link href={`/kundaliInfo?index=${indexParam}`}>लग्न कुंडली</Link>
+
+          <div className="border-b-2 py-2">
+            <Link href={`/panchang/rahuKaal`}>राहु काल</Link>
           </div>
 
           <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/navmansha?index=${indexParam}`}>
-              नवमांश कुंडली
-            </Link>
+            <Link href={`/panchang/gaadiLena`}>गाड़ी लेने के दिन</Link>
           </div>
 
           <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/mahadasha?index=${indexParam}`}>
-              महादशा
-            </Link>
+            <Link href={`/panchang/VyahKiTaari`}>व्याह के दिन</Link>
           </div>
 
           <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/Info?index=${indexParam}`}>
-              सामान्य परिचय
-            </Link>
+            <Link href={`/panchang/panchang`}>गृह प्रवेश</Link>
           </div>
 
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/astaVargaChakra?index=${indexParam}`}>
-              अष्टकवर्ग चक्र
-            </Link>
-          </div>
 
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/sodasVargaKundali?index=${indexParam}`}>
-              षोडश वर्ग कुंडली
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/faladesh?index=${indexParam}`}>
-              फलादेश
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/dosha?index=${indexParam}`}>
-              दोष
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/ratna?index=${indexParam}`}>
-              रत्न
-            </Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/kundaliInfo/remedies?index=${indexParam}`}>
-              उपाय
-            </Link>
-          </div>
         </div>
       </motion.div>
     </>

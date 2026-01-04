@@ -137,7 +137,7 @@ export default function Page() {
 
                     {/* Left Big Box */}
                     <Link href="/kundali" className="flex-1 rounded-3xl card-bg p-5 overflow-hidden relative">
-                      <div className="text-2xl">
+                      <div className="text-lg">
                         Kundali
                       </div>
                       <img src="/images/homeKundali.png" alt="" className="w-35 h-35 absolute bottom-0 right-0" />
@@ -169,6 +169,18 @@ export default function Page() {
                   </Link>
                 </div>
 
+                <div className="flex-[0.5] rounded-3xl card-bg">
+                  <Link href="/mantras" className="rounded-3xl relative">
+                    <div className="flex justify-between items-center relative p-5">
+
+                      <div className="text-lg text-white">
+                        Mantras
+                      </div>
+                      <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-0" />
+                    </div>
+                  </Link>
+                </div>
+
                 {/* Bottom Box */}
                 <div className="flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700 card-bg p-5 overflow-y-auto">
                   <div className="mb-1 text-white">
@@ -191,21 +203,8 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="flex-[0.5] rounded-3xl card-bg">
-                  <Link href="/mantras" className="rounded-3xl relative">
-                    <div className="flex justify-between items-center relative p-5">
-
-                      <div className="text-2xl text-white">
-                        Mantras
-                      </div>
-                      <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-5" />
-                    </div>
-                  </Link>
-                </div>
-
               </div>
             </div>
-
 
           </div>
         </div>

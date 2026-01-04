@@ -19,7 +19,8 @@ import {
     getVashya,
     getYoni,
     getNaadi,
-    calculateGunMilanScore
+    calculateGunMilanScore,
+    rashiTattvas
 } from "@/app/matchmatching/MatchUtils";
 
 import KundaliStructure from "@/components/KundaliStructure";
@@ -66,19 +67,19 @@ const MatchInfoPage = () => {
     const boy = matchData.male;
     const girl = matchData.female;
 
-    const taraPoints = calculateTaraPoints(matchData.male.raw?.planets?.Moon?.nakshatra, matchData.female.raw?.planets?.Moon?.nakshatra);
+    const taraPoints = calculateTaraPoints(boy.raw?.planets?.Moon?.nakshatra, girl.raw?.planets?.Moon?.nakshatra);
 
-    const boyVarna = getVarna(matchData.male.raw?.planets?.Moon?.rashiIndex);
-    const girlVarna = getVarna(matchData.female.raw?.planets?.Moon?.rashiIndex);
+    const boyVarna = getVarna(boy.raw?.planets?.Moon?.rashiIndex);
+    const girlVarna = getVarna(girl.raw?.planets?.Moon?.rashiIndex);
 
-    const boyVashya = getVashya(matchData.male.raw?.planets?.Moon?.rashiIndex);
-    const girlVashya = getVashya(matchData.female.raw?.planets?.Moon?.rashiIndex);
+    const boyVashya = getVashya(boy.raw?.planets?.Moon?.rashiIndex);
+    const girlVashya = getVashya(girl.raw?.planets?.Moon?.rashiIndex);
 
-    const boyYoni = getYoni(matchData.male.raw?.planets?.Moon?.nakshatraIndex);
-    const girlYoni = getYoni(matchData.female.raw?.planets?.Moon?.nakshatraIndex);
+    const boyYoni = getYoni(boy.raw?.planets?.Moon?.nakshatraIndex);
+    const girlYoni = getYoni(girl.raw?.planets?.Moon?.nakshatraIndex);
 
-    const boyNaadi = getNaadi(matchData.male.raw?.planets?.Moon?.nakshatraIndex);
-    const girlNaadi = getNaadi(matchData.female.raw?.planets?.Moon?.nakshatraIndex);
+    const boyNaadi = getNaadi(boy.raw?.planets?.Moon?.nakshatraIndex);
+    const girlNaadi = getNaadi(girl.raw?.planets?.Moon?.nakshatraIndex);
 
     const info = [
         {
@@ -101,7 +102,6 @@ const MatchInfoPage = () => {
             male: boy.meta.city,
             female: girl.meta.city,
         },
-
         {
             label: "लग्न",
             male: rashi(boy.raw?.ascendant?.rashiIndex),
@@ -176,7 +176,7 @@ const MatchInfoPage = () => {
 
     const boyData = {
         varna: boyVarna,
-        vashya: getVashya(matchData.male.raw?.planets?.Moon?.rashiIndex),
+        vashya: getVashya(boy.raw?.planets?.Moon?.rashiIndex),
         yoni: boyYoni,
         grahaMaitri: getLords("rashi", boy.raw?.planets?.Moon.rashi),
         gana: getNakshatraGana(boy.raw?.planets?.Moon.nakshatraIndex + 1),
@@ -186,7 +186,7 @@ const MatchInfoPage = () => {
 
     const girlData = {
         varna: girlVarna,
-        vashya: getVashya(matchData.female.raw?.planets?.Moon?.rashiIndex),
+        vashya: getVashya(girl.raw?.planets?.Moon?.rashiIndex),
         yoni: girlYoni,
         grahaMaitri: getLords("rashi", girl.raw?.planets?.Moon.rashi),
         gana: getNakshatraGana(girl.raw?.planets?.Moon.nakshatraIndex + 1),
@@ -198,19 +198,19 @@ const MatchInfoPage = () => {
 
     const totalMilanScore = taraPoints.points + totalMilan.totalScore;
 
-    const noncompboy = getNonCompatibleNakshatrasInHindi(matchData.male.raw?.planets?.Moon.nakshatra)
-    const noncompgirl = getNonCompatibleNakshatrasInHindi(matchData.female.raw?.planets?.Moon.nakshatra);
+    const noncompboy = getNonCompatibleNakshatrasInHindi(boy.raw?.planets?.Moon.nakshatra)
+    const noncompgirl = getNonCompatibleNakshatrasInHindi(girl.raw?.planets?.Moon.nakshatra);
 
-    const nakshataraBoy = nakshatra(matchData.male.raw?.planets?.Moon.nakshatraIndex);
-    const nakshataraGirl = nakshatra(matchData.female.raw?.planets?.Moon.nakshatraIndex);
+    const nakshataraBoy = nakshatra(boy.raw?.planets?.Moon.nakshatraIndex);
+    const nakshataraGirl = nakshatra(girl.raw?.planets?.Moon.nakshatraIndex);
 
     const Compatibility = (nakshataraBoy, nakshataraGirl) => {
 
         if (noncompboy.find((item) => item === nakshataraGirl)) {
-            return "यह मेल मिलाप मेल नहीं हो रहा  है क्योंकि लड़की लड़के में गैर-संगत नक्षत्र है"
+            return "यह मेल मिलाप मेल नहीं हो रहा है क्योंकि लड़की लड़के में गैर-संगत नक्षत्र है"
         }
         else if (noncompgirl.find((item) => item === nakshataraBoy)) {
-            return "यह मेल मिलाप मेल नहीं हो रहा  है क्योंकि लड़के लड़की में गैर-संगत नक्षत्र है"
+            return "यह मेल मिलाप मेल नहीं हो रहा है क्योंकि लड़के लड़की में गैर-संगत नक्षत्र है"
         }
         else {
 
@@ -218,20 +218,22 @@ const MatchInfoPage = () => {
         }
     };
 
-    const boyRahuHouseNumber = matchData.male.raw?.planets?.Rahu?.house;
-    const girlRahuHouseNumber = matchData.female.raw?.planets?.Rahu?.house;
+    console.log(matchData)
 
-    const boyMarsHouseNumber = matchData.male.raw?.planets?.Mars?.house;
-    const girlMarsHouseNumber = matchData.female.raw?.planets?.Mars?.house;
+    const boyRahuHouseNumber = boy.raw?.planets?.Rahu?.house;
+    const girlRahuHouseNumber = girl.raw?.planets?.Rahu?.house;
 
-    const boySaturnHouseNumber = matchData.male.raw?.planets?.Saturn?.house;
-    const girlSaturnHouseNumber = matchData.female.raw?.planets?.Saturn?.house;
+    const boyMarsHouseNumber = boy.raw?.planets?.Mars?.house;
+    const girlMarsHouseNumber = girl.raw?.planets?.Mars?.house;
 
-    const boySunHouseNumber = matchData.male.raw?.planets?.Sun?.house;
-    const girlSunHouseNumber = matchData.female.raw?.planets?.Sun?.house;
+    const boySaturnHouseNumber = boy.raw?.planets?.Saturn?.house;
+    const girlSaturnHouseNumber = girl.raw?.planets?.Saturn?.house;
 
-    const sunSaturnRahuDoshaForBoy = hasSunSaturnRahuDosha(boySunHouseNumber, boySaturnHouseNumber, boyRahuHouseNumber);
-    const sunSaturnRahuDoshaForGirl = hasSunSaturnRahuDosha(girlSunHouseNumber, girlSaturnHouseNumber, girlRahuHouseNumber);
+    const boySunHouseNumber = boy.raw?.planets?.Sun?.house;
+    const girlSunHouseNumber = girl.raw?.planets?.Sun?.house;
+
+    const hasSunSaturnRahuDoshaForBoy = hasSunSaturnRahuDosha(boySunHouseNumber, boySaturnHouseNumber, boyRahuHouseNumber);
+    const hasSunSaturnRahuDoshaForGirl = hasSunSaturnRahuDosha(girlSunHouseNumber, girlSaturnHouseNumber, girlRahuHouseNumber);
 
     const isBoyManglik = checkManglik(boyMarsHouseNumber);
     const isGirlManglik = checkManglik(girlMarsHouseNumber);
@@ -291,15 +293,45 @@ const MatchInfoPage = () => {
         },
     ];
 
-    const manglikStatus = (isBoyManglik, isGirlManglik) => {
-        if (isBoyManglik.type === "मंगलीक" && isGirlManglik.type === "मंगलीक") {
-            return "लड़के और लड़की दोनों की कुंडली में मांगलिक दोष है इसली मांगलिक द्रष्टिकोण से विवाह को अनुमती दी जा सकती है"
+    const boyRashiTatvas = rashiTattvas({
+        asc: boy.raw?.ascendant?.rashiIndex + 1,
+        moon: boy.raw?.planets?.Moon.rashiIndex + 1,
+        venus: boy.raw?.planets?.Venus.rashiIndex + 1
+    })
+
+    const girlRashiTatvas = rashiTattvas({
+        asc: girl.raw?.ascendant?.rashiIndex + 1,
+        moon: girl.raw?.planets?.Moon.rashiIndex + 1,
+        venus: girl.raw?.planets?.Venus.rashiIndex + 1
+    })
+
+    const tatvaInfo = [
+        {
+            label: "लग्न",
+            total: boyRashiTatvas.ascTatva,
+            female: girlRashiTatvas.ascTatva,
+        },
+        {
+            label: "चंद्र",
+            total: boyRashiTatvas.moonTatva,
+            female: girlRashiTatvas.moonTatva,
+        },
+        {
+            label: "शुक्र",
+            total: boyRashiTatvas.venusTatva,
+            female: girlRashiTatvas.venusTatva,
+        },
+    ];
+
+    const saturnRahuDoshaWithManglikDosha = () => {
+        if ((isBoyManglik.type === "मंगलीक" && hasSunSaturnRahuDoshaForBoy) && isGirlManglik.type !== "मंगलीक") {
+            return `लड़के की कुंडली में मांगलिक दोष है और लड़की की कुंडली में मांगलिक दोष नहीं है लेकिन मांगलिक भाव में ${hasSunSaturnRahuDoshaForBoy.affectedPlanets} है जो मांगलिक दोष को कम या ख़त्म करता है`
         }
-        else if (isBoyManglik.type === "मंगलीक" && isGirlManglik.type !== "मंगलीक") {
-            return "लड़के की कुंडली में मांगलिक दोष है और लड़की की कुंडली में मांगलिक दोष नहीं है इसली मांगलिक द्रष्टिकोण से विवाह को अनुमती नहीं दी जा सकती है"
+        else if ((isGirlManglik.type === "मंगलीक" && hasSunSaturnRahuDoshaForGirl) && isBoyManglik.type !== "मंगलीक") {
+            return `लड़की की कुंडली में मांगलिक दोष है और लड़के की कुंडली में मांगलिक दोष नहीं है लेकिन मांगलिक भाव में ${hasSunSaturnRahuDoshaForGirl.affectedPlanets} है जो मांगलिक दोष को कम या ख़त्म करता है`
         }
-        else if (isBoyManglik.type !== "मंगलीक" && isGirlManglik.type === "मंगलीक") {
-            return "लड़की की कुंडली में मांगलिक दोष है और लड़के की कुंडली में मांगलिक दोष नहीं है इसली मांगलिक द्रष्टिकोण से विवाह को अनुमती नहीं दी जा सकती है"
+        else if ((isBoyManglik.type === "मंगलीक") && (isGirlManglik.type === "मंगलीक")) {
+            return `लड़के की कुंडली में मांगलिक दोष है और लड़की की कुंडली में मांगलिक दोष है इसलिये मांगलिक द्रष्टिकोण से विवाह को अनुमती दी जा सकती है`
         }
         else {
             return "लड़के और लड़की दोनों की कुंडली में मांगलिक दोष नहीं है इसली मांगलिक द्रष्टिकोण से विवाह को अनुमती दी जा सकती है"
@@ -360,48 +392,6 @@ const MatchInfoPage = () => {
                             </tbody>
                         </table>
 
-                        <table className="w-full rounded-2xl border border-black/30 mt-10">
-                            <thead className="bg-black/10">
-                                <tr>
-                                    <th className="text-left px-5 py-2 text-gray-900 border-r border-black/30">
-                                        विवरण
-                                    </th>
-
-                                    <th className="text-center px-6 py-2 border-r border-black/30">
-                                        <span className="text-black text-lg ">
-                                            प्राप्तांक
-                                        </span>
-                                    </th>
-
-                                    <th className="text-center px-6 py-2">
-                                        <span className="text-black text-lg ">
-                                            पूर्णांक
-                                        </span>
-                                    </th>
-                                </tr>
-                            </thead>
-
-                            <tbody className="text-black text-sm">
-                                {info1.map((item, index) => (
-                                    <tr
-                                        key={index}
-                                        className="border-t border-black/20"
-                                    >
-                                        <td className="px-4 py-3 font-medium text-gray-900 border-r border-black/30">
-                                            {item.label}
-                                        </td>
-
-                                        <td className="px-4 py-3 text-center border-r border-black/20">
-                                            {item.female || "-"}
-                                        </td>
-
-                                        <td className="px-4 py-3 text-center">
-                                            {item.total || "-"}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
 
                         <div className="text-black w-full flex flex-col lg:flex-row" >
                             <div className="w-[92%] ">
@@ -411,6 +401,97 @@ const MatchInfoPage = () => {
                             <div className="w-[92%] ">
                                 <KundaliStructure kundali={matchData.female} title="लड़की की कुंडली" />
                             </div>
+                        </div>
+
+                        <div>
+                            <table className="w-full rounded-2xl border border-black/30 mt-10">
+                                <thead className="bg-black/10">
+                                    <tr>
+                                        <th className="text-left px-5 py-2 text-gray-900 border-r border-black/30">
+                                            अष्टकूट
+                                        </th>
+
+                                        <th className="text-center px-6 py-2 border-r border-black/30">
+                                            <span className="text-black text-lg ">
+                                                प्राप्तांक
+                                            </span>
+                                        </th>
+
+                                        <th className="text-center px-6 py-2">
+                                            <span className="text-black text-lg ">
+                                                पूर्णांक
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody className="text-black text-sm">
+                                    {info1.map((item, index) => (
+                                        <tr
+                                            key={index}
+                                            className="border-t border-black/20"
+                                        >
+                                            <td className="px-4 py-3 font-medium text-gray-900 border-r border-black/30">
+                                                {item.label}
+                                            </td>
+
+                                            <td className="px-4 py-3 text-center border-r border-black/20">
+                                                {item.female || "-"}
+                                            </td>
+
+                                            <td className="px-4 py-3 text-center">
+                                                {item.total || "-"}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className="mt-5">
+                            <h2 className="text-xl font-bold text-center text-black mt-5">तत्व विश्लेषण</h2>
+                            <table className="w-full rounded-2xl border border-black/30 mt-5">
+                                <thead className="bg-black/10">
+                                    <tr>
+                                        <th className="text-left px-5 py-2 text-gray-900 border-r border-black/30">
+                                            ग्रह
+                                        </th>
+
+                                        <th className="text-center px-6 py-2 border-r border-black/30">
+                                            <span className="text-black text-lg ">
+                                                लड़का
+                                            </span>
+                                        </th>
+
+                                        <th className="text-center px-6 py-2">
+                                            <span className="text-black text-lg ">
+                                                लड़की
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody className="text-black text-sm">
+                                    {tatvaInfo.map((item, index) => (
+                                        <tr
+                                            key={index}
+                                            className="border-t border-black/20"
+                                        >
+                                            <td className="px-4 py-3 font-medium text-gray-900 border-r border-black/30">
+                                                {item.label}
+                                            </td>
+
+                                            <td className="px-4 py-3 text-center border-r border-black/20">
+                                                {item.female || "-"}
+                                            </td>
+
+                                            <td className="px-4 py-3 text-center">
+                                                {item.total || "-"}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
 
                         <div className="mt-6 text-black p-2">
@@ -423,7 +504,7 @@ const MatchInfoPage = () => {
                                 <h2 className="text-base font-semibold underline underline-offset-4 mt-2">मांगलिक दोष विचार :-</h2>
                                 <p className="mt-3 text-red-600">- लड़के की {isBoyManglik.status}</p>
                                 <p className="mt-3 text-red-600">- लड़की की {isGirlManglik.status}</p>
-                                <p className="mt-2">{manglikStatus(isBoyManglik, isGirlManglik)}</p>
+                                <p className="mt-2">{saturnRahuDoshaWithManglikDosha()}</p>
                             </div>
 
                         </div>

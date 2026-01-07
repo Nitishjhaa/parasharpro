@@ -138,7 +138,7 @@ export default function Page() {
                     {/* Left Big Box */}
                     <Link href="/kundali" className="flex-1 rounded-3xl card-bg p-5 overflow-hidden relative">
                       <div className="text-lg">
-                         कुंडली
+                        Kundali
                       </div>
                       <img src="/images/homeKundali.png" alt="" className="w-35 h-35 absolute bottom-0 right-0" />
                     </Link>
@@ -147,13 +147,13 @@ export default function Page() {
                     <div className="flex-1 flex flex-col gap-3 ">
                       <Link href="/panchang" className="flex-1 rounded-3xl card-bg p-5 relative">
                         <div className="text-lg text-white">
-                          पंचांग
+                          Panchang
                         </div>
                         <img src="/images/homeChild.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                       </Link>
                       <Link href="/child" className="flex-1 rounded-3xl card-bg p-5 relative">
                         <div className="text-lg text-white">
-                          बच्चे का
+                          Child
                         </div>
                         <img src="/images/matchKundali.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                       </Link>
@@ -163,7 +163,7 @@ export default function Page() {
                   {/* Middle Full Box */}
                   <Link href="/matchmatching" className="flex-1 rounded-3xl card-bg p-5 relative">
                     <div className="text-lg text-white">
-                      कुंडली मिलान
+                      Match Matching
                     </div>
                     <img src="/images/homePanchange.png" alt="" className="w-15 h-15 absolute bottom-0 right-0" />
                   </Link>
@@ -174,7 +174,7 @@ export default function Page() {
                     <div className="flex justify-between items-center relative p-5">
 
                       <div className="text-lg text-white">
-                        मंत्र
+                        Mantras
                       </div>
                       <img src="/images/hawan.png" alt="" className="w-20 h-20 absolute -bottom-1 right-0" />
                     </div>
@@ -184,7 +184,7 @@ export default function Page() {
                 {/* Bottom Box */}
                 <div className="flex-1 rounded-3xl border border-neutral-300 dark:border-neutral-700 card-bg p-5 overflow-y-auto">
                   <div className="mb-1 text-white">
-                    पिछली कुंडली
+                    Recent Kundali
                   </div>
                   <div className="mt-3 space-y-2 p-2 rounded overflow-y-auto">
                     {recent.length === 0 && (

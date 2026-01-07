@@ -5,7 +5,6 @@ import Link from "next/link";
 
 
 export default function PanchangPage() {
-  const [isSideOpen, setIsSideOpen] = useState(null);
 
   return (
     <div className="w-[98%] mx-auto p-2">
@@ -26,12 +25,12 @@ export default function PanchangPage() {
               <div className="flex flex-col gap-3">
                 <div className="card-bg w-full h-16 rounded-2xl p-4">
                   <Link href="/panchang/rahuKaal">
-                    <h1 className="text-lg ">गृह प्रवेश</h1>
+                    <h1 className="text-lg ">Grih Pravesha</h1>
                   </Link>
                 </div>
                 <div className="card-bg w-full h-16 rounded-2xl p-4">
                   <Link href="/panchang/rahuKaal">
-                    <h1 className="text-lg ">राहु काल</h1>
+                    <h1 className="text-lg ">Rahu Kaal</h1>
                   </Link>
                 </div>
               </div>
@@ -40,17 +39,17 @@ export default function PanchangPage() {
           <div className="flex flex-col gap-3 p-2">
             <div className="card-bg rounded-2xl h-16 p-4">
               <Link href="/panchang/rahuKaal">
-                <h1 className="text-lg">गाड़ी लेने के दिन</h1>
+                <h1 className="text-lg">Gaadi Lena</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">
               <Link href="/panchang/rahuKaal">
-                <h1 className="text-lg">व्याह के दिन</h1>
+                <h1 className="text-lg">Vyah</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">
               <Link href="/panchang/rahuKaal">
-                <h1 className="text-lg">कुआं पूजन</h1>
+                <h1 className="text-lg">Kuan Pujan</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">

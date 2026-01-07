@@ -337,7 +337,6 @@ export default function KundaliInfoInner() {
 
   const sixthDayInfo = getSixthDayLater(datetimeUTC);
 
-  console.log("sixthDayInfo", sixthDayInfo)
   // sixth day info end
 
   const data = [
@@ -364,8 +363,6 @@ export default function KundaliInfoInner() {
       "ऋतु": panchang.ritu,
     }
   ];
-
-  console.log(kundali)
 
   return (
     <div className="p-2 overflow-hidden text-black" >

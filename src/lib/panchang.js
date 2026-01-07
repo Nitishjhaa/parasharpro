@@ -93,13 +93,13 @@ export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
     const tithiIndex = tithiList.indexOf(tithiName);
 
     // Convert Amanta month to Purnimanta month
-    const convertToPurnimanta = (amantaMonth, tithiIndex) => {
+    const convertToPurnimanta = (amantaMonth, paksha) => {
         let monthIndex = months.indexOf(amantaMonth);
         if (monthIndex === -1) return "Unknown";
 
-        // If Tithi is Purnima (Index 14) or Krishna Paksha (Index 15-29), shift back one month
-        if (tithiIndex >= 14) {
-            monthIndex = (monthIndex - 1 + 12) % 12;
+        // In Purnimanta system, Krishna Paksha belongs to the next month
+        if (paksha === 'Krishna') {
+            monthIndex = (monthIndex + 1) % 12;
         }
 
         return months[monthIndex];
@@ -169,7 +169,7 @@ export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
     }
 
     // Get the converted month
-    const purnimantaMonth = tithiIndex !== -1 ? convertToPurnimanta(amantaMonth, tithiIndex) : "Unknown"
+    const purnimantaMonth = convertToPurnimanta(amantaMonth, paksha);
 
     return {
         ritu: rituNameInHindi(ritu),

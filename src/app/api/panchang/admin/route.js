@@ -1,75 +1,81 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-// Absolute path to your public JSON file
-const filePath = path.join(process.cwd(), "public", "data", "panchang.json");
-
-// Ensure the JSON file exists
-function ensureFile() {
-  if (!fs.existsSync(filePath)) {
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    fs.writeFileSync(filePath, "{}");
-  }
-}
-
-// Safe JSON reader
-function readJSON() {
-  ensureFile();
-  try {
-    const content = fs.readFileSync(filePath, "utf8") || "{}";
-    return JSON.parse(content);
-  } catch {
-    // In case of corrupted JSON, reset file
-    fs.writeFileSync(filePath, "{}");
-    return {};
-  }
-}
-
-// Safe JSON writer
-function writeJSON(data) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
-}
+import Panchangam from "@/models/Panchangam";
+import dbConnect from "@/lib/mongoose";
 
 export async function GET() {
   try {
-    const data = readJSON();
-    return NextResponse.json({ success: true, data });
-  } catch (err) {
-    return NextResponse.json({ success: false, error: err.message });
+    await dbConnect();
+    const panchangams = await Panchangam.find().sort({ createdAt: -1 });
+    return NextResponse.json({ success: true, data: panchangams });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
   }
 }
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const body = await req.json();
-    const { year, month, data } = body;
+    const { nameOfWork, date, month, year, time, paksha, tithi, description } = body;
+    console.log(body);
 
-    if (!year || !month) {
-      return NextResponse.json({
-        success: false,
-        error: "Year and month are required.",
-      });
+    if (!nameOfWork || !date || !month || !year) {
+      return NextResponse.json({ success: false, error: "Required fields missing" });
     }
 
-    const file = readJSON();
-
-    if (!file[year]) file[year] = {};
-    if (!file[year][month]) file[year][month] = {};
-
-    file[year][month] = {
-      ...file[year][month],
-      ...data,
-    };
-
-    writeJSON(file);
-
-    return NextResponse.json({
-      success: true,
-      message: "Panchang updated successfully",
-      data: file[year][month],
+    const panchangam = await Panchangam.create({
+      nameOfWork,
+      date,
+      month,
+      year,
+      time,
+      paksha,
+      tithi,
+      description,
     });
-  } catch (err) {
-    return NextResponse.json({ success: false, error: err.message });
+
+    return NextResponse.json({ success: true, data: panchangam });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
+}
+
+export async function PUT(req) {
+  try {
+    await dbConnect();
+    const body = await req.json();
+    const { _id, nameOfWork, date, month, year, time, paksha, tithi, description } = body;
+
+    if (!_id) {
+      return NextResponse.json({ success: false, error: "ID is required for update" });
+    }
+
+    const updatedPanchangam = await Panchangam.findByIdAndUpdate(
+      _id,
+      { nameOfWork, date, month, year, time, paksha, tithi, description, updatedAt: Date.now() },
+      { new: true }
+    );
+
+    return NextResponse.json({ success: true, data: updatedPanchangam });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    await dbConnect();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: "ID is required for deletion" });
+    }
+
+    await Panchangam.findByIdAndDelete(id);
+
+    return NextResponse.json({ success: true, message: "Deleted successfully" });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: error.message });
   }
 }

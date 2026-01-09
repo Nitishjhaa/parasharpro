@@ -24,7 +24,7 @@ export default function PanchangPage() {
             <div className=" w-[50%] rounded-2xl">
               <div className="flex flex-col gap-3">
                 <div className="card-bg w-full h-16 rounded-2xl p-4">
-                  <Link href="/panchang/rahuKaal">
+                  <Link href="/panchang/grihPravesha">
                     <h1 className="text-lg ">Grih Pravesha</h1>
                   </Link>
                 </div>
@@ -38,18 +38,23 @@ export default function PanchangPage() {
           </div>
           <div className="flex flex-col gap-3 p-2">
             <div className="card-bg rounded-2xl h-16 p-4">
-              <Link href="/panchang/rahuKaal">
+              <Link href="/panchang/gaadiLena">
                 <h1 className="text-lg">Gaadi Lena</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">
-              <Link href="/panchang/rahuKaal">
+              <Link href="/panchang/vyah">
                 <h1 className="text-lg">Vyah</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">
-              <Link href="/panchang/rahuKaal">
+              <Link href="/panchang/kuanPujan">
                 <h1 className="text-lg">Kuan Pujan</h1>
+              </Link>
+            </div>
+            <div className="card-bg rounded-2xl h-16 p-4">
+              <Link href="/panchang/lagan">
+                <h1 className="text-lg">Lagan</h1>
               </Link>
             </div>
             <div className="card-bg rounded-2xl h-16 p-4">

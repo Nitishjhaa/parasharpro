@@ -142,9 +142,10 @@ export default function PanchangAdmin() {
               <option value="lagan">Lagan</option>
               <option value="grih-parvesh">Grih Parvesh</option>
               <option value="mundan">Mundan</option>
-              <option value="namkaran">Namkaran</option>
+              <option value="namkaran">Namkaran (Kuan Pujan)</option>
               <option value="vivah">Vivah</option>
-              <option value="other">Other</option>
+              <option value="neew">Neew Lena</option>
+              
             </select>
           </div>
 

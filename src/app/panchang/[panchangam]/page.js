@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Panchangam() {
     const params = useParams();
@@ -34,57 +35,63 @@ export default function Panchangam() {
     };
 
     if (loading) {
-        return <div className="min-h-screen flex justify-center items-center">
-            <div className="text-xl font-semibold text-purple-600">Loading...</div>
+        return <div className="min-h-screen bg-[#222] flex justify-center items-center">
+            <div className="text-xl font-semibold text-white">Loading...</div>
         </div>;
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-10 border-b-2 border-purple-200 pb-4">
-                    {formatTitle(panchangamType)} Muhurat
-                </h1>
-
-                {events.length > 0 ? (
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-                        {events.map((item) => (
-                            <div key={item._id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
-                                <div className="p-6">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <h2 className="text-xl font-bold text-purple-700">{item.nameOfWork}</h2>
-                                        <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                                            {item.date}
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-2 text-sm text-gray-600 mb-4">
-                                        <div className="flex items-center">
-                                            <span className="font-semibold w-20">Time:</span>
-                                            <span>{item.time || 'N/A'}</span>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <span className="font-semibold w-20">Paksha:</span>
-                                            <span>{item.paksha || 'N/A'}</span>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <span className="font-semibold w-20">Tithi:</span>
-                                            <span>{item.tithi || 'N/A'}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="pt-4 border-t border-gray-100">
-                                        <p className="text-gray-700 italic">"{item.description}"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+        <div className="w-[98%] mx-auto p-2">
+            <div>
+                <div className="rounded-3xl overflow-hidden mb-4">
+                    <div className="card-bg p-5 flex gap-4 items-center">
+                        <Link href="/panchang">
+                            <img src="/images/kundaliHead.png" className="w-12 brightness-0 invert-100" />
+                        </Link>
+                        <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent text-2xl">
+                            {formatTitle(panchangamType)} Muhurat
+                        </span>
                     </div>
-                ) : (
-                    <div className="text-center py-12 bg-white rounded-xl shadow-sm">
-                        <p className="text-xl text-gray-500">No events found for {formatTitle(panchangamType)}.</p>
-                    </div>
-                )}
+                </div>
+
+                <div className="mt-2 bg-linear-to-r from-[#FFE984] to-[#FFB111] min-h-screen rounded-3xl p-4">
+                    {events.length > 0 ? (
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="border-b border-white/10 text-black text-sm">
+                                        <th className="p-4 font-semibold">Date</th>
+                                        <th className="p-4 font-semibold">Time</th>
+                                        <th className="p-4 font-semibold">Paksha</th>
+                                        <th className="p-4 font-semibold">Tithi</th>
+                                        <th className="p-4 font-semibold">Event</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="text-black text-sm">
+                                    {events.map((item) => (
+                                        <tr key={item._id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                            <td className="p-4 whitespace-nowrap">
+                                                <span className="font-medium text-black">
+                                                    {item.date || 'N/A'} / {item.month || 'N/A'} / {item.year || 'N/A'}
+                                                </span>
+                                            </td>
+                                            <td className="p-4 whitespace-nowrap">{item.time || 'N/A'}</td>
+                                            <td className="p-4 whitespace-nowrap">{item.paksha || 'N/A'}</td>
+                                            <td className="p-4 whitespace-nowrap">{item.tithi || 'N/A'}</td>
+                                            <td className="p-4 min-w-[200px]">
+                                                <div className="text-black mb-1">({item.description || 'N/A'}) </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+                            <div className="text-xl">No events found for {formatTitle(panchangamType)}.</div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

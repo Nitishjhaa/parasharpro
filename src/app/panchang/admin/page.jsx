@@ -157,7 +157,7 @@ export default function PanchangAdmin() {
               value={formData.date}
               onChange={handleChange}
               required
-              placeholder="e.g. 15-08-2024"
+              placeholder="e.g. 01, 02, 03"
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500"
             />
           </div>

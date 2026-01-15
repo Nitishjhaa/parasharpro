@@ -519,6 +519,7 @@ export default function PanchangAdmin() {
                           <option value="namkaran">Namkaran (Kuan Pujan)</option>
                           <option value="vivah">Vivah</option>
                           <option value="neew">Neew Lena</option>
+                          <option value="moolShanti">Mool Shanti</option>
                         </select>
                       </div>
 

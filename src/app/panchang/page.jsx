@@ -62,6 +62,11 @@ export default function PanchangPage() {
                 <h1 className="text-lg">Neew Lena</h1>
               </Link>
             </div>
+            <div className="card-bg rounded-2xl h-16 p-4">
+              <Link href="/panchang/moolShanti">
+                <h1 className="text-lg">Mool Shanti</h1>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

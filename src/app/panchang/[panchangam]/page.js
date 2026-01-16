@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { MdArrowBackIos } from "react-icons/md";
 import PanchangHeader from "@/components/PanchangHeader";
 
@@ -13,6 +13,8 @@ export default function Panchangam() {
     const [loading, setLoading] = useState(true);
     const [isSideOpen, setIsSideOpen] = useState(false);
     const [months, setMonths] = useState();
+
+    const router = useRouter();
 
     useEffect(() => {
         if (panchangamType) {

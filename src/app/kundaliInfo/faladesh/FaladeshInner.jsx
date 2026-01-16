@@ -81,6 +81,7 @@ export default function KundaliInfoInner() {
 
     const sunMeaning = getPlanetNakshatraMeaning("Sun");
     const moonMeaning = getPlanetNakshatraMeaning("Moon");
+    const marsMeaning = getPlanetNakshatraMeaning("Mars");
     const mercuryMeaning = getPlanetNakshatraMeaning("Mercury");
     const venusMeaning = getPlanetNakshatraMeaning("Venus");
     const jupiterMeaning = getPlanetNakshatraMeaning("Jupiter");
@@ -169,7 +170,7 @@ export default function KundaliInfoInner() {
                     <hr />
                     <p className="text-black px-6 py-3">
                         <span className="font-bold">मंगल: {nakAndPaad("Mars")} :</span><br />
-                        {sunMeaning}
+                        {marsMeaning}
                     </p>
                     <hr />
                     <p className="text-black px-6 py-3">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { pName } from "@/app/panchang/nameAndHref";
 
 export default function PanchangHeader({
   title = "कुंडली",
@@ -92,23 +93,11 @@ export default function PanchangHeader({
           onClick={() => setIsSideOpen(false)}
         >
 
-          <div className="border-b-2 py-2">
-            <Link href={`/panchang/rahuKaal`}>राहु काल</Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/panchang/gaadiLena`}>गाड़ी लेने के दिन</Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/panchang/VyahKiTaari`}>व्याह के दिन</Link>
-          </div>
-
-          <div className="border-b-2 py-2">
-            <Link href={`/panchang/panchang`}>गृह प्रवेश</Link>
-          </div>
-
-
+          {pName.map((p, index) => (
+            <div key={index} className="border-b-2 py-2">
+              <Link href={`/panchang/${p.href}`}>{p.name}</Link>
+            </div>
+          ))}
         </div>
       </motion.div>
     </>

@@ -43,15 +43,15 @@ export default function RahuKaalPage() {
     ]
 
     return (
-        <div className="md:hidden p-2 text-white">
+        <div className=" p-2 text-white">
             <div className="w-[98%] mx-auto">
                 <PanchangHeader title="राहु काल" isSideOpen={isSideOpen} setIsSideOpen={setIsSideOpen} />
 
                 <div className="flex flex-col bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10 p-3 mt-3">
 
                     <div className="my-5 text-black font-bold flex gap-2">
-                        <span onClick={() => router.back()} className="px-2 py-2 border bg-black text-white rounded-full">
-                            <MdArrowBackIos />
+                        <span onClick={() => router.back()} className="px-2 py-2 border bg-black text-white rounded-full flex gap-2 justify-center items-center">
+                            <MdArrowBackIos size={12} /> Back
                         </span>
                     </div>
 
@@ -59,8 +59,8 @@ export default function RahuKaalPage() {
                         <h1 className="text-2xl font-bold text-black mb-4">समय सारणी</h1>
                     </div>
 
-                    <div className="flex flex-col text-black">
-                        <div className="flex">
+                    <div className="flex flex-col text-black ">
+                        <div className="flex bg-white">
                             <div className="w-[30%] py-3 text-center border">दिन</div>
                             <div className="w-[70%] py-3 text-center border">समय</div>
                         </div>

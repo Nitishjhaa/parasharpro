@@ -513,12 +513,6 @@ export default function PanchangAdmin() {
                           className="w-full px-3 py-2 border border-gray-300 text-black rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-shadow bg-white"
                         >
                           <option value="">Select Event Type</option>
-                          <option value="lagan">Lagan</option>
-                          <option value="grih-parvesh">Grih Parvesh</option>
-                          <option value="mundan">Mundan</option>
-                          <option value="namkaran">Namkaran (Kuan Pujan)</option>
-                          <option value="vivah">Vivah</option>
-                          <option value="neew">Neew Lena</option>
                           <option value="moolShanti">Mool Shanti</option>
                         </select>
                       </div>

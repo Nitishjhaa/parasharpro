@@ -389,13 +389,13 @@ export default function KundaliPage() {
                   <label className="text-[#d5d5d5] font-semibold">Gender:</label>
                   <div className="flex items-center gap-4 mt-1">
                     <label className="flex items-center gap-2">
-                      <input type="radio" name="gender" value="Male"
+                      <input className="active:scale-80 transition-all duration-100" type="radio" name="gender" value="Male"
                         checked={form.gender === "Male"} onChange={handleChange} />
                       Male
                     </label>
 
                     <label className="flex items-center gap-2">
-                      <input type="radio" name="gender" value="Female"
+                      <input className="active:scale-80 transition-all duration-100" type="radio" name="gender" value="Female"
                         checked={form.gender === "Female"} onChange={handleChange} />
                       Female
                     </label>

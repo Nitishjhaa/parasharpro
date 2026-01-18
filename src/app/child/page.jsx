@@ -281,6 +281,9 @@ export default function KundaliPage() {
     if (mm?.length === 2 && prev.current.mm.length !== 2) {
       yyyyRef.current?.focus();
     }
+    if (yyyy?.length === 4 && prev.current.yyyy.length !== 4) {
+      hhRef.current?.focus();
+    }
 
     // TIME -----------------------------------------------------
     if (hh?.length === 2 && prev.current.hh.length !== 2) {
@@ -364,6 +367,7 @@ export default function KundaliPage() {
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={2}
                       placeholder="DD"
+                      type="number"
                       ref={ddRef}
                       value={form.birthDate.split("-")[0] || ""}
                       onChange={(e) => {
@@ -377,6 +381,7 @@ export default function KundaliPage() {
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={2}
                       placeholder="MM"
+                      type="number"
                       ref={mmRef}
                       value={form.birthDate.split("-")[1] || ""}
                       onChange={(e) => {

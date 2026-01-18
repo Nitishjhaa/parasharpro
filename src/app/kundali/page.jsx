@@ -341,6 +341,10 @@ export default function KundaliPage() {
       yyyyRef.current?.focus();
     }
 
+    if (yyyy?.length === 4 && prev.current.yyyy.length !== 4) {
+      hhRef.current?.focus();
+    }
+
     // TIME -----------------------------------------------------
     if (hh?.length === 2 && prev.current.hh.length !== 2) {
       minRef.current?.focus();
@@ -496,7 +500,7 @@ export default function KundaliPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
-                      // type="number"
+                      type="number"
                       placeholder="YYYY"
                       ref={yyyyRef}
                       value={form.birthDate.split("-")[2] || ""}

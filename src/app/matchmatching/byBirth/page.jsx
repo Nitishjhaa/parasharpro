@@ -347,6 +347,11 @@ export default function MatchMakingPage() {
     if (mm?.length === 2 && malePrev.current.mm.length !== 2) {
       maleYyyyRef.current?.focus();
     }
+
+    if (yyyy?.length === 4 && malePrev.current.yyyy.length !== 4) {
+      maleHhRef.current?.focus();
+    }
+
     if (hh?.length === 2 && malePrev.current.hh.length !== 2) {
       maleMinRef.current?.focus();
     }
@@ -368,6 +373,11 @@ export default function MatchMakingPage() {
     if (mm?.length === 2 && femalePrev.current.mm.length !== 2) {
       femaleYyyyRef.current?.focus();
     }
+
+    if (yyyy?.length === 4 && femalePrev.current.yyyy.length !== 4) {
+      femaleHhRef.current?.focus();
+    }
+
     if (hh?.length === 2 && femalePrev.current.hh.length !== 2) {
       femaleMinRef.current?.focus();
     }
@@ -496,6 +506,7 @@ export default function MatchMakingPage() {
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
                       placeholder="YYYY"
+                      type="number"
                       ref={maleYyyyRef}
                       value={maleForm.birthDate.split("-")[2] || ""}
                       onChange={(e) => {
@@ -588,10 +599,10 @@ export default function MatchMakingPage() {
                 </div>
               </div>
             </div>
-            </div>
+          </div>
 
-            {/* DIVIDER */}
-            {/* <div className="border-t border-2 p-[2px] my-10 bg-white"></div> */}
+          {/* DIVIDER */}
+          {/* <div className="border-t border-2 p-[2px] my-10 bg-white"></div> */}
 
           <div className="card-bg rounded-3xl p-5 max-h-[80vh] overflow-y-auto mt-5">
 
@@ -666,6 +677,7 @@ export default function MatchMakingPage() {
                     <input
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
+                      type="number"
                       placeholder="YYYY"
                       ref={femaleYyyyRef}
                       value={femaleForm.birthDate.split("-")[2] || ""}

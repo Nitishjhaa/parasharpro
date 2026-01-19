@@ -284,7 +284,7 @@ export default function KundaliPage() {
     if (yyyy?.length === 4 && prev.current.yyyy.length !== 4) {
       hhRef.current?.focus();
     }
-
+    
     // TIME -----------------------------------------------------
     if (hh?.length === 2 && prev.current.hh.length !== 2) {
       minRef.current?.focus();
@@ -441,6 +441,7 @@ export default function KundaliPage() {
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       maxLength={4}
                       placeholder="YYYY"
+                      type="number"
                       ref={yyyyRef}
                       value={form.birthDate.split("-")[2] || ""}
                       onChange={(e) => {
@@ -460,6 +461,7 @@ export default function KundaliPage() {
                     <input
                       maxLength={2}
                       placeholder="HH"
+                      type="number"
                       ref={hhRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       value={form.birthTime.split(":")[0] || ""}
@@ -473,6 +475,7 @@ export default function KundaliPage() {
                     <input
                       maxLength={2}
                       placeholder="MM"
+                      type="number"
                       ref={minRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       value={form.birthTime.split(":")[1] || ""}
@@ -494,6 +497,7 @@ export default function KundaliPage() {
                     <input
                       maxLength={2}
                       placeholder="SS"
+                      type="number"
                       ref={secRef}
                       className="bg-transparent border-b border-gray-400 p-2 outline-none text-center"
                       value={form.birthTime.split(":")[2] || ""}

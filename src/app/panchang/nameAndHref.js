@@ -15,4 +15,8 @@ export const pName = [
         name: "मूल शांति",
         href: "moolShanti"
     },
+    {
+        name: "त्योहार",
+        href: "tyohar"
+    }
 ]

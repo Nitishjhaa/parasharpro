@@ -85,6 +85,18 @@ export default function KundaliInfoInner() {
         Ketu: kundali?.raw?.planets?.Ketu?.house,
     };
 
+    const houseNumber = [
+        kundali?.raw?.planets?.Sun?.house,
+        kundali?.raw?.planets?.Moon?.house,
+        kundali?.raw?.planets?.Mars?.house,
+        kundali?.raw?.planets?.Mercury?.house,
+        kundali?.raw?.planets?.Jupiter?.house,
+        kundali?.raw?.planets?.Venus?.house,
+        kundali?.raw?.planets?.Saturn?.house,
+        kundali?.raw?.planets?.Rahu?.house,
+        kundali?.raw?.planets?.Ketu?.house,
+    ];
+
     // ------- Get Remedies for Single Planet -------
     function getRemediesForPlanet(planetName) {
         const planetRemedyObj = remedies.find(r => r.grah === planetName);
@@ -102,12 +114,6 @@ export default function KundaliInfoInner() {
         const remedy = getRemediesForPlanet(planet);
         return remedy ? { planet, remedy } : null;
     }).filter(Boolean);
-
-
-
-    // ==========================
-    // ⭐ NEW FEATURE: USER INPUT SEARCH
-    // ==========================
 
     function searchRemedy() {
         if (!userPlanet || !userHouse) {
@@ -137,7 +143,6 @@ export default function KundaliInfoInner() {
 
         setUserRemedy(houseEntry.remedies);
     }
-
 
     return (
         <div className="p-2 overflow-hidden text-black" >
@@ -170,10 +175,25 @@ export default function KundaliInfoInner() {
                             <p>अशुभ ग्रहों के लिए कोई उपाय उपलब्ध नहीं।</p>
                         )}
 
+                        <div className="mt-10 p-4 py-5 rounded-xl text-black border">
+                            <h2 className="text-xl font-semibold text-center mb-4">ग्रह और भाव</h2>
+                            <div className="grid max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                                {["सूर्य", "चंद्र", "मंगल", "बुध", "गुरु", "शुक्र", "शनि", "राहु", "केतु"].map((planet, index) => (
+                                    <>
+                                        <div className="border p-2 rounded-lg flex justify-between">
+                                            <span>
+                                                {planet}
+                                            </span>
+                                            <span>
+                                                {houseNumber[index]}
+                                            </span>
+                                        </div>
+                                    </>
+                                ))}
+                            </div>
 
-                        {/* ------------------------------------
-                            ⭐ NEW UI: Manual Planet-House Search (Select Based)
-                        ------------------------------------- */}
+                        </div>
+
                         <div className="mt-10 p-4 rounded-xl text-black border">
 
                             {/* Planet Select */}

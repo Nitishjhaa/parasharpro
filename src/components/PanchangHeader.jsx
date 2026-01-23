@@ -79,7 +79,7 @@ export default function PanchangHeader({
         animate={{ x: isSideOpen ? 0 : -260 }}   // FULL OPEN = 0
         transition={{ type: "spring", stiffness: 260, damping: 30 }}
         className="fixed top-0 left-0 h-screen bg-black z-20 rounded-r-3xl p-3"
-        style={{ width: "270px" }}
+        style={{ width: "260px" }}
       >
         <img
           src="/images/kundaliHead.png"

@@ -313,7 +313,7 @@ export default function KundaliPage() {
 
           {/* HEADER */}
           <div className="rounded-3xl overflow-hidden mb-4">
-            <div className="dark:bg-[#232323] bg-[#d0d0d0] p-5 flex gap-4 items-center">
+            <div className="card-bg p-5 flex gap-4 items-center">
               <img src="/images/kundaliHead.png" className="w-12" />
               <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent text-3xl">
                 Child Kundali

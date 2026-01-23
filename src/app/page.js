@@ -121,7 +121,7 @@ export default function Page() {
                 <div className=" text-4xl flex gap-5 items-center w-full mr-3 rounded-3xl">
                   <img src='images/kundaliHead.png' className="w-15" />
                   <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent">
-                    Horescope
+                    Parashar
                   </span>
                 </div>
               </div>

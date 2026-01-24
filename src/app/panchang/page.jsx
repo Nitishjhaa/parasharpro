@@ -9,7 +9,7 @@ export default function PanchangPage() {
   
 
   return (
-    <div className="w-[98%] mx-auto p-2">
+    <div className="w-[98%] mx-auto pt-2">
       <div>
         <div className="rounded-3xl overflow-hidden mb-4">
           <div className="card-bg p-5 flex gap-4 items-center">

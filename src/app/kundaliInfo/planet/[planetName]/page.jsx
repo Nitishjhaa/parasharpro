@@ -204,11 +204,10 @@ export default function PlanetInfoPage() {
             uach_Ghar: "1",
             neech_Ghar: "6,7,10",
             shrest_Ghar: "1,5,8,9,11,12",
-            god: "अग्नि, ",
+            god: "अग्नि,",
             beej_mantra : "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
             vaar: "रविवार",
             daan: "गेहूँ, तांबा, माणिक, गुड़, लाल कपड़ा, लाल फूल, चंदन की लकड़ी, केसर"
-
         },
         Moon: {
             mitraGraha: "सूर्य, बुध",
@@ -228,7 +227,6 @@ export default function PlanetInfoPage() {
             beej_mantra : "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः",
             vaar: "सोमवार",
             daan: "चावल, दूध, सफेद वस्त्र, चांदी, मोती, सफेद फूल"
-
         },
         Mars: {
             mitraGraha: "सूर्य, चंद्र, गुरु",
@@ -248,7 +246,6 @@ export default function PlanetInfoPage() {
             beej_mantra : "ॐ क्रां क्रीं क्रौं सः भौमाय नमः",
             vaar: "मंगलवार",
             daan: "मूंगा, मसूर दाल, लाल चंदन, गुड़, तांबे के बर्तन"
-
         },
         Mercury: {
             mitraGraha: "सूर्य, शुक्र",
@@ -363,8 +360,7 @@ export default function PlanetInfoPage() {
             beej_mantra : "ॐ स्रां स्रीं स्रौं सः केतवे नमः",
             vaar: "मंगलवार और शनिवार",
             daan: "नीले फूल, कंबल, काले तिल, लहसुनिया, धूप, चंदन"
-        },
-
+        }
     }
 
     const planetExtraInfo = (planet) => {

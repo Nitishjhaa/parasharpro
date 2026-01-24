@@ -672,7 +672,6 @@ export function computeAshtakavarga({
     };
 }
 
-
 export const getHouseLordsWithPositions = (ascendant, planetPositions) => {
     const houseLordMap = {
         0: ["Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter"],

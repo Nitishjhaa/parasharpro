@@ -47,6 +47,7 @@ export default function KundaliInfoInner() {
     }, []);
 
     const lagnaIndex = kundali?.raw?.ascendant?.rashiIndex;
+    const path = kundali?.raw?.planets;
 
     const selectedLagna = lagna?.[lagnaIndex] || null;
 
@@ -74,27 +75,27 @@ export default function KundaliInfoInner() {
 
     // ------- HOUSE NUMBERS -------
     const houseNumbers = {
-        Sun: kundali?.raw?.planets?.Sun?.house,
-        Moon: kundali?.raw?.planets?.Moon?.house,
-        Mars: kundali?.raw?.planets?.Mars?.house,
-        Mercury: kundali?.raw?.planets?.Mercury?.house,
-        Jupiter: kundali?.raw?.planets?.Jupiter?.house,
-        Venus: kundali?.raw?.planets?.Venus?.house,
-        Saturn: kundali?.raw?.planets?.Saturn?.house,
-        Rahu: kundali?.raw?.planets?.Rahu?.house,
-        Ketu: kundali?.raw?.planets?.Ketu?.house,
+        Sun: path?.Sun?.house,
+        Moon: path?.Moon?.house,
+        Mars: path?.Mars?.house,
+        Mercury: path?.Mercury?.house,
+        Jupiter: path?.Jupiter?.house,
+        Venus: path?.Venus?.house,
+        Saturn: path?.Saturn?.house,
+        Rahu: path?.Rahu?.house,
+        Ketu: path?.Ketu?.house,
     };
 
     const houseNumber = [
-        kundali?.raw?.planets?.Sun?.house,
-        kundali?.raw?.planets?.Moon?.house,
-        kundali?.raw?.planets?.Mars?.house,
-        kundali?.raw?.planets?.Mercury?.house,
-        kundali?.raw?.planets?.Jupiter?.house,
-        kundali?.raw?.planets?.Venus?.house,
-        kundali?.raw?.planets?.Saturn?.house,
-        kundali?.raw?.planets?.Rahu?.house,
-        kundali?.raw?.planets?.Ketu?.house,
+        path?.Sun?.house,
+        path?.Moon?.house,
+        path?.Mars?.house,
+        path?.Mercury?.house,
+        path?.Jupiter?.house,
+        path?.Venus?.house,
+        path?.Saturn?.house,
+        path?.Rahu?.house,
+        path?.Ketu?.house,
     ];
 
     // ------- Get Remedies for Single Planet -------

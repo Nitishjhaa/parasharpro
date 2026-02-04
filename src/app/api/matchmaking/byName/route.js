@@ -108,23 +108,18 @@ function getAstroData(name) {
 
     const upperName = name.toUpperCase();
 
-    // Try first 3 characters for complex sounds like BHA
     let syllable = upperName.substring(0, 3);
     let data = syllableMap[syllable];
 
     if (!data) {
-        // Try first two characters
         syllable = upperName.substring(0, 2);
         data = syllableMap[syllable];
     }
 
     if (!data) {
-        // Try first character
         syllable = upperName.substring(0, 1);
         data = syllableMap[syllable];
     }
-
-    // Also check Hindi characters as backup (case original input was Hindi)
     if (!data) {
         syllable = name.substring(0, 2);
         data = syllableMap[syllable];
@@ -135,7 +130,6 @@ function getAstroData(name) {
     }
 
     if (!data) {
-        // Default to Ashwini if still not found
         data = syllableMap['A'];
     }
 

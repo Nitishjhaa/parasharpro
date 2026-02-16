@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter, useParams } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader';
-import { RiArrowGoBackLine } from "react-icons/ri";
+import { RiArrowGoBackLine, RiSearchLine, RiCloseLine } from "react-icons/ri";
 import { getHindiNakshatra } from '@/lib/nakshatra';
 
 export default function PlanetInfoPage() {
@@ -15,9 +15,13 @@ export default function PlanetInfoPage() {
     const [kundali, setKundali] = useState(null);
     const [grahInfo, setGrahInfo] = useState(null);
     const [isSideOpen, setIsSideOpen] = useState(false);
-    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]); 
+    const [planetsInNakshatras, setPlanetsInNakshatras] = useState([]);
     const [remedies, setRemedies] = useState([]);
 
+    // Search State
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [matchCount, setMatchCount] = useState(0);
 
     const indexParam = searchParams.get("index");
     const planetName = params.planetName; // This will be the English name from URL
@@ -129,6 +133,99 @@ export default function PlanetInfoPage() {
         return houseEntry?.remedies || null;
     }
 
+    // ------- SEARCH & HIGHLIGHT LOGIC -------
+
+    // Calculate match count effect
+    useEffect(() => {
+        if (!searchQuery || searchQuery.trim() === "") {
+            setMatchCount(0);
+            return;
+        }
+
+        if (!planetConfig || !info) return;
+
+        let total = 0;
+        const query = searchQuery.toLowerCase();
+
+        // Helper to count in text
+        const countInText = (text) => {
+            if (!text) return 0;
+            const parts = text.toLowerCase().split(query);
+            return parts.length - 1;
+        };
+
+        // 1. Subh/Ashubh
+        total += countInText(info.subh);
+        total += countInText(info.ashubh);
+
+        // 2. Nakshatra Meaning
+        total += countInText(getPlanetNakshatraMeaning(planetConfig.key));
+
+        // 3. Remedies
+        total += countInText(getRemediesForPlanet(planetConfig.key));
+
+        // 4. Planet Extra Info
+        if (planetsInformation[planetConfig.key]) {
+            const extra = planetsInformation[planetConfig.key];
+            Object.values(extra).forEach(val => {
+                total += countInText(val);
+            });
+        }
+
+        setMatchCount(total);
+
+    }, [searchQuery, grahInfo, kundali, remedies]); // Dependencies for count calculation
+
+    // Highlight Component
+    const HighlightText = ({ text }) => {
+        if (!text) return null;
+        if (!searchQuery || searchQuery.trim() === "") return <>{text}</>;
+
+        const parts = text.split(new RegExp(`(${searchQuery})`, 'gi'));
+        return (
+            <span>
+                {parts.map((part, i) =>
+                    part.toLowerCase() === searchQuery.toLowerCase() ? (
+                        <span key={i} className="bg-yellow-300 text-black font-semibold rounded-sm px-0.5">{part}</span>
+                    ) : (
+                        part
+                    )
+                )}
+            </span>
+        );
+    };
+
+    // Modified FormattedText to use HighlightText
+    const FormattedText = ({ text }) => {
+        if (!text) return null;
+        return (
+            <div>
+                {text
+                    .match(/\d+\.\s[^]+?(?=\s\d+\.|$)/g) // extract each point
+                    ?.map((item, index) => (
+                        <div key={index} className="mb-2">
+                            <HighlightText text={item.trim()} />
+                        </div>
+                    )) || <div><HighlightText text={text} /></div>}
+            </div>
+        );
+    };
+
+    // Modified RemediesFormattedText to use HighlightText
+    const RemediesFormattedText = ({ text }) => {
+        if (!text) return null;
+        return (
+            <div>
+                {text.split('\n').filter(line => line.trim() !== '').map((item, index) => (
+                    <div key={index} className="mb-1">
+                        <HighlightText text={item.trim()} />
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+
     // ------- FINAL REMEDIES OUTPUT -------
 
 
@@ -165,30 +262,6 @@ export default function PlanetInfoPage() {
 
     const info = grahInfo?.[0]?.[planetConfig.jsonKey]?.[housePosition];
 
-    const FormattedText = ({ text }) => {
-        if (!text) return null;
-        return (
-            <div>
-                {text
-                    .match(/\d+\.\s[^]+?(?=\s\d+\.|$)/g) // extract each point
-                    ?.map((item, index) => (
-                        <div key={index} className="mb-2">{item.trim()}</div>
-                    )) || <div>{text}</div>}
-            </div>
-        );
-    };
-
-    const RemediesFormattedText = ({ text }) => {
-        if (!text) return null;
-        return (
-            <div>
-                {text.split('\n').filter(line => line.trim() !== '').map((item, index) => (
-                    <div key={index} className="mb-1">{item.trim()}</div>
-                ))}
-            </div>
-        );
-    };
-
     const planetsInformation = {
         Sun: {
             mitraGraha: "चंद्र, मंगल, गुरु",
@@ -205,7 +278,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "6,7,10",
             shrest_Ghar: "1,5,8,9,11,12",
             god: "अग्नि,",
-            beej_mantra : "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
+            beej_mantra: "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
             vaar: "रविवार",
             daan: "गेहूँ, तांबा, माणिक, गुड़, लाल कपड़ा, लाल फूल, चंदन की लकड़ी, केसर"
         },
@@ -224,7 +297,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "6,8,10,11,12",
             shrest_Ghar: "1,2,3,4,5,7,9",
             god: "जल देव, ",
-            beej_mantra : "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः",
+            beej_mantra: "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः",
             vaar: "सोमवार",
             daan: "चावल, दूध, सफेद वस्त्र, चांदी, मोती, सफेद फूल"
         },
@@ -243,7 +316,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "3,6,11,12",
             shrest_Ghar: "2,4,5,7,9,10",
             god: "कार्तिकेय",
-            beej_mantra : "ॐ क्रां क्रीं क्रौं सः भौमाय नमः",
+            beej_mantra: "ॐ क्रां क्रीं क्रौं सः भौमाय नमः",
             vaar: "मंगलवार",
             daan: "मूंगा, मसूर दाल, लाल चंदन, गुड़, तांबे के बर्तन"
         },
@@ -262,7 +335,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "7,8,9,12",
             shrest_Ghar: "1,2,4,5,10,11",
             god: "नारायण",
-            beej_mantra : "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः",
+            beej_mantra: "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः",
             vaar: "बुधवार",
             daan: "पन्ना, हरी सब्ज़ियाँ, मूँग की दाल, हरा कपड़ा, दूर्वा घास"
         },
@@ -281,7 +354,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "6,7,10",
             shrest_Ghar: "2,5,8,9,12",
             god: "बृहस्पति, ",
-            beej_mantra : "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः",
+            beej_mantra: "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः",
             vaar: "गुरुवार",
             daan: "चना दाल, हल्दी, पुखराज, पीला वस्त्र, पीला फूल, केसर"
         },
@@ -300,7 +373,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "1,6,9,10,11",
             shrest_Ghar: "2,3,4,7,12",
             god: "शुक्राचार्य",
-            beej_mantra : "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः",
+            beej_mantra: "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः",
             vaar: "शुक्रवार",
             daan: "हीरा, दही, सफेद कपड़े, सफेद चावल, चांदी, सुगंधित द्रव्य"
         },
@@ -319,7 +392,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "1,4,5,6",
             shrest_Ghar: "1,3,7,12",
             god: "शनि ",
-            beej_mantra : "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः",
+            beej_mantra: "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः",
             vaar: "शनिवार",
             daan: "तिल, काली उड़द, नीलम, लोहा, काला कपड़ा, तेल"
         },
@@ -338,7 +411,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "1,2,4,5,7,12",
             shrest_Ghar: "3,4,6",
             god: "सरस्वती",
-            beej_mantra : "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः",
+            beej_mantra: "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः",
             vaar: "शनिवार",
             daan: "तिल, सरसों का तेल, काला कपड़ा, कंबल, नारियल"
         },
@@ -357,7 +430,7 @@ export default function PlanetInfoPage() {
             neech_Ghar: "8,7,11",
             shrest_Ghar: "3,6,9,10,12",
             god: "गणेश",
-            beej_mantra : "ॐ स्रां स्रीं स्रौं सः केतवे नमः",
+            beej_mantra: "ॐ स्रां स्रीं स्रौं सः केतवे नमः",
             vaar: "मंगलवार और शनिवार",
             daan: "नीले फूल, कंबल, काले तिल, लहसुनिया, धूप, चंदन"
         }
@@ -369,70 +442,70 @@ export default function PlanetInfoPage() {
                 <div className="grid grid-cols-2 gap-3">
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">मित्र ग्रह :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].mitraGraha}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].mitraGraha} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">शत्रु ग्रह :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].shatruGraha}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].shatruGraha} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">सम ग्रह :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].samaGraha}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].samaGraha} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">आधिपति :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].adhipati}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].adhipati} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">उच्च :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].uach}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].uach} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">नीच :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].neech}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].neech} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">लिंग :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].ling}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].ling} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">दिशा :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].disha}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].disha} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">रत्न :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].ratan}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].ratan} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">पक्का घर :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].uach_Ghar}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].uach_Ghar} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">नीच घर :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].neech_Ghar}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].neech_Ghar} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">श्रेष्ठ घर :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].shrest_Ghar}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].shrest_Ghar} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">देवता :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].god}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].god} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">वार :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].vaar}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].vaar} /></p>
                     </div>
-                    
+
                 </div>
                 <div className="grid grid-cols-1 gap-3 mt-3">
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">दान :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].daan}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].daan} /></p>
                     </div>
                     <div className="border border-black/20 p-2 rounded-lg">
                         <div className="text-sm">मंत्र :</div>
-                        <p className="text-xs mt-2">{planetsInformation[planet].beej_mantra}</p>
+                        <p className="text-xs mt-2"><HighlightText text={planetsInformation[planet].beej_mantra} /></p>
                     </div>
                 </div>
             </>
@@ -464,15 +537,51 @@ export default function PlanetInfoPage() {
                     ) : (
                         <div className="p-3 bg-white/50 rounded-xl shadow-sm">
                             <div className="flex justify-between items-center mb-4 border-b pb-2 border-orange-400">
-                                <h2 className="text-xl font-bold text-black">
-                                    {planetConfig.label} - भाव {housePosition}
-                                </h2>
-                                <button
-                                    onClick={() => router.back()}
-                                    className="px-3 py-2 bg-black text-white text-sm rounded hover:bg-orange-600 transition"
-                                >
-                                    <RiArrowGoBackLine />
-                                </button>
+                                {isSearchOpen ? (
+                                    <div className="flex items-center gap-2 flex-1 animate-in fade-in slide-in-from-right-5 duration-300">
+                                        <input
+                                            autoFocus
+                                            type="text"
+                                            placeholder="Search word..."
+                                            className="w-full border border-orange-300 rounded px-2 py-1 outline-none focus:border-orange-500"
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                        />
+                                        <div className="text-sm whitespace-nowrap font-medium text-orange-700">
+                                            {matchCount} results
+                                        </div>
+                                        <button
+                                            onClick={() => {
+                                                setIsSearchOpen(false);
+                                                setSearchQuery("");
+                                            }}
+                                            className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition"
+                                        >
+                                            <RiCloseLine />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <h2 className="text-xl font-bold text-black">
+                                            {planetConfig.label} - भाव {housePosition}
+                                        </h2>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => setIsSearchOpen(true)}
+                                                className="px-3 py-2 bg-orange-500 text-white text-lg rounded hover:bg-orange-600 transition flex items-center justify-center"
+                                                title="Search"
+                                            >
+                                                <RiSearchLine />
+                                            </button>
+                                            <button
+                                                onClick={() => router.back()}
+                                                className="px-3 py-2 bg-black text-white text-sm rounded hover:bg-gray-800 transition"
+                                            >
+                                                <RiArrowGoBackLine />
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-6 mb-6">

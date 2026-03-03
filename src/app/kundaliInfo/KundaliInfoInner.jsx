@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import KundaliStructure from '@/components/KundaliStructure';
 import PlanetTable from "@/components/PlanetTable";
 import PlanetAspectTable from "@/components/PlanetAspectTable";
@@ -85,8 +86,10 @@ export default function KundaliInfoInner() {
 
         <div className="relative flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
           
-          <div className="absolute top-8 right-5 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center">
-            M
+          <div className="absolute top-8 right-5 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center transition-all duration-300 active:scale-80">
+            <Link href={`/kundaliInfo/mahadasha?index=${indexParam}`}>
+              𝕄
+            </Link>
           </div>
           
           <KundaliStructure kundali={kundali} title="लग्न कुंडली" />

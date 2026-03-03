@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { loadKundaliByIndex } from "@/lib/db";
 import { MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
 import { CiCircleInfo } from "react-icons/ci";
+import Link from "next/link";
 import { GoEyeClosed, GoEye } from "react-icons/go";
 import KundaliHeader from "@/components/KundaliHeader";
 
@@ -89,7 +90,12 @@ export default function MahadashaPage() {
             )}
 
             {/* MAIN CONTENT */}
-            <div className="p-6 md:p-10 bg-linear-to-r from-[#FFE984] to-[#FFB111] min-h-screen text-black rounded-3xl">
+            <div className="p-6 md:p-10 bg-linear-to-r from-[#FFE984] to-[#FFB111] min-h-screen text-black rounded-3xl relative">
+                <div className="absolute top-3 right-1 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center transition-all duration-300 active:scale-80">
+                    <Link href={`/kundaliInfo?index=${indexParam}`}>
+                        𝕃
+                    </Link>
+                </div>
                 <div className="space-y-4">
                     {sequence.map((md, mdIndex) => {
                         const mdCurrent = isCurrent(md.start, md.end);

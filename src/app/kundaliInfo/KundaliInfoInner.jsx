@@ -38,6 +38,30 @@ export default function KundaliInfoInner() {
       .then((data) => setLagna(data));
   }, []);
 
+  console.log(kundali?.raw?.meta?.datetimeUTC);
+
+  let today = new Date();
+  let birthDate = new Date(kundali?.raw?.meta?.datetimeUTC);
+
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  // If days are negative, borrow days from previous month
+  if (days < 0) {
+    months--;
+
+    // Get days in previous month
+    let prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  // If months are negative, borrow from years
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
   // if (!kundali) return <div className="p-4 text-white">Loading...</div>;
   // if (!kundali?.raw?.ascendant?.rashiIndex) return <div className="p-4 text-white">Loading...</div>;
 
@@ -59,8 +83,18 @@ export default function KundaliInfoInner() {
           setIsSideOpen={setIsSideOpen}
         />
 
-        <div className="flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
+        <div className="relative flex flex-col justify-center items-center bg-linear-to-r from-[#FFE984] to-[#FFB111] rounded-3xl pb-10">
+          
+          <div className="absolute top-8 right-5 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center">
+            M
+          </div>
+          
           <KundaliStructure kundali={kundali} title="लग्न कुंडली" />
+
+          <div className="text-xl w-full ml-3">
+            उम्र : {years} वर्ष {months} महीने {days} दिन
+          </div>
+
           <PlanetTable kundali={kundali} />
           <PlanetAspectTable kundali={kundali} />
 

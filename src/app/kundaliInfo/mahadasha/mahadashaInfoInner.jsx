@@ -91,7 +91,7 @@ export default function MahadashaPage() {
 
             {/* MAIN CONTENT */}
             <div className="p-6 md:p-10 bg-linear-to-r from-[#FFE984] to-[#FFB111] min-h-screen text-black rounded-3xl relative">
-                <div className="absolute top-3 right-1 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center transition-all duration-300 active:scale-80">
+                <div className="absolute -top-20 right-18 w-10 h-10 rounded-full bg-black hover:bg-white text-white hover:text-black cursor-pointer flex justify-center items-center transition-all duration-300 active:scale-80">
                     <Link href={`/kundaliInfo?index=${indexParam}`}>
                         𝕃
                     </Link>
@@ -104,8 +104,8 @@ export default function MahadashaPage() {
                             <div
                                 key={mdIndex}
                                 className={`rounded-xl shadow border ${mdCurrent
-                                        ? "bg-[#ffe49b] border-[#ffb300]"
-                                        : "bg-white border-yellow-300"
+                                    ? "bg-[#ffe49b] border-[#ffb300]"
+                                    : "bg-white border-yellow-300"
                                     }`}
                             >
                                 {/* MAHADASHA HEADER */}
@@ -143,8 +143,8 @@ export default function MahadashaPage() {
                                                 <div
                                                     key={adIndex}
                                                     className={`rounded-lg p-4 border ${adCurrent
-                                                            ? "bg-[#ffe49b] border-[#ffb300]"
-                                                            : "bg-[#fff2d9] border-yellow-200"
+                                                        ? "bg-[#ffe49b] border-[#ffb300]"
+                                                        : "bg-[#fff2d9] border-yellow-200"
                                                         }`}
                                                 >
                                                     {/* Antardasha Header */}
@@ -192,8 +192,8 @@ export default function MahadashaPage() {
                                                                     <div
                                                                         key={pdIndex}
                                                                         className={`p-3 rounded-lg ${pdCurrent
-                                                                                ? "bg-[#ffe49b] border border-[#ffb300]"
-                                                                                : "bg-[#fff9e6]"
+                                                                            ? "bg-[#ffe49b] border border-[#ffb300]"
+                                                                            : "bg-[#fff9e6]"
                                                                             }`}
                                                                     >
                                                                         <div className="flex justify-between items-start">

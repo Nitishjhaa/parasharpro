@@ -9,8 +9,8 @@ const nakshatraHindiNames = {
   Pushya: "पुष्य",
   Ashlesha: "आश्लेषा",
   Magha: "मघा",
-  Purva_Phalguni: "पूर्वाफाल्गुनी",
-  Uttara_Phalguni: "उत्तराफाल्गुनी",
+  PurvaPhalguni: "पूर्वाफाल्गुनी",
+  UttaraPhalguni: "उत्तराफाल्गुनी",
   Hasta: "हस्त",
   Chitra: "चित्रा",
   Swati: "स्वाती",
@@ -18,13 +18,13 @@ const nakshatraHindiNames = {
   Anuradha: "अनुराधा",
   Jyeshtha: "ज्येष्ठा",
   Mula: "मूल",
-  Purva_Ashadha: "पूर्वाषाढ़ा",
-  Uttara_Ashadha: "उत्तराषाढ़ा",
+  PurvaAshadha: "पूर्वाषाढ़ा",
+  UttaraAshadha: "उत्तराषाढ़ा",
   Shravana: "श्रवण",
   Dhanishta: "धनिष्ठा",
   Shatabhisha: "शतभिषा",
-  Purva_Bhadrapada: "पूर्वभाद्रपदा",
-  Uttara_Bhadrapada: "उत्तराभाद्रपद",
+  PurvaBhadrapada: "पूर्वभाद्रपदा",
+  UttaraBhadrapada: "उत्तराभाद्रपद",
   Revati: "रेवती",
 };
 
@@ -416,7 +416,7 @@ export function calculateGunMilanScore(boyData, girlData) {
   };
 }
 
-export const rashiTattvas = ({asc, moon, venus}) => {
+export const rashiTattvas = ({ asc, moon, venus }) => {
 
   const ascNumber = asc;
   const moonNumber = moon;
@@ -447,4 +447,32 @@ export const rashiTattvas = ({asc, moon, venus}) => {
     venusTatva
   }
 
+};
+
+export const eighthHouse = ({ MaleAsc, FemaleAsc, MaleMoon, FemaleMoon }) => {
+
+  const male8thBhaav = ((MaleAsc + 7 - 1) % 12) + 1;
+  const female8thBhaav = ((FemaleAsc + 7 - 1) % 12) + 1;
+
+  const boyRashiNumber = MaleMoon + 1;
+  const girlRashiNumber = FemaleMoon + 1;
+
+  if (male8thBhaav === girlRashiNumber) {
+    return {
+      def: true,
+      message: "लड़के के 8वें भाव में लड़की की राशि है जो घातक है"
+    }
+  }
+
+  if (female8thBhaav === boyRashiNumber) {
+    return {
+      def: true,
+      message: "लड़की के 8वें भाव में लड़के की राशि है जो घातक है"
+    }
+  }
+
+  return {
+    def: false,
+    message: "कोई दोष नहीं है"
+  };
 };

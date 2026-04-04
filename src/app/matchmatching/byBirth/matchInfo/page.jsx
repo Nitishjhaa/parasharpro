@@ -20,7 +20,8 @@ import {
     getYoni,
     getNaadi,
     calculateGunMilanScore,
-    rashiTattvas
+    rashiTattvas,
+    eighthHouse
 } from "@/app/matchmatching/MatchUtils";
 
 import KundaliStructure from "@/components/KundaliStructure";
@@ -80,6 +81,15 @@ const MatchInfoPage = () => {
 
     const boyNaadi = getNaadi(boy.raw?.planets?.Moon?.nakshatraIndex);
     const girlNaadi = getNaadi(girl.raw?.planets?.Moon?.nakshatraIndex);
+
+    const eighthBhaavVichaar = eighthHouse({
+        MaleAsc: boy.raw?.ascendant?.rashiIndex,
+        FemaleAsc: girl.raw?.ascendant?.rashiIndex,
+        MaleMoon: boy.raw?.planets?.Moon?.rashiIndex,
+        FemaleMoon: girl.raw?.planets?.Moon?.rashiIndex,
+    });
+
+    console.log(eighthBhaavVichaar);
 
     const info = [
         {
@@ -198,7 +208,7 @@ const MatchInfoPage = () => {
 
     const totalMilanScore = taraPoints.points + totalMilan.totalScore;
 
-    const noncompboy = getNonCompatibleNakshatrasInHindi(boy.raw?.planets?.Moon.nakshatra)
+    const noncompboy = getNonCompatibleNakshatrasInHindi(boy.raw?.planets?.Moon.nakshatra);
     const noncompgirl = getNonCompatibleNakshatrasInHindi(girl.raw?.planets?.Moon.nakshatra);
 
     const nakshataraBoy = nakshatra(boy.raw?.planets?.Moon.nakshatraIndex);
@@ -218,6 +228,9 @@ const MatchInfoPage = () => {
         }
     };
 
+
+    const compatibilityResult = Compatibility(nakshataraBoy, nakshataraGirl);
+    console.log(compatibilityResult)
     console.log(matchData)
 
     const boyRahuHouseNumber = boy.raw?.planets?.Rahu?.house;
@@ -505,6 +518,10 @@ const MatchInfoPage = () => {
                                 <p className="mt-3 text-red-600">- लड़के की {isBoyManglik.status}</p>
                                 <p className="mt-3 text-red-600">- लड़की की {isGirlManglik.status}</p>
                                 <p className="mt-2">{saturnRahuDoshaWithManglikDosha()}</p>
+                            </div>
+                            <div className="border p-4 mt-3 rounded-2xl border-black/40">
+                                <h2 className="text-base font-semibold underline underline-offset-4 mt-2">अष्टम भाव विचार :-</h2>
+                                <p className={`mt-3 ${eighthBhaavVichaar.def ? "text-red-600" : ""}`}>{eighthBhaavVichaar.message}</p>
                             </div>
 
                         </div>

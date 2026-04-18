@@ -4,7 +4,7 @@ const nakshatraHindiNames = {
   Krittika: "कृतिका",
   Rohini: "रोहिणी",
   Mrigashira: "मृगशिरा",
-  Ardra: "अर्द्रा",
+  Ardra: "आर्द्रा",
   Punarvasu: "पुनर्वसु",
   Pushya: "पुष्य",
   Ashlesha: "आश्लेषा",
@@ -451,8 +451,11 @@ export const rashiTattvas = ({ asc, moon, venus }) => {
 
 export const eighthHouse = ({ MaleAsc, FemaleAsc, MaleMoon, FemaleMoon }) => {
 
-  const male8thBhaav = ((MaleAsc + 7 - 1) % 12) + 1;
-  const female8thBhaav = ((FemaleAsc + 7 - 1) % 12) + 1;
+  let male8thBhaav = ((MaleAsc + 7 - 1) % 12) + 1;
+  male8thBhaav = male8thBhaav + 1;
+
+  let female8thBhaav = ((FemaleAsc + 7 - 1) % 12) + 1;
+  female8thBhaav = female8thBhaav + 1;
 
   const boyRashiNumber = MaleMoon + 1;
   const girlRashiNumber = FemaleMoon + 1;

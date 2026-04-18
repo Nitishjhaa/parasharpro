@@ -215,6 +215,8 @@ const MatchInfoPage = () => {
     const nakshataraGirl = nakshatra(girl.raw?.planets?.Moon.nakshatraIndex);
 
     const Compatibility = (nakshataraBoy, nakshataraGirl) => {
+        console.log(nakshataraBoy)
+        console.log(nakshataraGirl)
 
         if (noncompboy.find((item) => item === nakshataraGirl)) {
             return "यह मेल मिलाप मेल नहीं हो रहा है क्योंकि लड़की लड़के में गैर-संगत नक्षत्र है"

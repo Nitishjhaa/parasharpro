@@ -27,7 +27,6 @@ const page = () => {
                                 <div className='text-white'>
                                     नक्षत्र संज्ञा
                                 </div>
-
                             </div>
                         </div>
                     </Link>
@@ -38,7 +37,6 @@ const page = () => {
                                 <div className='text-white'>
                                     पंचक नक्षत्र
                                 </div>
-
                             </div>
                         </div>
                     </Link>
@@ -49,7 +47,16 @@ const page = () => {
                                 <div className='text-white'>
                                     योग और दोष
                                 </div>
+                            </div>
+                        </div>
+                    </Link>
 
+                    <Link href="/astrohelp/case">
+                        <div className='card-bg rounded-xl! border-white/80 border'>
+                            <div className='py-3 pl-2'>
+                                <div className='text-white'>
+                                    मुकदमा करना
+                                </div>
                             </div>
                         </div>
                     </Link>

@@ -352,12 +352,6 @@ export default function YogPage() {
         </div>
       </div>
 
-      <div className="my-3 text-black font-bold flex gap-2">
-        <Link href="/astrohelp" className="px-3 py-2 border bg-black text-white rounded-full flex gap-2 justify-center items-center text-sm hover:bg-neutral-800 transition-colors">
-          <MdArrowBackIos size={12} /> Back
-        </Link>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-2">
         {/* ---------- FORM PANEL (LHS) ---------- */}
         <div className="lg:col-span-4 bg-white/95 backdrop-blur-md rounded-3xl p-6 shadow-lg border border-yellow-200 h-fit">

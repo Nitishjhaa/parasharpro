@@ -6,7 +6,7 @@ import { computeD9Chart } from "@/lib/computeD9";
 import KundaliStructure from "@/components/KundaliStructure";
 import { useSearchParams, useRouter } from "next/navigation";
 import KundaliHeader from '@/components/KundaliHeader'
-import NavamshaPlanetTable from '@/components/NavamshaPlanetTable'
+import NavamshaPlanetTable from '@/components/D9PlanetTable'
 
 
 export default function Page() {

@@ -13,7 +13,7 @@ const hindiPlanetNames = {
   Ketu: "केतु",
 };
 
-export default function KundaliStructure({ kundali, title = "कुंडली" }) {
+export default function KundaliStructure({ kundali, title = "कुंडली", purpose = "" }) {
   if (!kundali) return null;
 
   const planets = kundali?.planets || kundali?.raw?.planets;
@@ -120,6 +120,10 @@ export default function KundaliStructure({ kundali, title = "कुंडली"
           })}
         </svg>
       </div>
+
+       <h2 className={purpose ? "text-center text-xl text-red-500 md:-mt-10 " : "opacity-0 none" }>
+        {purpose}
+      </h2>
 
     </div>
   );

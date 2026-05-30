@@ -28,6 +28,11 @@ export default function HomeButton() {
     href = pathname === "/mantras" ? "/" : "/mantras";
   }
 
+  else if (pathname.startsWith("/astrohelp")) {
+    // If exactly on /astrohelp, go Home. Else go back to /mantras
+    href = pathname === "/astrohelp" ? "/" : "/astrohelp";
+  }
+
   else if (pathname.startsWith("/matchmatching")) {
     // If exactly on /matchmatching, go Home. Else go back to /matchmatching
     href = pathname === "/matchmatching" ? "/" : "/matchmatching";

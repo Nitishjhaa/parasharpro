@@ -3,10 +3,10 @@
 import { getHindiRashi } from "@/lib/rashi";
 import { convertToDMS } from "@/lib/convertToDMS";
 
-export default function HoraPlanetTable({ d2 }) {
-    if (!d2 || !d2.planets) return null;
+export default function D60PlanetTable({ d60 }) {
+    if (!d60 || !d60.planets) return null;
 
-    const planets = d2.planets;
+    const planets = d60.planets;
 
     const rows = [
         { hi: "सूर्य", en: "Sun" },
@@ -30,14 +30,14 @@ export default function HoraPlanetTable({ d2 }) {
         <div className="w-full p-1.5">
             <div className="w-full py-10">
                 <h2 className="mb-3 text-2xl text-center">
-                    होरा (D2) ग्रह तालिका
+                    षष्ट्यांश ग्रह तालिका (D60)
                 </h2>
 
                 <table className="w-full border-2 border-black text-sm">
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="px-4 py-2">ग्रह</th>
-                            <th className="px-4 py-2">अंश (Hora)</th>
+                            <th className="px-4 py-2">अंश (Shashtyamsa)</th>
                             <th className="px-4 py-2">राशि</th>
                             <th className="px-4 py-2">तत्त्व</th>
                             <th className="px-4 py-2">भाव</th>
@@ -50,29 +50,24 @@ export default function HoraPlanetTable({ d2 }) {
 
                             return (
                                 <tr key={p.en}>
-                                    {/* Planet Name */}
                                     <td className="border-2 border-black px-2 py-2 text-center font-semibold">
                                         {p.hi}
                                     </td>
 
-                                    {/* D2 Degree */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
                                         {data?.degree !== undefined
                                             ? convertToDMS(data.degree)
                                             : "--"}
                                     </td>
 
-                                    {/* D2 Rashi */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
                                         {getHindiRashi(rashiList[data?.rashiIndex]) || "--"}
                                     </td>
 
-                                    {/* Tatva */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
                                         {data?.tatva || "--"}
                                     </td>
 
-                                    {/* House */}
                                     <td className="border-2 border-black px-2 py-2 text-center">
                                         {data?.house || "--"}
                                     </td>

@@ -170,6 +170,18 @@ export default function Page() {
                 </div>
 
                 <div className="flex-[0.5] rounded-3xl card-bg">
+                  <Link href="/astrohelp" className="rounded-3xl relative">
+                    <div className="flex justify-between items-center relative p-5">
+
+                      <div className="text-lg text-white">
+                        Astrological Help
+                      </div>
+                      <img src="/images/as.png" alt="" className="w-18 h-18 absolute -bottom-1 right-0" />
+                    </div>
+                  </Link>
+                </div>
+
+                <div className="flex-[0.5] rounded-3xl card-bg">
                   <Link href="/mantras" className="rounded-3xl relative">
                     <div className="flex justify-between items-center relative p-5">
 

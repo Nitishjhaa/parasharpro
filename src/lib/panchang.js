@@ -179,7 +179,9 @@ export default function getPanchangDetails(birthDate, birthTime, lat, lon) {
         guna,
         gana: ganaInHindi(gana),
         amantaMonth,
-        purnimantaMonth: hindiMonths(purnimantaMonth)
+        purnimantaMonth: hindiMonths(purnimantaMonth),
+        englishTithi: tithiName,
+        englishNakshatra: panchangDetails.Nakshatra?.name_en_IN || ""
     };
 };
 

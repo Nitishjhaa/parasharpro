@@ -8,6 +8,7 @@ import KundaliStructure from '@/components/KundaliStructure';
 import PlanetTable from "@/components/PlanetTable";
 import PlanetAspectTable from "@/components/PlanetAspectTable";
 import KundaliHeader from '@/components/KundaliHeader'
+// import {nameNotGood} from './AstrologicalData'
 
 export default function KundaliInfoInner() {
   const [kundali, setKundali] = useState(null);
@@ -17,6 +18,8 @@ export default function KundaliInfoInner() {
   const [lagna, setLagna] = useState([]);
 
   const indexParam = params.get("index");
+
+  console.log(kundali)
 
   useEffect(() => {
     async function load() {
@@ -60,6 +63,10 @@ export default function KundaliInfoInner() {
     years--;
     months += 12;
   }
+ 
+  // from here we will pick name thing
+  // const nameThatisNotGoodis = nameNotGood(kundali?.raw?.planets?.Moon?.nakshatraIndex)
+
 
   // if (!kundali) return <div className="p-4 text-white">Loading...</div>;
   // if (!kundali?.raw?.ascendant?.rashiIndex) return <div className="p-4 text-white">Loading...</div>;

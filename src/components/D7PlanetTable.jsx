@@ -1,12 +1,12 @@
-// this is a test file and we will use it for testing purposes"use client";
+"use client";
 
 import { getHindiRashi } from "@/lib/rashi";
 import { convertToDMS } from "@/lib/convertToDMS";
 
-export default function ChaturthamshaPlanetTable({ d4 }) {
-    if (!d4 || !d4.planets) return null;
+export default function SaptamshaPlanetTable({ d7 }) {
+    if (!d7 || !d7.planets) return null;
 
-    const planets = d4.planets;
+    const planets = d7.planets;
 
     const rows = [
         { hi: "सूर्य", en: "Sun" },
@@ -39,14 +39,14 @@ export default function ChaturthamshaPlanetTable({ d4 }) {
         <div className="w-full p-1.5">
             <div className="w-full py-10">
                 <h2 className="mb-3 text-2xl text-center">
-                    चतुर्थांश ग्रह तालिका
+                    सप्तमांश ग्रह तालिका
                 </h2>
 
                 <table className="w-full border-2 border-black text-sm">
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="px-4 py-2">ग्रह</th>
-                            <th className="px-4 py-2">अंश (D4)</th>
+                            <th className="px-4 py-2">अंश (D7)</th>
                             <th className="px-4 py-2">राशि</th>
                             <th className="px-4 py-2">तत्त्व</th>
                             <th className="px-4 py-2">भाव</th>

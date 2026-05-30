@@ -711,17 +711,414 @@ export const getHouseLordsWithPositions = (ascendant, planetPositions) => {
 }
 
 export function getNakshatraGana(number) {
-    if ([1,5,7,8,13,15,17,22,27].includes(number)) {
+    if ([1, 5, 7, 8, 13, 15, 17, 22, 27].includes(number)) {
         return "देव";
     }
 
-    if ([2,4,6,11,12,20,21,25,26].includes(number)) {
+    if ([2, 4, 6, 11, 12, 20, 21, 25, 26].includes(number)) {
         return "मनुष्य";
     }
 
-    if ([3,9,10,14,16,18,19,23,24].includes(number)) {
+    if ([3, 9, 10, 14, 16, 18, 19, 23, 24].includes(number)) {
         return "राक्षस";
     }
 
     return null;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// these functions will be used to determine the naam akshar of that person 
+export function nameNotGood(nakIndex) {
+    const Naklist = {
+        0: "अश्विनी",
+        1: "भरणी",
+        2: "कृत्तिका",
+        3: "रोहिणी",
+        4: "मृगशिरा",
+        5: "आर्द्रा",
+        6: "पुनर्वसू",
+        7: "पुष्य",
+        8: "अश्लेषा",
+        9: "मघा",
+        10: "पूर्वाफाल्गुनी",
+        11: "उत्तराफाल्गुनी",
+        12: "हस्त",
+        13: "चित्रा",
+        14: "स्वाती",
+        15: "विशाखा",
+        16: "अनुराधा",
+        17: "ज्येष्ठा",
+        18: "मूला",
+        19: "पूर्वाषाढ़ा",
+        20: "उत्तराषाढ़ा",
+        21: "श्रवण",
+        22: "धनिष्ठा",
+        23: "शतभिषा",
+        24: "पूर्वाभाद्रपदा",
+        25: "उत्तराभाद्रपदा",
+        26: "रेवती",
+    };
+
+    const englishNakshatras = [
+        "Ashwini",
+        "Bharani",
+        "Krittika",
+        "Rohini",
+        "Mrigashira",
+        "Ardra",
+        "Punarvasu",
+        "Pushya",
+        "Ashlesha",
+        "Magha",
+        "PurvaPhalguni",
+        "UttaraPhalguni",
+        "Hasta",
+        "Chitra",
+        "Swati",
+        "Vishakha",
+        "Anuradha",
+        "Jyeshtha",
+        "Mula",
+        "PurvaAshadha",
+        "UttaraAshadha",
+        "Shravana",
+        "Dhanishta",
+        "Shatabhisha",
+        "PurvaBhadrapada",
+        "UttaraBhadrapada",
+        "Revati",
+    ];
+
+    const nakshatraAkshar = {
+        "अश्विनी": ["चू", "चे", "चो", "ला"],
+        "भरणी": ["ली", "लू", "ले", "लो"],
+        "कृत्तिका": ["अ", "ई", "उ", "ए"],
+        "रोहिणी": ["ओ", "वा", "वी", "वु"],
+        "मृगशिरा": ["वे", "वो", "का", "की"],
+        "आर्द्रा": ["कू", "घ", "ङ", "छ"],
+        "पुनर्वसू": ["के", "को", "हा", "ही"],
+        "पुष्य": ["हू", "हे", "हो", "डा"],
+        "अश्लेषा": ["डी", "डू", "डे", "डो"],
+        "मघा": ["मा", "मी", "मू", "मे"],
+        "पूर्वाफाल्गुनी": ["मो", "टा", "टी", "टू"],
+        "उत्तराफाल्गुनी": ["टे", "टो", "पा", "पी"],
+        "हस्त": ["पू", "ष", "ण", "ठ"],
+        "चित्रा": ["पे", "पो", "रा", "री"],
+        "स्वाती": ["रू", "रे", "रो", "ता"],
+        "विशाखा": ["ती", "तू", "ते", "तो"],
+        "अनुराधा": ["ना", "नी", "नू", "ने"],
+        "ज्येष्ठा": ["नो", "या", "यी", "यू"],
+        "मूला": ["ये", "यो", "भा", "भी"],
+        "पूर्वाषाढ़ा": ["भू", "धा", "फा", "ढा"],
+        "उत्तराषाढ़ा": ["भे", "भो", "जा", "जी"],
+        "श्रवण": ["जू", "जे", "जो", "गु"],
+        "धनिष्ठा": ["गा", "गी", "गू", "गे"],
+        "शतभिषा": ["गो", "सा", "सी", "सू"],
+        "पूर्वाभाद्रपदा": ["से", "सो", "दा", "दी"],
+        "उत्तराभाद्रपदा": ["दू", "थ", "झ", "ञ"],
+        "रेवती": ["दे", "दो", "चा", "ची"],
+    };
+
+    const nakshatraNonCompatibleMap = {
+        Ashwini: [],
+        Bharani: ["Rohini", "Pushya", "Ashlesha", "Ardra", "Jyeshtha"],
+        Krittika: ["Mrigashira", "Ardra", "Mula", "PurvaPhalguni"],
+        Rohini: ["Ardra", "Mula", "PurvaPhalguni", "Pushya", "Magha", "Swati"],
+        Mrigashira: ["PurvaPhalguni", "Punarvasu", "Pushya", "UttaraPhalguni"],
+        Ardra: ["Pushya", "UttaraPhalguni", "Shravana", "Magha"],
+        Punarvasu: ["Pushya", "Ashlesha", "Krittika", "Shatabhisha"],
+        Pushya: ["Shravana", "Shatabhisha", "Chitra", "Magha", "UttaraPhalguni"],
+        Ashlesha: ["PurvaPhalguni", "Hasta", "Shatabhisha", "PurvaBhadrapada"],
+        Magha: ["UttaraPhalguni", "Chitra", "Vishakha", "UttaraBhadrapada", "Rohini"],
+        PurvaPhalguni: ["Ashlesha", "Hasta", "Swati", "Mrigashira"],
+        UttaraPhalguni: ["Chitra", "Vishakha", "PurvaBhadrapada", "Punarvasu"],
+        Hasta: ["Ashwini", "Mula", "Magha", "Anuradha", "Swati", "Bharani"],
+        Chitra: ["Jyeshtha", "PurvaAshadha", "Krittika", "Vishakha"],
+        Swati: ["Anuradha", "Mula", "UttaraAshadha", "Rohini", "Mrigashira"],
+        Vishakha: ["Rohini", "Magha", "PurvaAshadha", "Shravana"],
+        Anuradha: ["Mula", "UttaraAshadha", "Ardra", "Punarvasu"],
+        Jyeshtha: ["PurvaAshadha", "Shravana", "Ardra", "UttaraPhalguni", "Shatabhisha", "Punarvasu"],
+        Mula: [],
+        PurvaAshadha: ["Shravana", "Shatabhisha", "UttaraBhadrapada", "Pushya", "Ashlesha", "Chitra"],
+        UttaraAshadha: ["Dhanishta", "Shatabhisha", "PurvaBhadrapada", "Revati", "Magha", "Swati"],
+        Shravana: ["Shatabhisha", "UttaraBhadrapada", "Ashwini", "Magha", "PurvaPhalguni"],
+        Dhanishta: ["PurvaBhadrapada", "Revati", "Anuradha", "Bharani"],
+        Shatabhisha: ["UttaraBhadrapada", "Ashwini", "Krittika", "Dhanishta"],
+        PurvaBhadrapada: ["Revati", "Bharani", "Mula"],
+        UttaraBhadrapada: ["Ashwini", "Krittika", "Mrigashira", "PurvaAshadha"],
+        Revati: ["Bharani", "Rohini", "Shravana", "PurvaAshadha"],
+    };
+
+    const harmingIndex = (nakIndex + 15) % 27;
+    const destructionIndex = (nakIndex + 22) % 27;
+    const karmikIndex = (nakIndex + 9) % 27;
+    const samudayikIndex = (nakIndex + 17) % 27;
+
+    const harmingName = Naklist[harmingIndex];
+    const destructionName = Naklist[destructionIndex];
+    const karmikName = Naklist[karmikIndex];
+    const samudayikName = Naklist[samudayikIndex];
+
+
+    const currentEnglishName = englishNakshatras[nakIndex];
+
+    const nonCompatible =
+        (nakshatraNonCompatibleMap[currentEnglishName] || []).map(
+            (englishName) => {
+                const index = englishNakshatras.indexOf(englishName);
+                const hindiName = Naklist[index];
+
+                return {
+                    index,
+                    name: hindiName,
+                    akshar: nakshatraAkshar[hindiName],
+                };
+            }
+        );
+
+    return {
+        harming: {
+            index: harmingIndex,
+            name: harmingName,
+            akshar: nakshatraAkshar[harmingName],
+        },
+
+        destruction: {
+            index: destructionIndex,
+            name: destructionName,
+            akshar: nakshatraAkshar[destructionName],
+        },
+        karmik: {
+            index: karmikIndex,
+            name: karmikName,
+            akshar: nakshatraAkshar[karmikName],
+        },
+        samudayik: {
+            index: samudayikIndex,
+            name: samudayikName,
+            akshar: nakshatraAkshar[samudayikName],
+        },
+
+        nonCompatible,
+    };
 }

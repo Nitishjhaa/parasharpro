@@ -1,12 +1,12 @@
-// this is a test file and we will use it for testing purposes"use client";
+"use client";
 
 import { getHindiRashi } from "@/lib/rashi";
 import { convertToDMS } from "@/lib/convertToDMS";
 
-export default function ChaturthamshaPlanetTable({ d4 }) {
-    if (!d4 || !d4.planets) return null;
+export default function DashamshaPlanetTable({ d10 }) {
+    if (!d10 || !d10.planets) return null;
 
-    const planets = d4.planets;
+    const planets = d10.planets;
 
     const rows = [
         { hi: "सूर्य", en: "Sun" },
@@ -21,32 +21,23 @@ export default function ChaturthamshaPlanetTable({ d4 }) {
     ];
 
     const rashiList = [
-        "Aries",
-        "Taurus",
-        "Gemini",
-        "Cancer",
-        "Leo",
-        "Virgo",
-        "Libra",
-        "Scorpio",
-        "Sagittarius",
-        "Capricorn",
-        "Aquarius",
-        "Pisces"
+        "Aries", "Taurus", "Gemini", "Cancer",
+        "Leo", "Virgo", "Libra", "Scorpio",
+        "Sagittarius", "Capricorn", "Aquarius", "Pisces"
     ];
 
     return (
         <div className="w-full p-1.5">
             <div className="w-full py-10">
                 <h2 className="mb-3 text-2xl text-center">
-                    चतुर्थांश ग्रह तालिका
+                    दशमांश ग्रह तालिका
                 </h2>
 
                 <table className="w-full border-2 border-black text-sm">
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="px-4 py-2">ग्रह</th>
-                            <th className="px-4 py-2">अंश (D4)</th>
+                            <th className="px-4 py-2">अंश (D10)</th>
                             <th className="px-4 py-2">राशि</th>
                             <th className="px-4 py-2">तत्त्व</th>
                             <th className="px-4 py-2">भाव</th>

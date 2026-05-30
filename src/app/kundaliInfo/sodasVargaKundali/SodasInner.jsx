@@ -16,12 +16,23 @@ import { getChandraData } from "@/lib/moonKundali";
 import MoonKundaliStructure from "@/components/MoonKundaliStructure";
 import { getSunData } from "@/lib/sunKundali";
 import SunKundaliStructure from "@/components/SunKundaliStructure";
-// import { computeD4Chart } from "@/lib/computeD4";
-// import ChaturthamshaPlanetTable from '@/components/ChaturthamshaPlanetTable'
-// import { computeD7Chart } from "@/lib/computeD7";
-// import { computeD10Chart } from "@/lib/computeD10";
-// import { computeD12Chart } from "@/lib/computeD12";
-// import { computeD16Chart } from "@/lib/computeD16";
+import { computeD4Chart } from "@/lib/computeD4";
+import ChaturthamshaPlanetTable from '@/components/ChaturthamshaPlanetTable';
+import { computeD7Chart } from "@/lib/computeD7";
+import D7PlanetTable from "@/components/D7PlanetTable";
+import { computeD10Chart } from "@/lib/computeD10";
+import D10PlanetTable from "@/components/D10PlanetTable";
+import { computeD12Chart } from "@/lib/computeD12";
+import D12PlanetTable from "@/components/D12PlanetTable";
+import { computeD16Chart } from "@/lib/computeD16";
+import D16PlanetTable from "@/components/D16PlanetTable";
+import { computeD20Chart } from "@/lib/computeD20";
+import D20PlanetTable from "@/components/D20PlanetTable";
+import { computeD24Chart } from "@/lib/computeD24";
+import D24PlanetTable from "@/components/D24PlanetTable";
+import { computeD27Chart } from "@/lib/computeD27";
+import D27PlanetTable from "@/components/D27PlanetTable";
+
 import { getHouseLordsWithPositions } from "../AstrologicalData";
 
 
@@ -40,6 +51,9 @@ export default function KundaliInfoInner() {
     const [d10, setD10] = useState(null);
     const [d12, setD12] = useState(null);
     const [d16, setD16] = useState(null);
+    const [d20, setD20] = useState(null);
+    const [d24, setD24] = useState(null);
+    const [d27, setD27] = useState(null);
     const [selectedChart, setSelectedChart] = useState("लग्न / D1");
 
     const charts = [
@@ -66,28 +80,36 @@ export default function KundaliInfoInner() {
             const d3Chart = computeD3Chart(record.raw);
             setD3(d3Chart);
 
-            // const d4Chart = computeD4Chart(record.raw);
-            // setD4(d4Chart);
+            const d4Chart = computeD4Chart(record.raw);
+            setD4(d4Chart);
 
-            // const d7Chart = computeD7Chart(record.raw);
-            // setD7(d7Chart);
+            const d7Chart = computeD7Chart(record.raw);
+            setD7(d7Chart);
 
             const d9Chart = computeD9Chart(record.raw);
             setD9(d9Chart);
 
-            // const d10Chart = computeD10Chart(record.raw);
-            // setD10(d10Chart);
+            const d10Chart = computeD10Chart(record.raw);
+            setD10(d10Chart);
 
-            // const d12Chart = computeD12Chart(record.raw);
-            // setD12(d12Chart);
+            const d12Chart = computeD12Chart(record.raw);
+            setD12(d12Chart);
 
-            // const d16Chart = computeD16Chart(record.raw);
-            // setD16(d16Chart);
+            const d16Chart = computeD16Chart(record.raw);
+            setD16(d16Chart);
+
+            const d20Chart = computeD20Chart(record.raw);
+            setD20(d20Chart);
+
+            const d24Chart = computeD24Chart(record.raw);
+            setD24(d24Chart);
+
+            const d27Chart = computeD27Chart(record.raw);
+            setD24(d27Chart);
         }
         load();
     }, [indexParam, router]);
 
-    console.log(kundali)
 
     const ascendantStr = kundali?.raw?.ascendant?.rashi;
     const ascendantNumber = kundali?.raw?.ascendant?.rashiIndex;
@@ -204,14 +226,63 @@ export default function KundaliInfoInner() {
                     )}
 
 
-                    {/* {selectedChart === "चतुर्थांश / D4" && (
+                    {selectedChart === "चतुर्थांश / D4" && (
                         <>
                             <KundaliStructure kundali={d4} title="चतुर्थांश कुंडली" />
                             <ChaturthamshaPlanetTable d4={d4} />
                         </>
-                    )} */}
+                    )}
 
-                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2", "द्रेक्काण / D3", "चन्द्र / Moon", "सूर्य / Sun"].includes(selectedChart) && (
+                    {selectedChart === "सप्तमांश / D7" && (
+                        <>
+                            <KundaliStructure kundali={d7} title="सप्तमांश कुंडली" />
+                            <D7PlanetTable d7={d7} />
+                        </>
+                    )}
+                    {selectedChart === "दशमांश / D10" && (
+                        <>
+                            <KundaliStructure kundali={d10} title="दशमांश कुंडली" />
+                            <D10PlanetTable d10={d10} />
+                        </>
+                    )}
+
+                    {selectedChart === "द्वादशांश / D12" && (
+                        <>
+                            <KundaliStructure kundali={d12} title="द्वादशांश कुंडली" />
+                            <D12PlanetTable d12={d12} />
+                        </>
+                    )}
+
+                    {selectedChart === "षोडशांश / D16" && (
+                        <>
+                            <KundaliStructure kundali={d16} title="षोडशांश कुंडली" />
+                            <D16PlanetTable d16={d16} />
+                        </>
+                    )}
+
+                    {selectedChart === "विंशांश / D20" && (
+                        <>
+                            <KundaliStructure kundali={d20} title="विंशांश कुंडली" />
+                            <D20PlanetTable d20={d20} />
+                        </>
+                    )}
+                    
+                    {selectedChart === "चतुर्विंशांश(सिद्धांश) / D24" && (
+                        <>
+                            <KundaliStructure kundali={d24} title="चतुर्विंशांश कुंडली" />
+                            <D24PlanetTable d24={d24} />
+                        </>
+                    )}
+                    
+                    {selectedChart === "सप्तविंशांश (भाम्स) / D27" && (
+                        <>
+                            <KundaliStructure kundali={d27} title="सप्तविंशांश कुंडली" />
+                            <D27PlanetTable d27={d27} />
+                        </>
+                    )}
+                    
+
+                    {!["लग्न / D1", "नवमांश / D9", "होरा / D2", "द्रेक्काण / D3", "चन्द्र / Moon", "सूर्य / Sun", "सप्तमांश / D7", "दशमांश / D10", "द्वादशांश / D12", "षोडशांश / D16", "विंशांश / D20", "चतुर्विंशांश(सिद्धांश) / D24", "सप्तविंशांश (भाम्स) / D27"].includes(selectedChart) && (
                         <div className="p-10 text-center text-lg font-semibold">
                             {selectedChart} Chart Coming Soon...
                         </div>

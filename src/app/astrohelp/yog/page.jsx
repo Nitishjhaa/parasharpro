@@ -8,6 +8,7 @@ import { CiClock2, CiLocationOn } from "react-icons/ci";
 import { toast } from "sonner";
 import getPanchangDetails from "@/lib/panchang";
 import { cheakMool } from "@/app/kundaliInfo/AstrologicalData";
+import { evaluateGuruPushya, evaluateRaviPushya, evaluateSarvarthaSiddhi, evaluateAmritSiddhi, evaluateRaviYoga, evaluatePanchak } from "./healper";
 
 // Hindi day names map
 const HINDI_DAYS = ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"];
@@ -38,9 +39,16 @@ const NAKSHATRA_MAP = {
   "Punarvasu": "पुनर्वसु",
   "Vishakha": "विशाखा",
   "UttaraPhalguni": "उत्तराफाल्गुनी",
+  "Uttara Phalguni": "उत्तराफाल्गुनी",
+  "Uttara_Phalguni": "उत्तराफाल्गुनी",
   "PurvaBhadrapada": "पूर्वाभाद्रपद",
+  "Purva Bhadrapada": "पूर्वाभाद्रपद",
+  "Purva_Bhadrapada": "पूर्वाभाद्रपद",
   "UttaraAshadha": "उत्तराषाढ़ा",
-  "Mrigashira": "मृगशीर्षा",
+  "Uttara Ashadha": "उत्तराषाढ़ा",
+  "Uttara_Ashadha": "उत्तराषाढ़ा",
+  "Mrigashira": "मृगशीर्ष",
+  "Mrigashirsha": "मृगशीर्ष",
   "Chitra": "चित्रा",
   "Dhanishta": "धनिष्ठा",
   "Ashwini": "अश्विनी",
@@ -51,22 +59,31 @@ const NAKSHATRA_MAP = {
   "Ashlesha": "आश्लेषा",
   "Magha": "मघा",
   "PurvaPhalguni": "पूर्वाफाल्गुनी",
+  "Purva Phalguni": "पूर्वाफाल्गुनी",
+  "Purva_Phalguni": "पूर्वाफाल्गुनी",
   "Hasta": "हस्त",
   "Swati": "स्वाती",
   "Anuradha": "अनुराधा",
   "Jyeshtha": "ज्येष्ठा",
   "Mula": "मूला",
   "PurvaAshadha": "पूर्वाषाढ़ा",
+  "Purva Ashadha": "पूर्वाषाढ़ा",
+  "Purva_Ashadha": "पूर्वाषाढ़ा",
   "Shravana": "श्रवण",
+  "Sravana": "श्रवण",
   "Shatabhisha": "शतभिषा",
   "UttaraBhadrapada": "उत्तराभाद्रपद",
-  "Revati": "रेवती"
+  "Uttara Bhadrapada": "उत्तराभाद्रपद",
+  "Uttara_Bhadrapada": "उत्तराभाद्रपद",
+  "Revati": "रेवती",
+  "Rebati": "रेवती",
+  "Dwija" : "भरणी"
 };
 
 // Yog check helper functions
 function evaluateTripushkar(weekdayIdx, englishTithi, englishNakshatra) {
   const allowedTithis = ["Vidhiya", "Sapthami", "Dvadasi"];
-  const allowedNakshatras = ["Krittika", "Punarvasu", "Vishakha", "UttaraPhalguni", "PurvaBhadrapada", "UttaraAshadha"];
+  const allowedNakshatras = ["Krittika", "Punarvasu", "Vishakha", "UttaraPhalguni","Uttara Phalguni", "Uttara_Phalguni", "PurvaBhadrapada", "Purva Bhadrapada", "Purva_Bhadrapada", "UttaraAshadha", "Uttara Ashadha", "Uttara_Ashadha"];
   const allowedWeekdays = [0, 2, 6]; // Sunday, Tuesday, Saturday
 
   const tithiMatch = allowedTithis.includes(englishTithi);
@@ -87,7 +104,7 @@ function evaluateTripushkar(weekdayIdx, englishTithi, englishNakshatra) {
 
 function evaluateDvipushkar(weekdayIdx, englishTithi, englishNakshatra) {
   const allowedTithis = ["Vidhiya", "Sapthami", "Dvadasi"];
-  const allowedNakshatras = ["Mrigashira", "Chitra", "Dhanishta"];
+  const allowedNakshatras = ["Mrigashira", "Mrigashirsha" , "Chitra", "Dhanishta"];
   const allowedWeekdays = [0, 2, 6]; // Sunday, Tuesday, Saturday
 
   const tithiMatch = allowedTithis.includes(englishTithi);
@@ -104,7 +121,7 @@ function evaluateDvipushkar(weekdayIdx, englishTithi, englishNakshatra) {
     matchedNakshatra: nakshatraMatch,
     matchedWeekday: weekdayMatch
   };
-}
+};
 
 export default function YogPage() {
   const [cities, setCities] = useState([]);
@@ -265,6 +282,12 @@ export default function YogPage() {
 
       // Evaluate Mool Dosha
       const moolResult = cheakMool(moonNakshatra, moonPada);
+      const guruPusya = evaluateGuruPushya(weekdayIdx, nakshatraEnglish);
+      const raviPusya = evaluateRaviPushya(weekdayIdx, nakshatraEnglish);
+      const sarvarthaSiddhi = evaluateSarvarthaSiddhi(weekdayIdx, nakshatraEnglish);
+      const amritSiddhi = evaluateAmritSiddhi(weekdayIdx, nakshatraEnglish);
+      const raviYoga = evaluateRaviYoga(weekdayIdx, nakshatraEnglish);
+      const panchak = evaluatePanchak(nakshatraEnglish);
 
       setResults({
         tithi: panchang.tithi?.name || TITHI_MAP[tithiEnglish] || tithiEnglish,
@@ -278,7 +301,13 @@ export default function YogPage() {
           definition: moolResult.definition,
           moonNakshatra: NAKSHATRA_MAP[moonNakshatra] || moonNakshatra,
           moonPada
-        }
+        },
+        guruPusya,
+        panchak,
+        raviYoga,
+        amritSiddhi,
+        sarvarthaSiddhi,
+        raviPusya
       });
       toast.success("Calculation completed successfully!");
     } catch (err) {
@@ -403,41 +432,12 @@ export default function YogPage() {
                         }`}
                     >
                       <div className="text-sm text-black">{c.city}</div>
-                      <div className="text-xs text-gray-500">{c.admin_name} | Lat: {c.lat}, Lng: {c.lng}</div>
+                      <div className="text-xs text-gray-500">{c.admin_name}</div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-
-            {/* Gender Selection */}
-            {/* <div className="flex flex-col">
-              <label className="text-sm font-semibold text-gray-700 mb-1">Gender (for Kundali analysis)</label>
-              <div className="flex gap-4 mt-1">
-                <label className="flex items-center gap-2 cursor-pointer font-medium">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Male"
-                    checked={form.gender === "Male"}
-                    onChange={e => setForm(prev => ({ ...prev, gender: e.target.value }))}
-                    className="accent-amber-500"
-                  />
-                  Male
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer font-medium">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="Female"
-                    checked={form.gender === "Female"}
-                    onChange={e => setForm(prev => ({ ...prev, gender: e.target.value }))}
-                    className="accent-amber-500"
-                  />
-                  Female
-                </label>
-              </div>
-            </div> */}
 
             {/* Calculate Button */}
             <button
@@ -502,12 +502,12 @@ export default function YogPage() {
                 {/* 1. TRIPUSHKAR YOG CARD */}
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-red-500 to-orange-500 px-6 py-4 text-white flex justify-between items-center">
-                    <h3 className="text-xl font-bold">त्रिपुष्कर योग (Tripushkar Yog)</h3>
+                    <h3 className="text-xl font-bold">त्रिपुष्कर योग</h3>
                     <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.tripushkar.present
-                        ? "bg-green-500 text-white"
-                        : results.tripushkar.partial
-                          ? "bg-yellow-500 text-black"
-                          : "bg-neutral-200 text-neutral-600"
+                      ? "bg-green-500 text-white"
+                      : results.tripushkar.partial
+                        ? "bg-yellow-500 text-black"
+                        : "bg-neutral-200 text-neutral-600"
                       }`}>
                       {results.tripushkar.present ? "पूर्ण उपस्थित" : results.tripushkar.partial ? "आंशिक उपस्थित" : "अनुपस्थित"}
                     </span>
@@ -541,12 +541,12 @@ export default function YogPage() {
                 {/* 2. DVIPUSHKAR YOG CARD */}
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-amber-500 to-yellow-600 px-6 py-4 text-white flex justify-between items-center">
-                    <h3 className="text-xl font-bold">द्विपुष्कर योग (Dvipushkar Yog)</h3>
+                    <h3 className="text-xl font-bold">द्विपुष्कर योग</h3>
                     <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.dvipushkar.present
-                        ? "bg-green-500 text-white"
-                        : results.dvipushkar.partial
-                          ? "bg-yellow-500 text-black"
-                          : "bg-neutral-200 text-neutral-600"
+                      ? "bg-green-500 text-white"
+                      : results.dvipushkar.partial
+                        ? "bg-yellow-500 text-black"
+                        : "bg-neutral-200 text-neutral-600"
                       }`}>
                       {results.dvipushkar.present ? "पूर्ण उपस्थित" : results.dvipushkar.partial ? "आंशिक उपस्थित" : "अनुपस्थित"}
                     </span>
@@ -581,16 +581,20 @@ export default function YogPage() {
                 {/* 3. GANDMOOL DOSHA CARD */}
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-purple-700 to-indigo-600 px-6 py-4 text-white flex justify-between items-center">
-                    <h3 className="text-xl font-bold">गण्डमूल दोष (Mool Dosha)</h3>
-                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.mool.present ? "bg-red-500 text-white" : "bg-green-500 text-white"
+                    <h3 className="text-xl font-bold">गण्डमूल दोष </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.mool.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
                       }`}>
-                      {results.mool.present ? "दोष उपस्थित" : "दोष अनुपस्थित"}
+                      {results.mool.present ? "उपस्थित" : "अनुपस्थित"}
                     </span>
                   </div>
                   <div className="p-6 space-y-4">
-                    <div className="text-sm font-semibold flex items-center gap-3">
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className={`flex items-center gap-1.5 ${results.mool.present ? "text-green-600" : "text-red-600"}`}>
+                        {results.mool.present ? <MdCheckCircle size={18} /> : <MdCancel size={18} />}
+                        नक्षत्र: अश्विनी, अश्लेषा, मघा, ज्येष्ठा, मूल और रेवती
+                      </span>
                       <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
-                        चन्द्र नक्षत्र: {results.mool.moonNakshatra}
+                        नक्षत्र: {results.mool.moonNakshatra}
                       </span>
                       <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
                         चरण (Pada): {results.mool.moonPada || "N/A"}
@@ -608,9 +612,156 @@ export default function YogPage() {
                         </>
                       ) : (
                         <p className="text-green-700 font-bold text-md">
-                          गण्डमूल दोष नहीं है। चन्द्रमा शुभ एवं सामान्य नक्षत्रों में गतिमान है।
+                          गण्डमूल दोष नहीं है।
                         </p>
                       )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* {4th goya} */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-red-700 to-red-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">गुरु पुष्य योग </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.guruPusya.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.guruPusya.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+
+                  <div className=" p-6 space-y-4">
+                    <div className="flex flex-wrap gap-4 text-sm font-semibold">
+                      <span className={`flex items-center gap-1.5 ${results.guruPusya.present ? "text-green-600" : "text-neutral-400"}`}>
+                        {results.nakshatra === "पुष्य" ? <MdCheckCircle size={18} /> : <MdCancel size={18} />}
+                        नक्षत्र:पुष्य
+                      </span>
+                      <span className={`flex items-center gap-1.5 ${results.weekday === "गुरुवार" ? "text-green-600" : "text-neutral-400"}`}>
+                        {results.weekday === "गुरुवार" ? <MdCheckCircle size={18} /> : <MdCancel size={18} />}
+                        वार: गुरुवार
+                      </span>
+                    </div>
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.guruPusya.name}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.guruPusya.effects}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5thyog */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-green-700 to-green-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">रवि पुष्य योग </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.raviPusya.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.raviPusya.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+                  <div className=" p-6 space-y-4">
+                    <div className="flex flex-wrap gap-4 text-sm font-semibold">
+                      <span className={`flex items-center gap-1.5 ${results.guruPusya.present ? "text-green-600" : "text-neutral-400"}`}>
+                        {results.nakshatra === "पुष्य" ? <MdCheckCircle size={18} /> : <MdCancel size={18} />}
+                        नक्षत्र:पुष्य
+                      </span>
+                      <span className={`flex items-center gap-1.5 ${results.weekday === "रविवार" ? "text-green-600" : "text-neutral-400"}`}>
+                        {results.weekday === "रविवार" ? <MdCheckCircle size={18} /> : <MdCancel size={18} />}
+                        वार: रविवार
+                      </span>
+                    </div>
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.raviPusya.name}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.raviPusya.effects}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 6thyog */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-blue-700 to-blue-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">अमृत सिद्धि योग </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.amritSiddhi.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.amritSiddhi.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+                  <div className=" p-6 space-y-4">
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.amritSiddhi.name}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.amritSiddhi.effects}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 7th yoga */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-orange-700 to-orange-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">सर्वार्थ सिद्धि योग </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.sarvarthaSiddhi.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.sarvarthaSiddhi.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+                  <div className=" p-6 space-y-4">
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.sarvarthaSiddhi.name}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.sarvarthaSiddhi.effects}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 8th yoga */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-pink-700 to-pink-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">रवि योग </h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.raviYoga.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.raviYoga.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+                  <div className=" p-6 space-y-4">
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.raviYoga.name}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.raviYoga.effects}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 9th yoga */}
+                <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
+                  <div className="bg-linear-to-r from-cyan-700 to-cyan-400 px-6 py-4 text-white flex justify-between items-center">
+                    <h3 className="text-xl font-bold">पंचक</h3>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.panchak.present ? "bg-red-500 text-white" : "bg-[#e5e5e5] text-neutral-600"
+                      }`}>
+                      {results.panchak.present ? "उपस्थित" : "अनुपस्थित"}
+                    </span>
+                  </div>
+                  <div className=" p-6 space-y-4">
+                    <div className="text-sm font-semibold flex flex-col gap-3">
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.panchak.definition}
+                      </span>
+                      <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg">
+                        {results.panchak.effects}
+                      </span>
                     </div>
                   </div>
                 </div>

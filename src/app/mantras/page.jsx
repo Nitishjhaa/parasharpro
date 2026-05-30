@@ -60,9 +60,9 @@ const page = () => {
             <div className="mx-auto w-[98%] min-h-screen">
                 <div className="flex flex-col gap-3 h-fit">
                     <div className="flex-[0.5] rounded-xl overflow-hidden">
-                        <div className="card-bg w-full h-full flex justify-between items-center p-3">
-                            <div className=" text-2xl flex gap-5 items-center w-full mr-3 rounded-xl">
-                                <img src='images/kundaliHead.png' className="w-15" />
+                        <div className="card-bg w-full h-full flex justify-between items-center p-6">
+                            <div className=" text-xl flex gap-5 items-center w-full mr-3 rounded-xl">
+                                <img src='images/kundaliHead.png' className="w-12 rotate-180 brightness-0 invert-100" />
                                 <span className="bg-linear-to-l from-[#F26A20]/50 to-red-500 bg-clip-text text-transparent">
                                     मंत्र और स्तोत्र
                                 </span>

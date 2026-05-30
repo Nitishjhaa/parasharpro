@@ -225,7 +225,7 @@ export default function YogPage() {
     try {
       // 1. Calculate Local Panchang Details
       const panchang = getPanchangDetails(form.date, form.time, form.lat, form.lon);
-      
+
       const dateObj = new Date(`${form.date}T${form.time}`);
       const weekdayIdx = dateObj.getDay();
       const hindiWeekday = HINDI_DAYS[weekdayIdx];
@@ -346,26 +346,30 @@ export default function YogPage() {
             </button>
 
             {/* Date Input */}
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold text-gray-700 mb-1">Date</label>
-              <input
-                type="date"
-                className="bg-neutral-50 border border-gray-300 rounded-xl p-3 outline-none focus:border-amber-500 transition-colors text-black font-medium"
-                value={form.date}
-                onChange={e => setForm(prev => ({ ...prev, date: e.target.value }))}
-              />
+            <div className="flex flex-col gap-4 max-md:flex-row ">
+
+              <div className="flex flex-col w-full">
+                <label className="text-sm font-semibold text-gray-700 mb-1">Date</label>
+                <input
+                  type="date"
+                  className="bg-neutral-50 border border-gray-300 rounded-xl p-3 outline-none focus:border-amber-500 transition-colors text-black font-medium"
+                  value={form.date}
+                  onChange={e => setForm(prev => ({ ...prev, date: e.target.value }))}
+                />
+              </div>
+
+              {/* Time Input */}
+              <div className="flex flex-col w-full">
+                <label className="text-sm font-semibold text-gray-700 mb-1">Time (24-hour format)</label>
+                <input
+                  type="time"
+                  className="bg-neutral-50 border border-gray-300 rounded-xl p-3 outline-none focus:border-amber-500 transition-colors text-black font-medium"
+                  value={form.time}
+                  onChange={e => setForm(prev => ({ ...prev, time: e.target.value }))}
+                />
+              </div>
             </div>
 
-            {/* Time Input */}
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold text-gray-700 mb-1">Time (24-hour format)</label>
-              <input
-                type="time"
-                className="bg-neutral-50 border border-gray-300 rounded-xl p-3 outline-none focus:border-amber-500 transition-colors text-black font-medium"
-                value={form.time}
-                onChange={e => setForm(prev => ({ ...prev, time: e.target.value }))}
-              />
-            </div>
 
             {/* City Autocomplete */}
             <div className="flex flex-col relative" ref={suggestionsRef}>
@@ -395,9 +399,8 @@ export default function YogPage() {
                     <div
                       key={i}
                       onClick={() => selectCity(c)}
-                      className={`p-3 cursor-pointer transition-colors ${
-                        highlightIdx === i ? "bg-amber-100 font-semibold" : "hover:bg-neutral-100"
-                      }`}
+                      className={`p-3 cursor-pointer transition-colors ${highlightIdx === i ? "bg-amber-100 font-semibold" : "hover:bg-neutral-100"
+                        }`}
                     >
                       <div className="text-sm text-black">{c.city}</div>
                       <div className="text-xs text-gray-500">{c.admin_name} | Lat: {c.lat}, Lng: {c.lng}</div>
@@ -408,7 +411,7 @@ export default function YogPage() {
             </div>
 
             {/* Gender Selection */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <label className="text-sm font-semibold text-gray-700 mb-1">Gender (for Kundali analysis)</label>
               <div className="flex gap-4 mt-1">
                 <label className="flex items-center gap-2 cursor-pointer font-medium">
@@ -434,7 +437,7 @@ export default function YogPage() {
                   Female
                 </label>
               </div>
-            </div>
+            </div> */}
 
             {/* Calculate Button */}
             <button
@@ -448,7 +451,7 @@ export default function YogPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                    Calculating...
+                  Calculating...
                 </>
               ) : (
                 "Calculate"
@@ -467,9 +470,9 @@ export default function YogPage() {
                 exit={{ opacity: 0, y: -20 }}
                 className="flex flex-col items-center justify-center h-full text-center py-20"
               >
-                
+
                 <h3 className="text-xl font-bold text-gray-700"> Details Will Be Shown Here</h3>
-                
+
               </motion.div>
             ) : (
               <motion.div
@@ -500,13 +503,12 @@ export default function YogPage() {
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-red-500 to-orange-500 px-6 py-4 text-white flex justify-between items-center">
                     <h3 className="text-xl font-bold">त्रिपुष्कर योग (Tripushkar Yog)</h3>
-                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${
-                      results.tripushkar.present
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.tripushkar.present
                         ? "bg-green-500 text-white"
                         : results.tripushkar.partial
-                        ? "bg-yellow-500 text-black"
-                        : "bg-neutral-200 text-neutral-600"
-                    }`}>
+                          ? "bg-yellow-500 text-black"
+                          : "bg-neutral-200 text-neutral-600"
+                      }`}>
                       {results.tripushkar.present ? "पूर्ण उपस्थित" : results.tripushkar.partial ? "आंशिक उपस्थित" : "अनुपस्थित"}
                     </span>
                   </div>
@@ -540,13 +542,12 @@ export default function YogPage() {
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-amber-500 to-yellow-600 px-6 py-4 text-white flex justify-between items-center">
                     <h3 className="text-xl font-bold">द्विपुष्कर योग (Dvipushkar Yog)</h3>
-                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${
-                      results.dvipushkar.present
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.dvipushkar.present
                         ? "bg-green-500 text-white"
                         : results.dvipushkar.partial
-                        ? "bg-yellow-500 text-black"
-                        : "bg-neutral-200 text-neutral-600"
-                    }`}>
+                          ? "bg-yellow-500 text-black"
+                          : "bg-neutral-200 text-neutral-600"
+                      }`}>
                       {results.dvipushkar.present ? "पूर्ण उपस्थित" : results.dvipushkar.partial ? "आंशिक उपस्थित" : "अनुपस्थित"}
                     </span>
                   </div>
@@ -569,7 +570,7 @@ export default function YogPage() {
 
                     <div className="bg-neutral-50 rounded-2xl p-4 border text-sm text-gray-700 leading-relaxed space-y-2">
                       <p><strong>परिणाम:</strong> इसमें मृत्यू, हानि, विनाश व लाभ दो गुणा होते हैं।</p>
-                      
+
                       <p className="text-xs text-neutral-500 font-medium">
                         * नोट: इस योग में किसी भी हानि की दो बार पुनरावृत्ति हो सकती है, इसी प्रकार किया गया शुभ कार्य या लाभ भी दो गुणा होता है।
                       </p>
@@ -581,9 +582,8 @@ export default function YogPage() {
                 <div className="bg-white rounded-3xl border border-yellow-200 shadow-md overflow-hidden transition-all hover:shadow-lg">
                   <div className="bg-linear-to-r from-purple-700 to-indigo-600 px-6 py-4 text-white flex justify-between items-center">
                     <h3 className="text-xl font-bold">गण्डमूल दोष (Mool Dosha)</h3>
-                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${
-                      results.mool.present ? "bg-red-500 text-white" : "bg-green-500 text-white"
-                    }`}>
+                    <span className={`px-4 py-1.5 rounded-full text-sm font-extrabold shadow-sm ${results.mool.present ? "bg-red-500 text-white" : "bg-green-500 text-white"
+                      }`}>
                       {results.mool.present ? "दोष उपस्थित" : "दोष अनुपस्थित"}
                     </span>
                   </div>

@@ -7,9 +7,19 @@ const page = () => {
 
     return (
 
-        <div className='bg-amber-200 h-screen'>
+        <div className='bg-gray-400 h-screen p-2'>
+            <div className="rounded-3xl overflow-hidden mb-4">
+                <div className="bg-linear-to-r from-[#FFE984] to-[#FFB111] p-5 flex gap-4 items-center shadow-md">
+                    <img src="/images/kundaliHead.png" className="w-12 brightness-0" alt="Yog Logo" />
+                    <div className="flex flex-col">
+                        <span className="bg-linear-to-l from-[#F26A20] to-red-600 bg-clip-text text-transparent text-2xl font-bold">
+                            Astrological Info
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-            <div className='max-w-[90%] mx-auto pt-7'>
+            <div className='max-w-[95%] mx-auto pt-3'>
                 <div className='flex max-md:flex-col flex-row gap-5'>
                     <Link href="/astrohelp/sangya">
                         <div className='bg-white rounded-xl '>

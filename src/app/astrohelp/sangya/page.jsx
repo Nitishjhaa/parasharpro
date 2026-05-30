@@ -51,11 +51,17 @@ export const nakshatraCategories = [
 
 export default function NakshatraCategories() {
     return (
-        <div className="bg-yellow-200 max-w-6xl mx-auto p-6">
-            <h2 className="text-black text-2xl font-bold text-center mb-8">
-                नक्षत्र संज्ञा
-            </h2>
-
+        <div className="bg-gray-400  mx-auto p-2">
+            <div className="rounded-3xl overflow-hidden mb-4">
+                <div className="bg-linear-to-r from-[#FFE984] to-[#FFB111] p-5 flex gap-4 items-center shadow-md">
+                    <img src="/images/kundaliHead.png" className="w-12 brightness-0" alt="Yog Logo" />
+                    <div className="flex flex-col">
+                        <span className="bg-linear-to-l from-[#F26A20] to-red-600 bg-clip-text text-transparent text-2xl font-bold">
+                            नक्षत्र संज्ञा
+                        </span>
+                    </div>
+                </div>  
+            </div>
             <div className="grid gap-5">
                 {nakshatraCategories.map((item) => (
                     <div

@@ -255,7 +255,6 @@ export default function CasePage() {
         }
     }
 
-    // console.log((results.ascendant+1) % 12)
 
     // ─── Condition Card Helper ───────────────────────────────────────────────────
     function ConditionRow({ ok, label }) {

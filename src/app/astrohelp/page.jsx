@@ -1,8 +1,30 @@
 import React from 'react'
 import Link from 'next/link'
-import { div } from 'framer-motion/client'
 
 const page = () => {
+
+    const pages = [
+        {
+            name: "नक्षत्र संज्ञा",
+            link: "/astrohelp/sangya"
+        },
+        {
+            name: "पंचक नक्षत्र",
+            link: "/astrohelp/panchak"
+        },
+        {
+            name: "योग और दोष",
+            link: "/astrohelp/yog"
+        },
+        {
+            name: "मुकदमा करना",
+            link: "/astrohelp/case"
+        },
+        {
+            name: "नामकरण",
+            link: "/astrohelp/name"
+        }
+    ]
 
 
     return (
@@ -21,45 +43,18 @@ const page = () => {
 
             <div className='mx-auto pt-1'>
                 <div className='flex max-md:flex-col flex-row gap-5'>
-                    <Link href="/astrohelp/sangya">
-                        <div className='card-bg rounded-xl! border-white/80 border'>
-                            <div className='py-3 pl-2'>
-                                <div className='text-white'>
-                                    नक्षत्र संज्ञा
+                    {pages.map((page, index) => (
+                        <Link href={page.link} key={index}>
+                            <div className='card-bg rounded-xl! border-white/80 border'>
+                                <div className='py-3 pl-2'>
+                                    <div className='text-white'>
+                                    {page.name}
                                 </div>
                             </div>
                         </div>
                     </Link>
+                    ))}
 
-                    <Link href="/astrohelp/panchak">
-                        <div className='card-bg rounded-xl! border-white/80 border'>
-                            <div className='py-3 pl-2'>
-                                <div className='text-white'>
-                                    पंचक नक्षत्र
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link href="/astrohelp/yog">
-                        <div className='card-bg rounded-xl! border-white/80 border'>
-                            <div className='py-3 pl-2'>
-                                <div className='text-white'>
-                                    योग और दोष
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link href="/astrohelp/case">
-                        <div className='card-bg rounded-xl! border-white/80 border'>
-                            <div className='py-3 pl-2'>
-                                <div className='text-white'>
-                                    मुकदमा करना
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
                 </div>
             </div>
 

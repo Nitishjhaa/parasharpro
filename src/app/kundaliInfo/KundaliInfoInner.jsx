@@ -19,8 +19,6 @@ export default function KundaliInfoInner() {
 
   const indexParam = params.get("index");
 
-  console.log(kundali)
-
   useEffect(() => {
     async function load() {
       if (!indexParam) return;

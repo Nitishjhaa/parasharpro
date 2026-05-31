@@ -38,7 +38,7 @@ export const panchakInfo = {
 
 export default function PanchakPage() {
     return (
-        <div className="bg-gray-400  mx-auto p-2">
+        <div className="bg-gray-400 mx-auto p-2">
             <div className="rounded-3xl overflow-hidden mb-4">
                 <div className="bg-linear-to-r from-[#FFE984] to-[#FFB111] p-5 flex gap-4 items-center shadow-md">
                     <img src="/images/kundaliHead.png" className="w-12 brightness-0" alt="Yog Logo" />
@@ -50,7 +50,7 @@ export default function PanchakPage() {
                 </div>
             </div>
            
-            <div className="max-w-5xl mx-auto px-4 py-8">
+            <div className="mx-auto pb-2">
                 {/* Header */}
                 <div className="rounded-3xl border bg-white p-6 shadow-sm mb-4">
                     <h1 className="text-xl font-bold text-black mb-4">

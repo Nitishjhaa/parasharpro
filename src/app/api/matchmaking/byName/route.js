@@ -146,7 +146,6 @@ function getAstroData(name) {
 export async function POST(req) {
     try {
         const { boyName, girlName } = await req.json();
-        console.log(boyName, girlName)
 
         if (!boyName || !girlName) {
             return NextResponse.json({ error: 'Boy name and Girl name are required' }, { status: 400 });

@@ -1,8 +1,6 @@
 
 const ChandraKundaliChart = ({ ascendant, sun, moon, mars, mercury, jupiter, venus, saturn, rahu, ketu, moonOffset }) => {
 
-  console.log(ascendant, sun, moon, mars, mercury, jupiter, venus, saturn, rahu, ketu, moonOffset)
-
   const housePositions = [
     { x: 193, y: 70 },
     { x: 170, y: 65 },

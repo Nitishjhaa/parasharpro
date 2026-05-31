@@ -727,226 +727,6 @@ export function getNakshatraGana(number) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // these functions will be used to determine the naam akshar of that person 
 export function nameNotGood(nakIndex) {
     const Naklist = {
@@ -1079,6 +859,9 @@ export function nameNotGood(nakIndex) {
     const karmikName = Naklist[karmikIndex];
     const samudayikName = Naklist[samudayikIndex];
 
+    const ownName = Naklist[nakIndex];
+    const ownAkshar = nakshatraAkshar[ownName];
+
 
     const currentEnglishName = englishNakshatras[nakIndex];
 
@@ -1097,6 +880,13 @@ export function nameNotGood(nakIndex) {
         );
 
     return {
+
+        own: {
+            index: nakIndex,
+            name: ownName,
+            akshar: ownAkshar,
+        },
+
         harming: {
             index: harmingIndex,
             name: harmingName,
@@ -1118,7 +908,6 @@ export function nameNotGood(nakIndex) {
             name: samudayikName,
             akshar: nakshatraAkshar[samudayikName],
         },
-
         nonCompatible,
     };
 }

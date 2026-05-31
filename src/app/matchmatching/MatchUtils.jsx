@@ -151,7 +151,6 @@ const auspicious = new Set([
 ]);
 
 function getNakshatraIndex(name) {
-  console.log(name)
   const index = nakshatras.findIndex(n => n.toLowerCase() === name.toLowerCase());
   if (index === -1) throw new Error(`Invalid Nakshatra name: ${name}`);
   return index;

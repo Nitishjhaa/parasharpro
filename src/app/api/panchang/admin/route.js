@@ -17,7 +17,6 @@ export async function POST(req) {
     await dbConnect();
     const body = await req.json();
     const { nameOfWork, date, month, year, time, paksha, tithi, description } = body;
-    console.log(body);
 
     if (!nameOfWork || !date || !month || !year) {
       return NextResponse.json({ success: false, error: "Required fields missing" });
